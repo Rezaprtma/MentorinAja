@@ -1,0 +1,7 @@
+﻿{
+    "dart.flutterSdkPath":  "",
+    "editor.formatOnSave":  true,
+    "files.exclude":  {
+                          "**/.gitkeep":  true
+                      }
+}

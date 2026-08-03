@@ -1,0 +1,213 @@
+# ==========================================================
+# OS
+# ==========================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================================================
+# Editors / IDEs
+# ==========================================================
+.idea/
+.idea_modules/
+*.iml
+
+.vscode-test/
+
+# Share only recommended VS Code settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ==========================================================
+# Temporary files
+# ==========================================================
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+
+tmp/
+temp/
+.temp/
+
+# ==========================================================
+# Logs
+# ==========================================================
+*.log
+logs/
+uvicorn.log
+*.pid
+*.seed
+*.stackdump
+
+# ==========================================================
+# Environment / Secrets
+# ==========================================================
+.env
+.env.*
+!.env.example
+
+.env.local
+.env.development
+.env.production
+.env.test
+
+.envrc
+
+# ==========================================================
+# Python
+# ==========================================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.pyre/
+
+.tox/
+.nox/
+
+.venv/
+.venv*/
+
+pip-wheel-metadata/
+__pypackages__/
+
+*.egg-info/
+
+.coverage
+coverage/
+htmlcov/
+
+# ==========================================================
+# Python Database (Development)
+# ==========================================================
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================================================
+# Flutter / Dart
+# ==========================================================
+frontend/.dart_tool/
+frontend/.dartServer/
+
+frontend/.packages
+frontend/.pub/
+frontend/.pub-cache/
+
+frontend/.build/
+frontend/build/
+
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.flutter-plugins-dependencies.lock
+
+# ==========================================================
+# Flutter Generated
+# ==========================================================
+frontend/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+
+frontend/ios/Flutter/Generated.xcconfig
+frontend/ios/Flutter/flutter_export_environment.sh
+frontend/ios/Flutter/ephemeral/
+
+frontend/ios/Runner/GeneratedPluginRegistrant.*
+
+# ==========================================================
+# Android
+# ==========================================================
+frontend/android/.gradle/
+frontend/android/build/
+frontend/android/app/build/
+
+frontend/android/local.properties
+frontend/android/captures/
+frontend/android/.cxx/
+
+# ==========================================================
+# iOS
+# ==========================================================
+frontend/ios/Pods/
+frontend/ios/.symlinks/
+
+frontend/ios/Flutter/Flutter.framework
+frontend/ios/Flutter/Flutter.podspec
+frontend/ios/Flutter/App.framework
+
+frontend/ios/DerivedData/
+
+# ==========================================================
+# Windows
+# ==========================================================
+frontend/windows/flutter/ephemeral/
+
+frontend/windows/runner/Debug/
+frontend/windows/runner/Release/
+frontend/windows/runner/Generated Files/
+
+frontend/windows/CMakeFiles/
+frontend/windows/x64/
+
+# ==========================================================
+# Linux
+# ==========================================================
+frontend/linux/flutter/ephemeral/
+
+# ==========================================================
+# macOS
+# ==========================================================
+frontend/macos/Flutter/ephemeral/
+
+# ==========================================================
+# Generated Files
+# ==========================================================
+generated/
+frontend/generated/
+frontend/lib/generated/
+**/generated/**
+!.gitkeep
+
+# ==========================================================
+# Build Outputs
+# ==========================================================
+dist/
+out/
+release/
+artifacts/
+
+.cache/
+.cache-loader/
+*.cache
+
+# ==========================================================
+# Coverage
+# ==========================================================
+coverage.lcov
+lcov.info
+
+# ==========================================================
+# Supabase
+# ==========================================================
+supabase/.temp/
+supabase/.branches/
+supabase/.env
+
+# ==========================================================
+# Node / Tooling
+# ==========================================================
+node_modules/
+
+# ==========================================================
+# Miscellaneous
+# ==========================================================
+*.local

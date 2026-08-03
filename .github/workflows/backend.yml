@@ -1,0 +1,13 @@
+name: Backend
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder backend validation
+        run: echo "Backend workflow placeholder"

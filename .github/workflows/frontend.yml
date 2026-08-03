@@ -1,0 +1,13 @@
+name: Frontend
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  frontend-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder frontend validation
+        run: echo "Frontend workflow placeholder"
