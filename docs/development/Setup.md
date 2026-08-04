@@ -1,322 +1,68 @@
-# MentorinAja Development Setup
+# Development setup
 
-**Status:** Production onboarding baseline  
-**Maintained by:** Engineering leads, platform maintainers, and contributors  
-**Audience:** New contributors, platform engineers, backend engineers, and Flutter engineers
-
----
-
-## Overview
-
-This document is a deeper setup reference for the MentorinAja monorepo. It is intended to complement the beginner-focused onboarding guide in [GETTING_STARTED.md](GETTING_STARTED.md) rather than replace it.
-
-MentorinAja is a Flutter-first, cross-platform client for Android, iOS, and Windows, backed by a Python FastAPI service and Supabase-managed infrastructure. The repository is organized as a monorepo, and the setup flow below reflects that structure directly.
-
-This guide is the source-of-truth setup reference for local development. It must remain aligned with the repository architecture, product requirements, data contract, and frontend architecture documents in `docs/`.
-
----
-
-## Purpose
-
-The goal of this document is to support the deeper operational details of repository setup for contributors who already know the basic workflow from [GETTING_STARTED.md](GETTING_STARTED.md).
-
-A contributor should be able to:
-
-1. clone the repository
-2. install the required toolchain
-3. prepare environment files
-4. install frontend and backend dependencies
-5. verify the workspace health
-6. start the frontend and backend locally
-7. debug, build, and test in a consistent way
-
-This document is not a generative tutorial. It is the engineering baseline for the team.
-
----
-
-## Source-of-truth alignment
-
-This guide must remain consistent with the repository’s authoritative documentation:
-
-- `docs/PRD.md`
-- `docs/ERD.md`
-- `docs/SCHEMA.md`
-- `docs/architecture/Architecture.md`
-- `docs/architecture/FolderStructure.md`
-- `docs/architecture/ProjectStructure.md`
-- `docs/design/Design.md`
-- `docs/design/DesignSystem.md`
-- `docs/frontend/FlutterArchitecture.md`
-- `docs/development/RepositoryTooling.md`
-
-When in doubt, follow the architecture and repository structure documents first, then use this setup guide as the operational procedure.
-
----
-
-## Repository layout
-
-The repository is organized as a production-grade monorepo.
-
-```text
-mentorinaja/
-├── .github/
-├── .vscode/
-├── assets/
-├── backend/
-├── docs/
-├── examples/
-├── frontend/
-├── scripts/
-├── tools/
-├── README.md
-├── .gitignore
-└── .editorconfig
-```
-
-### Important folders
-
-- `frontend/`: Flutter application
-- `backend/`: Python backend service
-- `docs/`: product, architecture, schema, and development references
-- `scripts/`: repository automation and operational scripts
-- `tools/`: generators and contributor utility tooling
-- `assets/`: shared product assets
-
-The repository structure is considered final. Do not redesign it during local development.
-
----
+This guide is a concise reference for local development in the MentorinAja monorepo. Use it alongside [GETTING_STARTED.md](GETTING_STARTED.md) when you need a quick reminder of the expected workflow.
 
 ## Prerequisites
 
-The machine must meet the minimum baseline needed to work on cross-platform Flutter and Python code.
-
-### Supported operating systems
-
-#### Windows
-
-Use Windows 10 or later with PowerShell or Command Prompt. This is the primary supported workstation environment for the repo.
-
-Required platform dependencies:
-
-- Visual Studio Build Tools
-- CMake
-- Android SDK
-- Java JDK
-- Git
-- Flutter SDK
-
-#### macOS
-
-Use macOS with Xcode and CocoaPods installed. macOS is required if you plan to build or debug iOS-specific workflows.
-
-Required platform dependencies:
-
-- Xcode
-- CocoaPods
-- Git
-- Flutter SDK
-- Java JDK if needed for Android tooling
-
-#### Linux
-
-Use a current supported Ubuntu or Debian-based environment if you are working on the backend, Flutter command line, or CI-compatible development.
-
-Required platform dependencies:
+Install the following before you start:
 
 - Git
 - Flutter SDK
-- Python
-- build tools such as `make`, `gcc`, and `cmake`
-- Android SDK if you need emulator or Android build support
-
-### Minimum hardware
-
-Recommended baseline:
-
-- CPU: 4-core processor or better
-- RAM: 16 GB minimum
-- Disk space: 25 GB free for Flutter SDK, Android SDK, IDE tooling, and caches
-
-### Recommended hardware
-
-For comfortable development:
-
-- CPU: 8-core processor
-- RAM: 32 GB
-- SSD storage: 100 GB or more free
-- Dedicated GPU is optional, but a fast SSD is strongly recommended
-
-### Reasoning
-
-Flutter and Android tooling are heavy. The Android SDK, Gradle caches, emulator images, and IDE files consume a lot of disk and memory. A strong laptop or workstation reduces startup time, build time, and general developer friction.
-
----
-
-## Software requirements
-
-All tools below should be installed before running the repository locally.
-
-### Required tools
-
-- Git
-- Flutter SDK
-- Dart SDK (provided by Flutter)
-- Python 3.12+
 - Android Studio
-- VS Code
-- Supabase CLI
-- Java JDK
-- Android SDK
-- CMake
-- Visual Studio Build Tools (Windows only)
-- CocoaPods (macOS only)
-- Xcode (macOS only)
+- Python 3.10+
 
-### Recommended stable versions
+## Frontend
 
-Use the latest stable releases that are compatible with the repository constraints.
-
-- Flutter: stable 3.24.x or newer
-- Dart: included with the Flutter SDK; use the Dart version bundled with the selected Flutter SDK
-- Python: 3.12.x
-- Git: latest stable 2.x release
-- Java: 17 LTS
-- Android SDK: command-line tools with the latest platform and build-tools installed
-
-### Why these versions
-
-- Flutter stable is the supported path for cross-platform application development.
-- The repository backend bootstrap currently targets Python 3.12+, which is a strong baseline for modern FastAPI and dependency compatibility.
-- Java 17 LTS is the most predictable support target for Android tooling.
-- Using the Flutter-bundled Dart SDK avoids SDK mismatch issues.
-
----
-
-## Recommended developer environment
-
-### VS Code
-
-Use VS Code as the standard editor for the entire monorepo.
-
-Recommended extensions:
-
-- `Dart-Code.dart-code`
-- `Dart-Code.flutter`
-- `ms-python.python`
-- `ms-python.vscode-pylance`
-- `ms-python.debugpy`
-- `tamasfe.even-better-toml`
-- `redhat.vscode-yaml`
-- `eamodio.gitlens`
-- `oderwat.indent-rainbow`
-- `charliermarsh.ruff`
-
-### Workspace settings
-
-The repository already includes the VS Code workspace configuration. Use it as the standard contributor baseline.
-
-Recommended settings:
-
-- format on save enabled
-- Python default interpreter set to the repository virtual environment
-- Flutter and Dart language server enabled
-- search exclusions enabled for generated and build directories
-- terminal shell set to the system default shell
-
-### Debug configuration
-
-Use VS Code launch profiles for:
-
-- frontend Flutter debug sessions
-- backend Python debug sessions
-- browser or device debugging where needed
-
-### Tasks
-
-Use the repository’s root Taskfile to run standard workflows from the repository root.
-
-The official developer command surface is:
-
-- `task setup` — bootstrap the repository toolchain and install dependencies
-- `task doctor` — validate installed tools, environment variables, and local repository health
-- `task dev` — start the frontend and backend together for local development
-- `task frontend` — run only the Flutter frontend
-- `task backend` — run only the Python backend
-- `task test` — execute the frontend and backend test suites
-- `task analyze` — run repository analysis checks
-- `task lint` — run linting and validation checks
-- `task format` — format the codebase
-- `task build` — build standard repository artifacts
-- `task clean` — remove generated caches and temporary artifacts
-
-Use a repository task instead of calling framework-specific commands directly whenever possible.
-
-### Terminal settings
-
-Use integrated terminals with the repository root as the working directory by default. PowerShell is the standard shell on Windows; use the system shell on macOS and Linux.
-
-### Formatting
-
-Use the repository’s configured formatting rules:
-
-- Dart formatting should be applied through Flutter tooling
-- Python formatting should follow Black-compatible style
-- `.editorconfig` is the repository-wide formatting baseline
-
----
-
-## Clone the repository
-
-Clone from the approved remote and enter the repository root.
-
-### Windows PowerShell
-
-```powershell
-git clone <repository-url>
-cd MentorinAja
-```
-
-### macOS / Linux
+The frontend lives in [frontend](../../frontend).
 
 ```bash
-git clone <repository-url>
-cd MentorinAja
+cd frontend
+flutter pub get
+flutter run
 ```
 
-### Branch strategy
+If Flutter reports missing Android tools, run `flutter doctor` and complete the missing setup steps in Android Studio.
 
-Use the repository’s default branch as the integration branch and create short-lived feature branches for work.
+## Backend
 
-Recommended branch naming:
-
-- `feature/<short-name>`
-- `fix/<short-name>`
-- `chore/<short-name>`
-- `refactor/<short-name>`
-
-Do not mix unrelated changes into a single branch.
-
----
-
-## Environment setup
-
-### Frontend environment
-
-The frontend lives in `frontend/` and uses Flutter.
-
-Create the frontend environment file by copying the example:
+The backend lives in [backend](../../backend).
 
 ```bash
-cp frontend/.env.example frontend/.env
+cd backend
+python -m venv .venv
 ```
 
-On Windows PowerShell:
+Activate the virtual environment:
+
+### Windows
 
 ```powershell
-Copy-Item frontend/.env.example frontend/.env
+.venv\Scripts\activate
 ```
 
-Populate the variables with the project-specific values your environment requires.
+### Linux and macOS
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies and start the server:
+
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+## Environment variables
+
+If the project includes example environment files, copy them to the expected `.env` location and fill in the required values before running the backend.
+
+## Troubleshooting
+
+- Use `flutter doctor` for Android, Flutter, and Java issues.
+- Use `python -m pip install --upgrade pip` if package installation fails.
+- Recreate the backend virtual environment if dependency issues persist.
+- Keep the frontend and backend commands separate unless you are intentionally running both.
 
 Required placeholders include:
 
