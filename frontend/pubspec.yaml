@@ -7,6 +7,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.10+1
+  lottie: ^3.5.1
 
 dev_dependencies:
   flutter_test:
@@ -15,3 +17,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/animations/
+    - assets/audio/
+    - assets/fonts/
+    - assets/translations/
