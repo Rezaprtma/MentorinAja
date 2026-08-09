@@ -88,6 +88,15 @@ abstract final class AppIllustrations {
   // Onboarding
   // -------------------------------------------------------------------------
 
+  /// First chapter artwork — discovery of personalized learning.
+  static const String onboarding1 = 'assets/icons/onboarding1.svg';
+
+  /// Second chapter artwork — adaptive learning pacing.
+  static const String onboarding2 = 'assets/icons/onboarding2.svg';
+
+  /// Third chapter artwork — starting the journey today.
+  static const String onboarding3 = 'assets/icons/onboarding3.svg';
+
   static const String onboardingWelcome =
       'assets/images/illustrations/onboarding_welcome.png';
   static const String onboardingExplore =

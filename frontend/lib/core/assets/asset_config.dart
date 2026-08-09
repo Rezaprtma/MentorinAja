@@ -55,16 +55,6 @@ abstract final class AssetConfig {
   static const double defaultMusicVolume = 0.5;
 
   // -------------------------------------------------------------------------
-  // Animation
-  // -------------------------------------------------------------------------
-
-  /// Default frame rate for Lottie animations.
-  static const int defaultAnimationFps = 60;
-
-  /// Whether to cache decoded animation frames in memory.
-  static const bool cacheAnimationFrames = true;
-
-  // -------------------------------------------------------------------------
   // Network images
   // -------------------------------------------------------------------------
 

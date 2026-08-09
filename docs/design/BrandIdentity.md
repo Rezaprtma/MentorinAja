@@ -203,7 +203,9 @@ Tutor should never:
 
 ### Foundation
 
-The MentorinAja palette is built on a **warm primary** (orange) with a **cool secondary** (blue) to create visual energy without conflict. Carefully balanced warm neutrals support the brand while maintaining a clean, modern, and premium appearance.
+The MentorinAja palette is built on a **warm primary orange** and a **cool electric indigo secondary**. This combination creates strong visual contrast while maintaining a clean, modern, energetic, and technology-focused identity.
+
+The orange represents energy, action, and the core brand identity. The indigo represents learning, technology, intelligence, and supporting visual elements. Warm neutrals maintain readability and prevent the interface from becoming overly colorful.
 
 ### Color Architecture
 
@@ -214,8 +216,11 @@ The MentorinAja palette is built on a **warm primary** (orange) with a **cool se
 | Primary Hover       | `primaryHover`       | `#EA580C` | Hover state for primary buttons                      |
 | Primary Pressed     | `primaryPressed`     | `#C2410C` | Pressed/active state                                 |
 | Primary Subtle      | `primarySubtle`      | `#FFFBF7` | Soft backgrounds and tinted surfaces                 |
-| Secondary           | `secondary`          | `#0EA5E9` | Links, secondary actions, informational UI           |
-| Secondary Container | `secondaryContainer` | `#E0F2FE` | Information cards, secondary surfaces                |
+| Secondary           | `secondary`          | `#514AF8` | Secondary actions, illustrations, informational UI   |
+| Secondary Container | `secondaryContainer` | `#EEEDFF` | Information cards, secondary surfaces                |
+| Secondary Hover     | `secondaryHover`     | `#4338CA` | Hover state for secondary buttons                    |
+| Secondary Pressed   | `secondaryPressed`   | `#3730A3` | Pressed/active state                                 |
+| Secondary Subtle    | `secondarySubtle`    | `#F5F3FF` | Soft indigo backgrounds and tinted surfaces          |
 | Success             | `success`            | `#22C55E` | Success feedback, completed lessons                  |
 | Success Container   | `successContainer`   | `#DCFCE7` | Success backgrounds                                  |
 | Warning             | `warning`            | `#EAB308` | Attention needed, partial progress                   |
@@ -242,13 +247,57 @@ The MentorinAja palette is built on a **warm primary** (orange) with a **cool se
 | Accent Light | `accentLight` | `#FED7AA` | Soft backgrounds, chips                           |
 | Accent Dark  | `accentDark`  | `#EA580C` | Strong emphasis, premium highlights               |
 
-### Recommended Gradient
+### Secondary Accent
 
-| Gradient         | Colors              |
-| ---------------- | ------------------- |
-| Primary Gradient | `#F97316 → #FDBA74` |
-| Hero Gradient    | `#EA580C → #FB923C` |
-| Accent Gradient  | `#C2410C → #FDBA74` |
+| Role                   | Token                  | Hex       | Usage                                    |
+| ---------------------- | ---------------------- | --------- | ---------------------------------------- |
+| Secondary Accent       | `secondaryAccent`      | `#818CF8` | Secondary highlights and illustrations   |
+| Secondary Accent Dark  | `secondaryAccentDark`  | `#4338CA` | Strong secondary emphasis                |
+| Secondary Accent Light | `secondaryAccentLight` | `#C7D2FE` | Soft decorative elements and backgrounds |
+
+### Recommended Gradients
+
+| Gradient           | Colors              | Usage                                      |
+| ------------------ | ------------------- | ------------------------------------------ |
+| Primary Gradient   | `#F97316 → #FDBA74` | Primary branded surfaces                   |
+| Hero Gradient      | `#EA580C → #FB923C` | Hero sections and major visual elements    |
+| Accent Gradient    | `#C2410C → #FDBA74` | Premium highlights                         |
+| Brand Gradient     | `#F97316 → #514AF8` | Special brand moments, onboarding, hero UI |
+| Secondary Gradient | `#514AF8 → #818CF8` | Secondary visual elements                  |
+
+### Illustration Color Strategy
+
+Illustrations should use the orange and indigo colors as complementary visual elements rather than distributing both colors equally.
+
+#### Orange Background
+
+| Element              | Color     |
+| -------------------- | --------- |
+| Background           | `#F97316` |
+| Primary Illustration | `#FFFFFF` |
+| Secondary Detail     | `#514AF8` |
+| Outline              | `#171717` |
+| Soft Detail          | `#FFF7ED` |
+
+#### White Background
+
+| Element              | Color     |
+| -------------------- | --------- |
+| Background           | `#FFFFFF` |
+| Primary Illustration | `#514AF8` |
+| Secondary Detail     | `#F97316` |
+| Outline              | `#171717` |
+| Soft Detail          | `#EEEDFF` |
+
+#### Indigo Background
+
+| Element              | Color     |
+| -------------------- | --------- |
+| Background           | `#514AF8` |
+| Primary Illustration | `#FFFFFF` |
+| Secondary Detail     | `#F97316` |
+| Outline              | `#171717` |
+| Soft Detail          | `#EEEDFF` |
 
 ### Splash Palette
 
@@ -262,72 +311,92 @@ The MentorinAja palette is built on a **warm primary** (orange) with a **cool se
 
 ### Semantic Color Mapping
 
-| Semantic Role       | Light Mode         | Dark Mode    |
-| ------------------- | ------------------ | ------------ |
-| Primary Interactive | `primary`          | `#FB923C`    |
-| Primary Container   | `primaryContainer` | `#7C2D12`    |
-| Text Primary        | `neutral900`       | `neutral50`  |
-| Text Secondary      | `neutral600`       | `neutral300` |
-| Text Disabled       | `neutral400`       | `neutral600` |
-| Text Inverse        | `white`            | `neutral900` |
-| Background          | `neutral100`       | `neutral900` |
-| Surface             | `white`            | `neutral800` |
-| Surface Elevated    | `white`            | `neutral700` |
-| Border              | `neutral300`       | `neutral600` |
-| Border Subtle       | `neutral200`       | `neutral700` |
-| Divider             | `neutral200`       | `neutral700` |
-| Success             | `success`          | `#4ADE80`    |
-| Warning             | `warning`          | `#FACC15`    |
-| Error               | `error`            | `#F87171`    |
-| Info                | `secondary`        | `#38BDF8`    |
+| Semantic Role         | Light Mode           | Dark Mode    |
+| --------------------- | -------------------- | ------------ |
+| Primary Interactive   | `primary`            | `#FB923C`    |
+| Primary Container     | `primaryContainer`   | `#7C2D12`    |
+| Secondary Interactive | `secondary`          | `#818CF8`    |
+| Secondary Container   | `secondaryContainer` | `#312E81`    |
+| Text Primary          | `neutral900`         | `neutral50`  |
+| Text Secondary        | `neutral600`         | `neutral300` |
+| Text Disabled         | `neutral400`         | `neutral600` |
+| Text Inverse          | `white`              | `neutral900` |
+| Background            | `neutral100`         | `neutral900` |
+| Surface               | `white`              | `neutral800` |
+| Surface Elevated      | `white`              | `neutral700` |
+| Border                | `neutral300`         | `neutral600` |
+| Border Subtle         | `neutral200`         | `neutral700` |
+| Divider               | `neutral200`         | `neutral700` |
+| Success               | `success`            | `#4ADE80`    |
+| Warning               | `warning`            | `#FACC15`    |
+| Error                 | `error`              | `#F87171`    |
+| Info                  | `secondary`          | `#818CF8`    |
 
 ### Color Ratio Rules
 
+The interface should remain primarily neutral, with orange and indigo used strategically.
+
+| Color Category   | Recommended Usage |
+| ---------------- | ----------------- |
+| Neutrals         | 70–80%            |
+| Primary Orange   | 10–15%            |
+| Secondary Indigo | 5–10%             |
+| Feedback Colors  | 2–5%              |
+
+### Color Usage Principles
+
+- `primary` (`#F97316`) is the dominant brand color.
+- `secondary` (`#514AF8`) replaces the previous blue `#0EA5E9`.
+- Orange should dominate primary interactions and brand identity.
+- Indigo should support secondary actions, illustrations, information, and technology-related elements.
+- Do not distribute orange and indigo equally across the interface.
+- Use neutral colors for most backgrounds, surfaces, text, and structural elements.
+- Use indigo more heavily in onboarding illustrations and secondary visual components.
+- Use orange backgrounds with white and indigo illustrations for strong onboarding screens.
+- Use white backgrounds with indigo illustrations and orange details for clean onboarding screens.
+- Reserve the `#F97316 → #514AF8` gradient for special brand moments rather than general UI components.
+
+### Contrast Rules
+
 **Text contrast (WCAG 2.1 AA):**
 
-| Background | Text Color             | Ratio  | Pass?           |
-| ---------- | ---------------------- | ------ | --------------- |
-| `#FFFFFF`  | `#171717` (neutral900) | 18.1:1 | AAA             |
-| `#FFFFFF`  | `#404040` (neutral700) | 9.7:1  | AAA             |
-| `#FFFFFF`  | `#525252` (neutral600) | 7.0:1  | AA              |
-| `#FFFFFF`  | `#F97316` (primary)    | 3.2:1  | AA (large text) |
-| `#171717`  | `#FFFFFF`              | 18.1:1 | AAA             |
-| `#FFF7ED`  | `#F97316`              | 3.0:1  | AA (large text) |
-| `#FFF7ED`  | `#C2410C`              | 5.0:1  | AA              |
-| `#F5F5F5`  | `#171717`              | 17.6:1 | AAA             |
+| Background | Text Color | Usage                       |
+| ---------- | ---------- | --------------------------- |
+| `#FFFFFF`  | `#171717`  | Primary text                |
+| `#FFFFFF`  | `#404040`  | Headings and body text      |
+| `#FFFFFF`  | `#525252`  | Secondary text              |
+| `#FFFFFF`  | `#C2410C`  | Small orange text           |
+| `#FFFFFF`  | `#3730A3`  | Small indigo text           |
+| `#171717`  | `#FFFFFF`  | Inverse text                |
+| `#FFF7ED`  | `#C2410C`  | Text on primary container   |
+| `#EEEDFF`  | `#3730A3`  | Text on secondary container |
 
-**Do not use `primary` (`#F97316`) as text on light backgrounds at small sizes.** Use `primaryPressed` (`#C2410C`) or `primaryHover` (`#EA580C`) for small text. Reserve the primary color for buttons, icons, large headings, and key interactive elements.
+Do not use `primary` (`#F97316`) or `secondary` (`#514AF8`) as small body text on light backgrounds when sufficient contrast is not achieved.
 
-### Color Usage Ratios
-
-| Usage                        | % of screen | Examples                                       |
-| ---------------------------- | ----------- | ---------------------------------------------- |
-| Neutrals (backgrounds, text) | 70–80%      | Page backgrounds, surfaces, body text, borders |
-| Primary                      | 15–20%      | CTAs, active states, highlights                |
-| Secondary                    | 3–5%        | Links, informational elements                  |
-| Feedback Colors              | 2–5%        | Success, warning, error states                 |
+Use darker variants such as `primaryPressed` (`#C2410C`) and `secondaryPressed` (`#3730A3`) for small text.
 
 ### Dark Mode Adaptation
 
 Dark mode uses `AppTheme.dark()` built from the same brand palette.
 
-- Background shifts from `neutral100` to `neutral900`
-- Surface shifts from `white` to `neutral800`
-- Text colors invert for readability
-- Primary brightens from `#F97316` to `#FB923C` for improved contrast
-- Feedback colors use lighter variants for accessibility
-- Elevation relies on subtle borders and tonal surfaces instead of heavy shadows
+- Background shifts from `neutral100` to `neutral900`.
+- Surface shifts from `white` to `neutral800`.
+- Text colors invert for readability.
+- Primary brightens from `#F97316` to `#FB923C`.
+- Secondary brightens from `#514AF8` to `#818CF8`.
+- Primary container shifts to `#7C2D12`.
+- Secondary container shifts to `#312E81`.
+- Feedback colors use lighter variants for accessibility.
+- Elevation relies on subtle borders and tonal surfaces instead of heavy shadows.
 
 ### Animation on Color Change
 
-When colors transition between states (hover → pressed → released):
+When colors transition between states:
 
-- Use `AppDurations.fast` (150ms) for color transitions
-- Use `AppEasing.standard` for natural motion
-- Do not animate page background colors
-- Animate button fills, progress indicators, tab indicators, toggles, and interactive surfaces only
-
----
+- Use `AppDurations.fast` (150ms) for color transitions.
+- Use `AppEasing.standard` for natural motion.
+- Do not animate page background colors.
+- Animate button fills, progress indicators, tab indicators, toggles, and interactive surfaces only.
 
 ## 4. Typography Strategy
 

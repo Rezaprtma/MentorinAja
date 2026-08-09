@@ -1,33 +1,35 @@
 /// Logo and brandmark asset paths.
 ///
-/// Organized by use-case so screens pick the correct variant without
+/// Organized by use surface so screens pick the correct variant without
 /// guessing. Every path is a compile-time constant — typos become errors.
 ///
-/// The primary logo asset is `assets/icons/icon.png` — the only logo
-/// file that should ever be used. If this asset is missing or invalid,
-/// the splash screen fails gracefully with a reported error.
+/// The brand creates two SVG logomarks of the same mascot: a full-color
+/// orange mark for light surfaces and a pale, monochrome mark for the brand
+/// orange surface. Use [onLight] and [onBrand] instead of a raw asset path.
 abstract final class AppLogo {
   const AppLogo._();
 
   // -------------------------------------------------------------------------
-  // Primary logo (the only logo asset)
+  // Brand logomark variants
   // -------------------------------------------------------------------------
 
-  /// MentorinAja logo — the single source of truth for all logo display.
-  ///
-  /// Asset path: `assets/icons/icon.png`
-  /// This is the only logo file in the project.
-  /// Do not create placeholder or generated variants of this asset.
-  static const String primary = 'assets/icons/icon.png';
+  /// Full-color orange mark — for white and other light surfaces.
+  static const String onLight = 'assets/icons/icon-w.svg';
+
+  /// Pale monochrome mark — for brand and colored surfaces (indigo, orange).
+  static const String onBrand = 'assets/icons/icon.svg';
+
+  // -------------------------------------------------------------------------
+  // Primary logo asset
+  // -------------------------------------------------------------------------
+
+  /// Legacy single-source logo constant; prefer [onLight]/[onBrand].
+  static const String primary = 'assets/icons/icon.svg';
 
   // -------------------------------------------------------------------------
   // Splash
   // -------------------------------------------------------------------------
 
-  /// Splash screen logo — resolves to [primary].
-  ///
-  /// The splash screen displays this asset centered with the brand name.
-  /// If this asset cannot be decoded, the splash reports the error and
-  /// stops rather than fabricating a replacement.
-  static const String splash = 'assets/icons/icon.png';
+  /// Splash screen logo.
+  static const String splash = 'assets/icons/icon.svg';
 }

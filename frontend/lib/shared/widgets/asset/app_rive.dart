@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 /// of [build] with `RiveAnimation.asset`. The API surface stays identical.
 ///
 /// ```dart
-/// AppRive(AppAnimations.streakFire, width: 48, height: 48);
+/// AppRive('assets/animations/streak_fire.riv', width: 48, height: 48);
 /// ```
 class AppRive extends StatelessWidget {
   const AppRive(

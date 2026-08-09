@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-/// SVG image widget — stub for future `flutter_svg` integration.
+/// SVG image widget backed by `flutter_svg`.
 ///
-/// When `flutter_svg` is added to `pubspec.yaml`, replace the body of
-/// [build] with `SvgPicture.asset` or `SvgPicture.network`. The API
-/// surface stays identical.
+/// Renders an SVG asset with [BoxFit.contain] by default. Pass [color] to
+/// tint monochrome SVG artwork via [ColorFilter.mode]. [width]/[height] are
+/// optional; when omitted the natural SVG size is used.
 ///
 /// ```dart
-/// AppSvg(AppIcons.home, width: 24, height: 24);
+/// AppSvg(AppIllustrations.onboardingWelcome, width: 240, height: 240);
 /// ```
 class AppSvg extends StatelessWidget {
   const AppSvg(
@@ -31,28 +32,20 @@ class AppSvg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Replace with SvgPicture.asset when flutter_svg is added.
-    //
-    // Scaffold:
-    // ```dart
-    // return SvgPicture.asset(
-    //   assetPath,
-    //   width: width,
-    //   height: height,
-    //   fit: fit,
-    //   colorFilter: color != null
-    //       ? ColorFilter.mode(color!, BlendMode.srcIn)
-    //       : null,
-    //   semanticsLabel: semanticsLabel,
-    // );
-    // ```
-
-    return SizedBox(
+    final widget = SvgPicture.asset(
+      assetPath,
       width: width,
       height: height,
-      child: const Center(
-        child: Icon(Icons.image_outlined, color: Colors.grey),
-      ),
+      fit: fit,
+      colorFilter: color != null
+          ? ColorFilter.mode(color!, BlendMode.srcIn)
+          : null,
+      semanticsLabel: semanticsLabel,
     );
+
+    if (semanticsLabel == null) {
+      return widget;
+    }
+    return Semantics(label: semanticsLabel, image: true, child: widget);
   }
 }

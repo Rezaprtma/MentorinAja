@@ -7,7 +7,7 @@ import '../../logic/auth_strings.dart';
 import '../../logic/auth_validators.dart';
 import '../../logic/verification_request_controller.dart';
 import '../widgets/auth_scaffold.dart';
-import '../widgets/google_auth_button.dart';
+import '../widgets/google_auth_sign_in_button.dart';
 
 /// Premium sign-in step of the passwordless flow.
 ///
@@ -42,6 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<void> _continue() async {
+    if (_controller.isProcessing) return;
     if (!(_formKey.currentState?.validate() ?? false)) return;
     final acceded = await _controller.proceed();
     if (!mounted || !acceded) return;
@@ -57,86 +58,88 @@ class _SignInScreenState extends State<SignInScreen> {
     return AuthScaffold(
       maxWidth: 400,
       contentBuilder: (context, constraints) {
-        return IntrinsicHeight(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Spacer(flex: 2),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      AuthStrings.signInTitle,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineMedium
-                          ?.copyWith(fontWeight: FontWeight.w700),
+        return ListenableBuilder(
+          listenable: _controller,
+          builder: (context, _) {
+            return IntrinsicHeight(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Spacer(flex: 2),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.xl,
                     ),
-                    const AppGap(AppSpacing.xl),
-                    AppTextField(
-                      controller: _emailController,
-                      label: AuthStrings.emailLabel,
-                      hint: AuthStrings.emailHint,
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.done,
-                      autofillHints: const [AutofillHints.email],
-                      prefixIcon: const Icon(Icons.mail_outline),
-                      showClearButton: true,
-                      onSubmitted: (_) => _continue(),
-                      validator: AuthValidators.email,
-                    ),
-                    const AppGap(AppSpacing.xl),
-                    Center(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: AppButton(
-                          onPressed: () => _continue(),
-                          label: AuthStrings.continueButton,
-                          variant: AppButtonVariant.primary,
-                          size: AppButtonSize.large,
-                        ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            AuthStrings.signInTitle,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headlineMedium
+                                ?.copyWith(fontWeight: FontWeight.w700),
+                          ),
+                          const AppGap(AppSpacing.xl),
+                          AppTextField(
+                            controller: _emailController,
+                            label: AuthStrings.emailLabel,
+                            hint: AuthStrings.emailHint,
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.done,
+                            autofillHints: const [AutofillHints.email],
+                            prefixIcon: const Icon(Icons.mail_outline),
+                            showClearButton: true,
+                            onSubmitted: (_) => _continue(),
+                            validator: AuthValidators.email,
+                          ),
+                          const AppGap(AppSpacing.xl),
+                          Center(
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: AppButton(
+                                onPressed: () => _continue(),
+                                label: AuthStrings.continueButton,
+                                variant: AppButtonVariant.primary,
+                                size: AppButtonSize.large,
+                                isLoading: _controller.isProcessing,
+                              ),
+                            ),
+                          ),
+                          const AppGap(AppSpacing.lg),
+                          const _OrDivider(),
+                          const AppGap(AppSpacing.lg),
+                          const GoogleAuthSignInButton(),
+                          const AppGap(AppSpacing.xxl),
+                          _AuthBottomLink(
+                            prefix: AuthStrings.dontHaveAccount,
+                            link: AuthStrings.createAccountButton,
+                            onLink: () => Navigator.pushNamed(
+                              context,
+                              AppRoutes.createAccount,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const AppGap(AppSpacing.lg),
-                    const _OrDivider(),
-                    const AppGap(AppSpacing.lg),
-                    GoogleAuthButton(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context)
-                          ..hideCurrentSnackBar()
-                          ..showSnackBar(
-                            const SnackBar(
-                              content: Text(AuthStrings.googleUnavailable),
-                              behavior: SnackBarBehavior.floating,
-                            ),
-                          );
-                      },
-                    ),
-                    const AppGap(AppSpacing.xxl),
-                    _AuthBottomLink(
-                      prefix: AuthStrings.dontHaveAccount,
-                      link: AuthStrings.createAccountButton,
-                      onLink: () =>
-                          Navigator.pushNamed(context, AppRoutes.createAccount),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(flex: 3),
-              const SafeArea(
-                top: false,
-                bottom: true,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: AppSpacing.md),
-                    child: _TermsFooter(),
                   ),
-                ),
+                  const Spacer(flex: 3),
+                  const SafeArea(
+                    top: false,
+                    bottom: true,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: AppSpacing.md),
+                        child: _TermsFooter(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         );
       },
     );

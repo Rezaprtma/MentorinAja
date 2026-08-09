@@ -9,7 +9,6 @@
 /// Re-exports all individual registry classes so screens only need one import.
 library;
 
-export 'app_animations.dart';
 export 'app_audio.dart';
 export 'app_brand.dart';
 export 'app_fonts.dart';

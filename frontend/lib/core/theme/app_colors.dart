@@ -11,30 +11,51 @@ import 'package:flutter/painting.dart';
 /// `docs/design/DESIGN.md`: an energetic orange primary on calm, warm neutrals.
 abstract final class AppColors {
   /// Seed used to derive dynamic Material 3 tonal palettes.
-  static const int seed = 0xFFFF7324;
+  static const int seed = 0xFFF97316;
 
   // -------------------------------------------------------------------------
   // Brand
   // -------------------------------------------------------------------------
 
   /// Primary call-to-action, active highlights, progress.
-  static const Color primary = Color(0xFFFF7324);
+  static const Color primary = Color(0xFFF97316);
 
   static const Color onPrimary = Color(0xFFFFFFFF);
 
   /// Soft primary tint: selected states, user chat bubbles, highlighted cards.
-  static const Color primaryContainer = Color(0xFFFFF1E8);
+  static const Color primaryContainer = Color(0xFFFFF7ED);
 
   static const Color onPrimaryContainer = Color(0xFF7A2E00);
 
-  /// Supporting emphasis such as progress and secondary interactive states.
-  static const Color secondary = Color(0xFF0BA5EC);
+  /// Primary hover state.
+  static const Color primaryHover = Color(0xFFEA580C);
+
+  /// Primary pressed state.
+  static const Color primaryPressed = Color(0xFFC2410C);
+
+  /// Primary subtle tint used on pale brand surfaces.
+  static const Color primarySubtle = Color(0xFFFFFBF7);
+
+  // -------------------------------------------------------------------------
+  // Secondary (indigo)
+  // -------------------------------------------------------------------------
+
+  static const Color secondary = Color(0xFF514AF8);
 
   static const Color onSecondary = Color(0xFFFFFFFF);
 
-  static const Color secondaryContainer = Color(0xFFE0F2FE);
+  static const Color secondaryContainer = Color(0xFFEEEDFF);
 
-  static const Color onSecondaryContainer = Color(0xFF0B4A6F);
+  static const Color onSecondaryContainer = Color(0xFF3730A3);
+
+  /// Secondary hover state.
+  static const Color secondaryHover = Color(0xFF4338CA);
+
+  /// Secondary pressed state.
+  static const Color secondaryPressed = Color(0xFF3730A3);
+
+  /// Subtle tint used on secondary isolated surfaces.
+  static const Color secondarySubtle = Color(0xFFF5F3FF);
 
   // -------------------------------------------------------------------------
   // Semantic
@@ -138,10 +159,10 @@ abstract final class AppDarkColors {
   static const Color primaryContainer = Color(0xFF5B2E08);
   static const Color onPrimaryContainer = Color(0xFFFFDBC6);
 
-  static const Color secondary = Color(0xFF5DC4F5);
-  static const Color onSecondary = Color(0xFF00344A);
-  static const Color secondaryContainer = Color(0xFF0B4A6F);
-  static const Color onSecondaryContainer = Color(0xFFD6ECFF);
+  static const Color secondary = Color(0xFF9B9DFF);
+  static const Color onSecondary = Color(0xFF13166F);
+  static const Color secondaryContainer = Color(0xFF3B3F9E);
+  static const Color onSecondaryContainer = Color(0xFFE1E2FF);
 
   static const Color success = Color(0xFF47D16C);
   static const Color onSuccess = Color(0xFF003D1F);

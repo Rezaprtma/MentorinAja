@@ -10,6 +10,8 @@ library;
 export 'logic/auth_flow.dart';
 export 'logic/auth_strings.dart';
 export 'logic/auth_validators.dart';
+export 'logic/google_auth_controller.dart';
+export 'logic/mock_auth_service.dart';
 export 'logic/otp_verification_controller.dart';
 export 'logic/verification_request_controller.dart';
 export 'presentation/screens/authentication_screen.dart';

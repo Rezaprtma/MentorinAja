@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:frontend/core/core.dart';
 import 'package:frontend/features/auth/auth.dart';
+import 'package:frontend/features/explore/explore.dart';
 import 'package:frontend/features/onboarding/onboarding.dart';
 import 'package:frontend/features/splash/splash.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
+import 'main_shell.dart';
 import '../routing/route_names.dart';
 
 class App extends StatelessWidget {
@@ -49,7 +51,9 @@ class App extends StatelessWidget {
       case AppRoutes.otpVerification:
         return const OtpVerificationScreen();
       case AppRoutes.home:
-        return const Scaffold(body: Center(child: Text('Home')));
+        return const MainShell();
+      case AppRoutes.explore:
+        return const ExplorePage();
       case AppRoutes.courses:
         return const Scaffold(body: Center(child: Text('Courses')));
       case AppRoutes.courseDetail:

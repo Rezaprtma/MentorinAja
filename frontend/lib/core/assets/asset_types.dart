@@ -18,7 +18,6 @@ enum AssetImageFormat {
 
 /// Animation source format.
 enum AssetAnimationFormat {
-  lottie('json'),
   rive('riv');
 
   const AssetAnimationFormat(this.extension);

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:frontend/core/core.dart';
 import 'package:frontend/routing/route_names.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
@@ -8,27 +6,16 @@ import 'package:frontend/shared/widgets/widgets.dart';
 import '../../logic/auth_strings.dart';
 import '../widgets/auth_ambient_background.dart';
 import '../widgets/auth_scaffold.dart';
-import '../widgets/google_auth_button.dart';
+import '../widgets/google_auth_sign_in_button.dart';
 
 /// Premium authentication landing — the single visual entry point.
 ///
-/// The Auth hero is the identity; no heading competes with it. Below it sit the
+/// The Auth hero is the identity; a short tagline frames it. Below sit the
 /// primary CTA (Continue with Google), a divider, the Create Account action and
 /// a Sign In text link, with Terms & Privacy pinned to the bottom of the
 /// viewport on every screen size.
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({super.key});
-
-  void _continueWithGoogle(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(
-          content: Text(AuthStrings.googleUnavailable),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +24,10 @@ class AuthenticationScreen extends StatelessWidget {
       background: const AuthAmbientBackground(),
       contentBuilder: (context, constraints) {
         final h = constraints.maxHeight;
-        final heroSize = (constraints.maxWidth * 0.55).clamp(200.0, 300.0);
-        final gapHero = (h * 0.015).clamp(12.0, 20.0);
+        final heroSize = (constraints.maxWidth * 0.55)
+            .clamp(0.0, h - 440)
+            .clamp(150.0, 320.0);
+        final gapHero = (h * 0.02).clamp(20.0, 26.0);
 
         return IntrinsicHeight(
           child: Column(
@@ -49,11 +38,11 @@ class AuthenticationScreen extends StatelessWidget {
               Center(
                 child: AppFadeIn(
                   duration: AppDurations.slower,
-                  child: AppLottie(
-                    AppAnimations.authWelcome,
+                  child: AppSvg(
+                    'assets/icons/auth.svg',
                     width: heroSize,
                     height: heroSize,
-                    semanticsLabel: 'Welcome animation',
+                    semanticsLabel: 'Welcome illustration',
                   ),
                 ),
               ),
@@ -63,9 +52,9 @@ class AuthenticationScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    GoogleAuthButton(
-                      onPressed: () => _continueWithGoogle(context),
-                    ),
+                    const _Tagline(),
+                    const AppGap(AppSpacing.xl),
+                    const GoogleAuthSignInButton(),
                     const AppGap(AppSpacing.sm),
                     const _OrDivider(),
                     const AppGap(AppSpacing.sm),
@@ -126,6 +115,38 @@ class _OrDivider extends StatelessWidget {
           ),
         ),
         const Expanded(child: AppDivider()),
+      ],
+    );
+  }
+}
+
+/// Tagline headline paired with a short supporting description.
+class _Tagline extends StatelessWidget {
+  const _Tagline();
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          AuthStrings.tagline,
+          textAlign: TextAlign.center,
+          style: textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w600,
+            height: 1.25,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 320),
+          child: Text(
+            AuthStrings.taglineDescription,
+            textAlign: TextAlign.center,
+            style: textTheme.bodyMedium?.copyWith(height: 1.5),
+          ),
+        ),
       ],
     );
   }

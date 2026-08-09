@@ -6,6 +6,9 @@ abstract final class AuthStrings {
   const AuthStrings._();
 
   // Authentication landing
+  static const String tagline = 'Teman Belajar yang Memahami Kamu.';
+  static const String taglineDescription =
+      'Dapatkan bantuan belajar yang menyesuaikan kebutuhan dan tujuanmu.';
   static const String createAccountButton = 'Create Account';
   static const String signInButton = 'Sign In';
   static const String alreadyHaveAccount = 'Already have an account?';
@@ -13,8 +16,18 @@ abstract final class AuthStrings {
   static const String termsFooter =
       'Dengan melanjutkan, kamu menyetujui\n'
       'Ketentuan Layanan & Kebijakan Privasi';
-  static const String googleUnavailable =
-      'Google Sign-In akan segera tersedia.';
+
+  // Google authentication
+  static const String googleSignInError =
+      'Google sign-in failed. Please try again.';
+  static const String googleSignInAlreadyRunning =
+      'Authentication is already in progress.';
+
+  // Notifications
+  static const String notificationSuccessTitle = 'Welcome!';
+  static const String notificationSuccessMessage = 'Google sign-in complete.';
+  static const String notificationErrorTitle = 'Login failed';
+  static const String notificationErrorMessage = 'Please try again.';
 
   // Create account
   static const String createTitle = 'Create Account';
@@ -48,12 +61,22 @@ abstract final class AuthStrings {
   static const String otpDigitsOnly = 'The code contains only digits';
 
   // OTP verification
-  static const String otpTitle = 'Verifikasi Email';
+  static const String otpTitle = 'Check your inbox';
   static const String otpSubtitle =
-      'Masukkan 6 digit kode yang telah dikirim ke email kamu.';
+      "We've sent a verification code to your email.";
   static const String otpVerifyButton = 'Verify';
   static const String otpResendButton = 'Resend Code';
-  static const String otpCanResend = 'Kode dapat dikirim ulang';
-  static const String otpResendIn = 'Kirim ulang dalam';
-  static const String otpSuccess = 'Email berhasil diverifikasi';
+  static const String otpCanResend = 'Code sent successfully';
+  static const String otpResendIn = 'Resend code in';
+  static const String otpDidNotReceive = "Didn't receive the code?";
+  static const String otpResendAction = 'Resend code';
+  static const String otpEmailEdit = 'Change';
+  static const String otpPaste = 'Paste';
+  static const String otpSuccess = 'Email verified successfully';
+  static const String otpSuccessTitle = 'Email verified!';
+  static const String otpSuccessMessage = "You're all set.";
+  static const String otpErrorTitle = 'Invalid code';
+  static const String otpErrorMessage = 'Check your code.';
+  static const String otpResendInfoTitle = 'Code sent!';
+  static const String otpResendInfoMessage = 'Check your inbox.';
 }

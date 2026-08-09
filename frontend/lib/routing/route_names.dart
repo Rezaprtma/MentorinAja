@@ -30,6 +30,7 @@ abstract final class AppRoutes {
   // -------------------------------------------------------------------------
 
   static const String home = '/home';
+  static const String explore = '/explore';
   static const String courses = '/courses';
   static const String progress = '/progress';
   static const String profile = '/profile';
