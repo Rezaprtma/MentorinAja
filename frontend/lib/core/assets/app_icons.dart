@@ -58,6 +58,36 @@ abstract final class AppIconPaths {
   static const String document = 'assets/icons/document.png';
 
   // -------------------------------------------------------------------------
+  // Technology icons
+  // -------------------------------------------------------------------------
+
+  static const String techPython = 'assets/icons/python.svg';
+  static const String techPhp = 'assets/icons/php.svg';
+  static const String techMysql = 'assets/icons/mysql.svg';
+  static const String techJavascript = 'assets/icons/javascript.svg';
+  static const String techTypescript = 'assets/icons/typescript-icon.svg';
+  static const String techCss = 'assets/icons/css.svg';
+  static const String techLaravel = 'assets/icons/laravel.svg';
+  static const String techFlutter = 'assets/icons/flutter.svg';
+  static const String techDart = 'assets/icons/dart.svg';
+  static const String techCpp = 'assets/icons/c++.svg';
+  static const String techJava = 'assets/icons/java.svg';
+  static const String techCsharp = 'assets/icons/C#.svg';
+  static const String techKotlin = 'assets/icons/kotlin.svg';
+  static const String techSwift = 'assets/icons/swift.svg';
+  static const String techNodejs = 'assets/icons/nodejs-logo.svg';
+  static const String techGo = 'assets/icons/go.svg';
+  static const String techPostgresql = 'assets/icons/postgresql.svg';
+  static const String techSqllite = 'assets/icons/sqllite.svg';
+
+  // -------------------------------------------------------------------------
+  // Hero banner artwork
+  // -------------------------------------------------------------------------
+
+  /// Discovery illustration used on the Home hero carousel.
+  static const String banner3 = 'assets/icons/banner3.svg';
+
+  // -------------------------------------------------------------------------
   // UI icons
   // -------------------------------------------------------------------------
 

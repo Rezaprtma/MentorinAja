@@ -44,11 +44,11 @@ class _MainShellState extends State<MainShell> {
     ),
   ];
 
-  static const List<Widget> _pages = [
-    HomePage(),
-    ExplorePage(),
-    ProgressPage(),
-    ProfilePage(),
+  late final List<Widget> _pages = [
+    HomePage(onExplore: () => setState(() => _selectedIndex = 1)),
+    const ExplorePage(),
+    const ProgressPage(),
+    const ProfilePage(),
   ];
 
   @override

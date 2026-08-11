@@ -19,15 +19,13 @@ void main() {
     await tester.pumpWidget(_buildApp());
 
     expect(find.byType(HomePage), findsOneWidget);
-    expect(find.text('Good afternoon'), findsOneWidget);
-    expect(
-      find.textContaining('Rina, ready to continue learning?'),
-      findsOneWidget,
-    );
-    expect(find.text('Your AI tutor'), findsOneWidget);
-    expect(find.text('Continue learning'), findsOneWidget);
-    expect(find.text('Continue lesson'), findsOneWidget);
-    expect(find.text('Recommended for you'), findsOneWidget);
+    expect(find.text('Selamat siang'), findsOneWidget);
+    expect(find.textContaining('Rina, siap lanjut belajar?'), findsOneWidget);
+    expect(find.text('Tingkatkan Kemampuanmu'), findsOneWidget);
+    expect(find.text('Mulai Sekarang'), findsOneWidget);
+    expect(find.text('Progres Saya'), findsOneWidget);
+    expect(find.text('Pelajaran 12 dari 20 • Fungsi'), findsOneWidget);
+    expect(find.text('Untuk Kamu'), findsOneWidget);
 
     expect(find.byType(AppFloatingBottomNav), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);
@@ -42,7 +40,7 @@ void main() {
     await tester.tap(find.text('Explore'));
     await tester.pump();
     expect(find.byType(ExplorePage), findsOneWidget);
-    expect(find.text('Explore courses'), findsOneWidget);
+    expect(find.text('Jelajahi'), findsOneWidget);
 
     await tester.tap(find.text('Progress'));
     await tester.pump();
@@ -65,7 +63,7 @@ void main() {
     await tester.tap(find.text('Home'));
     await tester.pump();
 
-    expect(find.text('Continue learning'), findsOneWidget);
+    expect(find.text('Progres Saya'), findsOneWidget);
   });
 
   testWidgets('floating nav reports the tapped destination index', (
@@ -109,8 +107,7 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Product Thinking 101'), findsOneWidget);
-    expect(find.text('Recommended for you'), findsOneWidget);
+    expect(find.text('Untuk Kamu'), findsOneWidget);
     expect(find.byType(AppFloatingBottomNav), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);
   });

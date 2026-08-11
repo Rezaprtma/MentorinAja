@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
+import 'package:frontend/shared/data/tech_brand_colors.dart';
+import 'package:frontend/shared/widgets/widgets.dart';
 
 import '../../mock_home_data.dart';
 
-/// Compact clickable course row used in the Home recommendations.
+/// Vivid course card used in the Home "Untuk Kamu" recommendation rail.
 ///
-/// Renders a soft indigo icon chip, the course title, a category • lesson
-/// count line and a trailing chevron. Rows carry no own surface and are meant
-/// to live as siblings inside a single grouped surface, separated by hairlines,
-/// so the curated feed reads as one lightweight list instead of stacked cards.
+/// The card surface is the course's brand accent with the real technology logo
+/// rendered directly on it — no mini container behind the icon. A soft white
+/// circle and a faint cropped copy of the logo decorate the background, and the
+/// footer carries the lesson count and rating in the brand's on-color.
 class RecommendedCourseCard extends StatelessWidget {
   const RecommendedCourseCard({super.key, required this.course, this.onTap});
 
@@ -19,73 +21,140 @@ class RecommendedCourseCard extends StatelessWidget {
   /// Opens the course detail.
   final VoidCallback? onTap;
 
-  /// Icon chip height and width.
-  static const double iconSize = 46;
-
   @override
   Widget build(BuildContext context) {
-    final ext = context.appColors;
-    final scheme = Theme.of(context).colorScheme;
+    final brand = course.brand;
+    final palette = brand ?? _palette(context);
+    final surface = palette.accent;
+    final onColor = palette.onAccent;
 
-    return InkWell(
+    return AppBaseCard(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(AppRadius.extraLarge),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.lg,
-          vertical: AppSpacing.sm,
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: iconSize,
-              height: iconSize,
+      clipBehavior: Clip.antiAlias,
+      color: surface,
+      radius: AppRadius.large,
+      elevation: AppElevation.xs,
+      padding: EdgeInsets.zero,
+      child: Stack(
+        children: [
+          Positioned(
+            top: -40,
+            right: -40,
+            child: Container(
+              width: 110,
+              height: 110,
               decoration: BoxDecoration(
-                color: scheme.secondaryContainer,
                 shape: BoxShape.circle,
-              ),
-              child: Icon(
-                course.icon,
-                color: scheme.secondary,
-                size: AppIconSizes.lg,
+                color: Colors.white.withValues(alpha: 0.12),
               ),
             ),
-            const SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    course.title,
-                    style: AppTypeScale.titleSmall.copyWith(
-                      color: ext.textPrimary,
-                      fontWeight: FontWeight.w600,
+          ),
+          Positioned(
+            bottom: -24,
+            right: -32,
+            child: Opacity(
+              opacity: 0.14,
+              child: AppSvg(course.iconPath, width: 96, height: 96),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    AppSvg(
+                      course.iconPath,
+                      width: 44,
+                      height: 44,
+                      fit: BoxFit.contain,
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: AppSpacing.xxs),
-                  Text(
-                    '${course.category} • ${course.lessonCount} lessons',
-                    style: AppTypeScale.bodySmall.copyWith(
-                      color: ext.textSecondary,
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Text(
+                        course.title,
+                        style: AppTypeScale.titleLarge.copyWith(
+                          color: onColor,
+                          fontWeight: FontWeight.w800,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.xxs),
+                Text(
+                  course.description,
+                  style: AppTypeScale.bodySmall.copyWith(
+                    color: onColor.withValues(alpha: 0.80),
                   ),
-                ],
-              ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Spacer(),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.schedule_rounded,
+                      size: AppIconSizes.sm,
+                      color: onColor.withValues(alpha: 0.85),
+                    ),
+                    const SizedBox(width: AppSpacing.xxs),
+                    Expanded(
+                      child: Text(
+                        '${course.lessonCount} pelajaran',
+                        style: AppTypeScale.labelMedium.copyWith(
+                          color: onColor.withValues(alpha: 0.85),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Icon(
+                      Icons.star_rounded,
+                      size: AppIconSizes.sm,
+                      color: onColor,
+                    ),
+                    const SizedBox(width: AppSpacing.xxs),
+                    Text(
+                      course.rating.toStringAsFixed(1),
+                      style: AppTypeScale.labelMedium.copyWith(
+                        color: onColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            const SizedBox(width: AppSpacing.xs),
-            Icon(
-              Icons.chevron_right_rounded,
-              color: ext.textSecondary,
-              size: AppIconSizes.md,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  /// Fallback palette used when the course has no brand colors.
+  TechBrandColors _palette(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    return switch (course.accent) {
+      CourseAccent.primary => TechBrandColors(
+        background: scheme.primaryContainer,
+        accent: scheme.primary,
+        onAccent: scheme.onPrimary,
+      ),
+      CourseAccent.secondary => TechBrandColors(
+        background: scheme.secondaryContainer,
+        accent: scheme.secondary,
+        onAccent: scheme.onSecondary,
+      ),
+      CourseAccent.neutral => TechBrandColors(
+        background: scheme.surfaceContainerLow,
+        accent: scheme.primary,
+        onAccent: scheme.onPrimary,
+      ),
+    };
   }
 }

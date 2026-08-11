@@ -7,7 +7,7 @@ import 'package:frontend/shared/design_system/design_system.dart';
 /// A soft, tinted assistant strip: a small brand icon, a short title and a
 /// supporting line. Rendered on a very light orange surface with no shadow so
 /// it reads as a helpful nudge rather than a promotional banner, without
-/// competing with the "Continue learning" call to action.
+/// competing with the "Lanjut Belajar" call to action.
 class AiTutorCard extends StatelessWidget {
   const AiTutorCard({super.key, this.onPressed});
 
@@ -20,7 +20,7 @@ class AiTutorCard extends StatelessWidget {
 
     return Semantics(
       button: true,
-      label: 'Ask your AI tutor',
+      label: 'Tanya Tutor AI-mu',
       child: AppBaseCard(
         onTap: onPressed,
         padding: const EdgeInsets.symmetric(
@@ -52,7 +52,7 @@ class AiTutorCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Your AI tutor',
+                    'Tutor AI-mu',
                     style: AppTypeScale.titleSmall.copyWith(
                       color: scheme.onPrimaryContainer,
                       fontWeight: FontWeight.w600,
@@ -60,7 +60,7 @@ class AiTutorCard extends StatelessWidget {
                   ),
                   const SizedBox(height: AppSpacing.xxs),
                   Text(
-                    'Need help with your lesson?',
+                    'Punya masalah dengan pelajaranmu?',
                     style: AppTypeScale.bodySmall.copyWith(
                       color: scheme.onPrimaryContainer.withValues(alpha: 0.72),
                     ),

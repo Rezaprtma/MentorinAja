@@ -102,74 +102,76 @@ void main() {
     }
   });
 
-  testWidgets('success uses a solid green surface with white typography', (
+  testWidgets('every variant renders on the shared white surface', (
     tester,
   ) async {
     await tester.pumpWidget(host(variants));
 
+    for (final type in AppNotificationType.values) {
+      final card = AppNotificationService.paletteFor(type);
+      expect(card.background, AppColors.surface);
+    }
+  });
+
+  testWidgets('success uses a black title on a white surface', (tester) async {
+    await tester.pumpWidget(host(variants));
+
     final card = AppNotificationService.paletteFor(AppNotificationType.success);
-    expect(card.background, const Color(0xFF16A34A));
-    expect(card.foreground, const Color(0xFFFFFFFF));
-    expect(card.accent, const Color(0xFFFFFFFF));
+    expect(card.background, AppColors.surface);
+    expect(card.foreground, AppColors.textPrimary);
 
     final titleStyle = tester.widget<Text>(find.text('Welcome back!')).style;
     final messageStyle = tester
         .widget<Text>(find.text("You're signed in."))
         .style;
-    expect(titleStyle!.color, const Color(0xFFFFFFFF));
-    expect(messageStyle!.color!.a, closeTo(0.85, 0.01));
+    expect(titleStyle!.color, AppColors.textPrimary);
+    expect(messageStyle!.color, AppColors.textSecondary);
   });
 
-  testWidgets('error uses a solid red surface with white typography', (
-    tester,
-  ) async {
+  testWidgets('error uses a red title on a white surface', (tester) async {
     await tester.pumpWidget(host(variants));
 
     final card = AppNotificationService.paletteFor(AppNotificationType.error);
-    expect(card.background, const Color(0xFFDC2626));
-    expect(card.foreground, const Color(0xFFFFFFFF));
-    expect(card.accent, const Color(0xFFFFFFFF));
+    expect(card.background, AppColors.surface);
+    expect(card.foreground, AppColors.error);
 
     final titleStyle = tester.widget<Text>(find.text('Invalid code')).style;
     final messageStyle = tester
         .widget<Text>(find.text('Check your code.'))
         .style;
-    expect(titleStyle!.color, const Color(0xFFFFFFFF));
-    expect(messageStyle!.color!.a, closeTo(0.85, 0.01));
+    expect(titleStyle!.color, AppColors.error);
+    expect(messageStyle!.color, AppColors.textSecondary);
   });
 
-  testWidgets('information uses a white surface with dark readable text', (
+  testWidgets('information uses a black title on a white surface', (
     tester,
   ) async {
     await tester.pumpWidget(host(variants));
 
     final card = AppNotificationService.paletteFor(AppNotificationType.info);
-    expect(card.background, const Color(0xFFFFFFFF));
-    expect(card.foreground, const Color(0xFF1D2939));
+    expect(card.background, AppColors.surface);
+    expect(card.foreground, AppColors.textPrimary);
 
     final titleStyle = tester.widget<Text>(find.text('Code sent!')).style;
     final messageStyle = tester
         .widget<Text>(find.text('Check your inbox.'))
         .style;
-    expect(titleStyle!.color, const Color(0xFF1D2939));
-    expect(messageStyle!.color!.a, closeTo(0.85, 0.01));
+    expect(titleStyle!.color, AppColors.textPrimary);
+    expect(messageStyle!.color, AppColors.textSecondary);
   });
 
-  testWidgets('warning uses a solid amber surface with white typography', (
-    tester,
-  ) async {
+  testWidgets('warning uses a black title on a white surface', (tester) async {
     await tester.pumpWidget(host(variants));
 
     final card = AppNotificationService.paletteFor(AppNotificationType.warning);
-    expect(card.background, const Color(0xFFF59E0B));
-    expect(card.foreground, const Color(0xFFFFFFFF));
-    expect(card.accent, const Color(0xFFFFFFFF));
+    expect(card.background, AppColors.surface);
+    expect(card.foreground, AppColors.textPrimary);
 
     final titleStyle = tester.widget<Text>(find.text('Almost expired')).style;
-    expect(titleStyle!.color, const Color(0xFFFFFFFF));
+    expect(titleStyle!.color, AppColors.textPrimary);
   });
 
-  testWidgets('action chip reuses the semantic accent for its label', (
+  testWidgets('action chip uses the neutral text treatment on a subtle chip', (
     tester,
   ) async {
     await tester.pumpWidget(host(variants));

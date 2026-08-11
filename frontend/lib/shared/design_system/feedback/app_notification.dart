@@ -30,28 +30,29 @@ class AppNotificationPalette {
     required this.border,
   });
 
-  /// Strong solid card surface that carries the semantic color.
+  /// White card surface shared by every variant.
   final Color background;
 
-  /// High-contrast text color (title; description derives from it).
+  /// Title color; carries the severity on the otherwise neutral card.
   final Color foreground;
 
-  /// Icon and action accent sitting on top of [background].
+  /// Subtle icon accent (success/info/error/warning tint).
   final Color accent;
 
-  /// Translucent button surface for the compact action chip.
+  /// Neutral button surface for the compact action chip.
   final Color actionSurface;
 
-  /// Hairline card border; may be fully transparent on colored variants.
+  /// Hairline card border separating the card from the page.
   final Color border;
 }
 
 /// Design-system notification card.
 ///
-/// Bold tooling-style surface: the solid [AppNotificationType] color carries the
-/// severity, with white typography on colored variants and a clean dark-on-white
-/// information variant. Layout `[icon] - [title]/[message] - optional [action]`
-/// with the text block vertically centered on the icon.
+/// Single neutral visual language: every variant renders on a white surface
+/// with a subtle border and shadow, and only the title and icon tint reflect
+/// the [AppNotificationType]. The message always uses the secondary text tone.
+/// Layout `[icon] - [title]/[message] - optional [action]` with the text block
+/// vertically centered on the icon.
 /// Pure presentation — animation and lifecycle live in [AppNotificationService].
 class AppNotificationCard extends StatelessWidget {
   const AppNotificationCard({
@@ -80,6 +81,7 @@ class AppNotificationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final palette = AppNotificationService.paletteFor(type);
+    final ext = context.appColors;
     final action = actionLabel;
 
     return Container(
@@ -96,19 +98,10 @@ class AppNotificationCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: AppIconSizes.xxl,
-            height: AppIconSizes.xxl,
-            decoration: BoxDecoration(
-              color: palette.accent.withValues(alpha: 0.18),
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: Icon(
-              AppNotificationService.iconFor(type),
-              size: AppIconSizes.sm,
-              color: palette.accent,
-            ),
+          Icon(
+            AppNotificationService.iconFor(type),
+            size: AppIconSizes.lg,
+            color: palette.accent,
           ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
@@ -133,7 +126,7 @@ class AppNotificationCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTypeScale.bodySmall.copyWith(
-                      color: palette.foreground.withValues(alpha: 0.85),
+                      color: ext.textSecondary,
                       fontWeight: FontWeight.w400,
                       height: 1.3,
                       decoration: TextDecoration.none,
@@ -152,7 +145,7 @@ class AppNotificationCard extends StatelessWidget {
               icon: Icon(
                 Icons.close,
                 size: AppIconSizes.md,
-                color: palette.accent,
+                color: ext.textSecondary,
               ),
               constraints: const BoxConstraints.tightFor(width: 36, height: 36),
               padding: EdgeInsets.zero,
@@ -177,11 +170,12 @@ class _ActionChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ext = context.appColors;
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
         backgroundColor: palette.actionSurface,
-        foregroundColor: palette.accent,
+        foregroundColor: ext.textPrimary,
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.sm,
           vertical: AppSpacing.xxs,
@@ -192,7 +186,7 @@ class _ActionChip extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.small),
         ),
         textStyle: AppTypeScale.labelMedium.copyWith(
-          color: palette.accent,
+          color: ext.textPrimary,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -261,35 +255,34 @@ class AppNotificationService {
   }
 
   static AppNotificationPalette paletteFor(AppNotificationType type) {
-    final white = const Color(0xFFFFFFFF);
     return switch (type) {
-      AppNotificationType.success => AppNotificationPalette(
-        background: const Color(0xFF16A34A),
-        foreground: white,
-        accent: white,
-        actionSurface: white.withValues(alpha: 0.22),
-        border: Colors.transparent,
+      AppNotificationType.success => const AppNotificationPalette(
+        background: AppColors.surface,
+        foreground: AppColors.textPrimary,
+        accent: AppColors.success,
+        actionSurface: AppColors.surfaceVariant,
+        border: AppColors.border,
       ),
-      AppNotificationType.error => AppNotificationPalette(
-        background: const Color(0xFFDC2626),
-        foreground: white,
-        accent: white,
-        actionSurface: white.withValues(alpha: 0.22),
-        border: Colors.transparent,
+      AppNotificationType.error => const AppNotificationPalette(
+        background: AppColors.surface,
+        foreground: AppColors.error,
+        accent: AppColors.error,
+        actionSurface: AppColors.surfaceVariant,
+        border: AppColors.border,
       ),
-      AppNotificationType.warning => AppNotificationPalette(
-        background: const Color(0xFFF59E0B),
-        foreground: white,
-        accent: white,
-        actionSurface: white.withValues(alpha: 0.22),
-        border: Colors.transparent,
+      AppNotificationType.warning => const AppNotificationPalette(
+        background: AppColors.surface,
+        foreground: AppColors.textPrimary,
+        accent: AppColors.warning,
+        actionSurface: AppColors.surfaceVariant,
+        border: AppColors.border,
       ),
       AppNotificationType.info => const AppNotificationPalette(
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF1D2939),
-        accent: Color(0xFF1D2939),
-        actionSurface: Color(0xFFF2F4F7),
-        border: Color(0xFFEAECF0),
+        background: AppColors.surface,
+        foreground: AppColors.textPrimary,
+        accent: AppColors.info,
+        actionSurface: AppColors.surfaceVariant,
+        border: AppColors.border,
       ),
     };
   }

@@ -5,9 +5,9 @@ import 'package:frontend/shared/design_system/design_system.dart';
 /// Greeting row for the Home screen.
 ///
 /// A time-of-day eyebrow pair throws a personalized "ready to continue
-/// learning?" line under the learner's name. The notification action and
-/// avatar stay minimal on the trailing edge so the header never grows taller
-/// than it needs to be.
+/// learning?" line under the learner's name. The notification action stays
+/// alone on the trailing edge — profile access lives in the bottom navigation —
+/// so the header never grows taller than it needs to be.
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
     super.key,
@@ -33,7 +33,7 @@ class HomeHeader extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Good afternoon',
+                'Selamat siang',
                 style: AppTypeScale.labelMedium.copyWith(
                   color: ext.textSecondary,
                   letterSpacing: 0.4,
@@ -41,7 +41,7 @@ class HomeHeader extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.xxs),
               Text(
-                '$displayName, ready to continue learning?',
+                '$displayName, siap lanjut belajar?',
                 style: AppTypeScale.headlineMedium.copyWith(
                   color: ext.textPrimary,
                 ),
@@ -54,11 +54,9 @@ class HomeHeader extends StatelessWidget {
         const SizedBox(width: AppSpacing.xs),
         AppIconButton(
           icon: Icons.notifications_none,
-          tooltip: 'Notifications',
+          tooltip: 'Notifikasi',
           onPressed: onNotificationsPressed,
         ),
-        const SizedBox(width: AppSpacing.xs),
-        AppAvatar.initial(name: displayName, size: 44),
       ],
     );
   }

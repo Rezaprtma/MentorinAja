@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 
 import '../../mock_home_data.dart';
+import 'horizontal_course_rail.dart';
 import 'recommended_course_card.dart';
 
 /// Recommended-courses block on the Home screen.
 ///
-/// Sits below the "Continue learning" hero and the open weekly stats so catalog
-/// content stays lower in the visual hierarchy. Renders a generous header and
-/// one grouped surface holding all [RecommendedCourseCard] rows separated by
-/// hairline dividers — a single curated list rather than repeated boxed cards.
+/// Sits below the resume card so discovery content stays lower in the visual
+/// hierarchy. Renders a "Untuk Kamu" header with a "Lihat Semua" action above a
+/// horizontally scrolling rail whose cards peek the next item.
 class RecommendedSection extends StatelessWidget {
   const RecommendedSection({super.key, this.onSeeAll, this.onCourseTap});
 
@@ -20,50 +20,45 @@ class RecommendedSection extends StatelessWidget {
   /// Opens a specific course; receives its mock title.
   final ValueChanged<String>? onCourseTap;
 
+  /// Uniform height kept for every card in the rail.
+  static const double _cardHeight = 216;
+
   @override
   Widget build(BuildContext context) {
-    final ext = context.appColors;
     final courses = MockHomeData.recommendedCourses;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         AppSectionHeader(
-          title: 'Recommended for you',
+          title: 'Untuk Kamu',
           trailing: TextButton(
             onPressed: onSeeAll,
-            child: const Text('See all'),
+            child: const Text('Lihat Semua'),
           ),
-          padding: const EdgeInsets.only(top: AppSpacing.lg),
+          padding: EdgeInsets.zero,
         ),
-        AppBaseCard(
-          color: ext.card,
-          elevation: AppElevation.flat,
-          radius: AppRadius.extraLarge,
-          borderSide: BorderSide(color: ext.border),
-          clipBehavior: Clip.antiAlias,
-          padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-          child: Column(
-            children: [
-              for (var i = 0; i < courses.length; i++) ...[
-                if (i > 0)
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                    child: AppDivider(
-                      height: AppSpacing.xs,
-                      indent: RecommendedCourseCard.iconSize + AppSpacing.sm,
-                    ),
-                  ),
-                RecommendedCourseCard(
-                  course: courses[i],
-                  onTap: onCourseTap == null
-                      ? null
-                      : () => onCourseTap!(courses[i].title),
-                ),
-              ],
-            ],
+        const SizedBox(height: AppSpacing.sm),
+        if (courses.isEmpty)
+          AppEmptyState(
+            compact: true,
+            icon: Icons.rocket_launch_outlined,
+            title: 'Mulai Perjalanan Belajarmu',
+            message: 'Pilih kursus dan mulailah berkembang.',
+            actionLabel: 'Jelajahi Kursus',
+            onAction: onSeeAll,
+          )
+        else
+          HorizontalCourseRail(
+            cardHeight: _cardHeight,
+            itemCount: courses.length,
+            itemBuilder: (context, index) => RecommendedCourseCard(
+              course: courses[index],
+              onTap: onCourseTap == null
+                  ? null
+                  : () => onCourseTap!(courses[index].title),
+            ),
           ),
-        ),
       ],
     );
   }
