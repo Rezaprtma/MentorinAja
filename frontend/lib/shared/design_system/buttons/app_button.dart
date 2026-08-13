@@ -142,7 +142,10 @@ class AppButton extends StatelessWidget {
               color: foreground,
             ),
           ),
-          if (label != null) ...[AppGap.xs, Text(label!)],
+          if (label != null) ...[
+            AppGap.xs,
+            Flexible(fit: FlexFit.loose, child: Text(label!)),
+          ],
         ],
       );
     }
@@ -163,7 +166,8 @@ class AppButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (leading != null) ...[leading, AppGap.xs],
-        ?labelWidget,
+        if (labelWidget != null)
+          Flexible(fit: FlexFit.loose, child: labelWidget),
         if (trailing != null) ...[AppGap.xs, trailing],
       ],
     );

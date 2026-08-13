@@ -1,31 +1,29 @@
 # MentorinAja
 
-MentorinAja is a voice-first, AI-assisted learning platform for personalized tutoring. The repository combines a Flutter frontend with a FastAPI backend in a simple monorepo structure.
+MentinorinAja is a course-based learning platform for Indonesian learners — "Teman Belajar yang Memahami Kamu". The repository combines a Flutter frontend (the implemented product) with a FastAPI backend bootstrap in a simple monorepo structure.
 
 ## Project overview
 
-- Flutter frontend for Android, iOS, and Windows
-- FastAPI backend for tutoring workflows, APIs, and business logic
-- Product, architecture, schema, and design documentation for contributors
+- Flutter frontend for Android, iOS, and Windows (current implementation)
+- FastAPI backend (bootstrap only; no services implemented yet)
+- Product, design, architecture, and development documentation for contributors
 
 ## Architecture
 
-- Frontend: screens, lesson flow, voice and camera interaction, and local state
-- Backend: API orchestration, progress logic, tutoring coordination, and persistence
-- Data and services: Supabase-backed auth, storage, and supporting services
+- Frontend: onboarding → auth → four-tab learning shell (Home, Explore, Progress, Profile) on local mock data
+- Backend: FastAPI bootstrap scaffold; not yet wired to the frontend
 
 ## Folder structure
 
 - [frontend](frontend): Flutter application code and platform assets
-- [backend](backend): Python backend service and API implementation
-- [docs](docs): product, architecture, schema, design, and contributor workflow documents
+- [backend](backend): Python backend service (scaffold)
+- [docs](docs): product, design, architecture, and contributor workflow documents
 - [.github](.github) and [.vscode](.vscode): repository configuration
 
 ## Tech stack
 
 - Flutter and Dart
-- Python and FastAPI
-- Supabase for auth, storage, and data services
+- Python and FastAPI (backend scaffold)
 - Git, Android Studio, and VS Code for local development
 
 ## Getting started
@@ -56,11 +54,11 @@ On Windows, activate the virtual environment with:
 
 ### Documentation
 
-Start with [docs/development/GETTING_STARTED.md](docs/development/GETTING_STARTED.md) for the full setup guide.
+Start with [docs/README.md](docs/README.md) for the documentation hub, or [docs/development/contributing.md](docs/development/contributing.md) for the full setup guide.
 
 ## Contributing
 
-Contributions should stay small, focused, and well documented. Review the relevant architecture and schema documents before changing behavior or contracts.
+Contributions should stay small, focused, and well documented. Review the relevant product, design, and architecture documents before changing behavior or contracts.
 
 ## License
 

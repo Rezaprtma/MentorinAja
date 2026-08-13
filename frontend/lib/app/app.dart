@@ -16,23 +16,26 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MentorinAja',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
-      themeMode: ThemeMode.system,
-      scrollBehavior: AppScrollBehavior(),
-      builder: (context, child) =>
-          AppShell(child: child ?? const SizedBox.shrink()),
-      initialRoute: AppRoutes.splash,
-      onGenerateRoute: (settings) {
-        final routeName = settings.name ?? AppRoutes.home;
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => _resolvePage(routeName),
-        );
-      },
+    return ListenableBuilder(
+      listenable: ThemeModeController.instance,
+      builder: (context, child) => MaterialApp(
+        title: 'MentorinAja',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
+        themeMode: ThemeModeController.instance.mode,
+        scrollBehavior: AppScrollBehavior(),
+        builder: (context, child) =>
+            AppShell(child: child ?? const SizedBox.shrink()),
+        initialRoute: AppRoutes.splash,
+        onGenerateRoute: (settings) {
+          final routeName = settings.name ?? AppRoutes.home;
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (context) => _resolvePage(routeName),
+          );
+        },
+      ),
     );
   }
 

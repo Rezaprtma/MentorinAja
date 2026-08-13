@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:frontend/core/theme/theme.dart';
+
 import '../../logic/splash_controller.dart';
 import '../../logic/splash_state.dart';
 
@@ -60,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF97316),
+      backgroundColor: AppColors.primary,
       body: Center(
         child: Semantics(
           label: 'MentorinAja',

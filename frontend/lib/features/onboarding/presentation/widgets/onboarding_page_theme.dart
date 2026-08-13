@@ -22,7 +22,7 @@ abstract final class OnboardingColors {
   static const Color white = Color(0xFFFFFFFF);
 
   /// Primary brand orange for the start chapter.
-  static const Color brand = Color(0xFFF97316);
+  static const Color brand = AppColors.primary;
 
   /// Secondary brand indigo for the discover chapter.
   static const Color indigo = AppColors.secondary;

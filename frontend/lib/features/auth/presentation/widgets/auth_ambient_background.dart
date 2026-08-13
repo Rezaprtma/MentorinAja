@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 /// Subtle ambient decoration behind the authentication content.
 ///
-/// Paints a long flowing organic ridge plus two soft radial corner glows
+/// Paints a long flowing organic ridge plus two flat translucent corner circles
 /// (top-left and bottom-right) so the white page gains quiet depth without
 /// competing with the Auth hero. All shapes use the design system's orange
-/// family at 4–8% opacity, are drawn from Flutter primitives (no assets),
-/// stay static, and never sit above content — the only motion on the screen
-/// is the Auth Lottie.
+/// family at 4–8% opacity, are drawn from Flutter primitives (no gradients, no
+/// assets), stay static, and never sit above content — the only motion on the
+/// screen is the Auth Lottie.
 class AuthAmbientBackground extends StatelessWidget {
   const AuthAmbientBackground({super.key});
 
@@ -27,7 +27,7 @@ class AuthAmbientBackground extends StatelessWidget {
   }
 }
 
-/// Paints the ambient wave and corner glows, scaled to the canvas size.
+/// Paints the ambient wave and corner shapes, scaled to the canvas size.
 class _AmbientBackgroundPainter extends CustomPainter {
   _AmbientBackgroundPainter({
     required this.primary,
@@ -42,20 +42,20 @@ class _AmbientBackgroundPainter extends CustomPainter {
     final w = size.width;
     final h = size.height;
 
-    _paintCornerGlow(
+    _paintFlatCircle(
       canvas,
       center: Offset(-w * 0.05, h * 0.02),
-      radius: w * 0.55,
+      radius: w * 0.30,
       color: primary,
-      peak: 0.05,
+      alpha: 0.05,
     );
 
-    _paintCornerGlow(
+    _paintFlatCircle(
       canvas,
       center: Offset(w * 1.05, h * 1.04),
-      radius: w * 0.62,
+      radius: w * 0.34,
       color: primaryContainer,
-      peak: 0.07,
+      alpha: 0.07,
     );
 
     // One continuous asymmetric ridge that crests near the hero's lower half,
@@ -77,25 +77,19 @@ class _AmbientBackgroundPainter extends CustomPainter {
     );
   }
 
-  /// Draws a soft radial glow that fades to transparent before its radius.
-  void _paintCornerGlow(
+  /// Draws a flat translucent circle (no gradient) used for quiet depth.
+  void _paintFlatCircle(
     Canvas canvas, {
     required Offset center,
     required double radius,
     required Color color,
-    required double peak,
+    required double alpha,
   }) {
-    final paint = Paint()
-      ..shader = RadialGradient(
-        colors: [
-          color.withValues(alpha: peak),
-          color.withValues(alpha: peak * 0.5),
-          color.withValues(alpha: 0),
-        ],
-        stops: const [0.0, 0.55, 1.0],
-      ).createShader(Rect.fromCircle(center: center, radius: radius));
-
-    canvas.drawCircle(center, radius, paint);
+    canvas.drawCircle(
+      center,
+      radius,
+      Paint()..color = color.withValues(alpha: alpha),
+    );
   }
 
   @override

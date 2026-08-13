@@ -376,24 +376,23 @@ Never commit them.
 
 Review before implementation:
 
+Product
+
+- docs/product/prd.md
+
+Design
+
+- docs/design/brandidentity.md
+- docs/design/design-system.md
+- docs/design/ui-patterns.md
+
 Architecture
 
-- docs/architecture/Architecture.md
-- docs/architecture/ProjectStructure.md
+- docs/architecture/frontend.md
 
 Development
 
-- docs/development/GETTING_STARTED.md
-- docs/development/Setup.md
-
-Product
-
-- docs/PRD.md
-
-Database
-
-- docs/ERD.md
-- docs/SCHEMA.md
+- docs/development/contributing.md
 
 Treat these documents as the project's source of truth.
 

@@ -1,6 +1,6 @@
 /// Spacing scale for the MentorinAja design system.
 ///
-/// Follows the 8-point grid defined in `docs/design/DESIGN.md`
+/// Follows the 8-point grid defined in `docs/design/design-system.md`
 /// (4, 8, 12, 16, 24, 32, 40, 48). Use these tokens instead of raw doubles so
 /// rhythm stays consistent and refactoring the scale is a one-file change.
 abstract final class AppSpacing {

@@ -7,8 +7,9 @@ import 'package:flutter/painting.dart';
 /// reference the Material 3 [ColorScheme], an [AppThemeExtension] semantic
 /// token, or these palette constants.
 ///
-/// Light mode follows the product's *Soft Minimalism* direction from
-/// `docs/design/DESIGN.md`: an energetic orange primary on calm, warm neutrals.
+/// Light mode follows the brand direction in
+/// `docs/design/brandidentity.md`: an energetic orange primary on calm, warm
+/// neutrals.
 abstract final class AppColors {
   /// Seed used to derive dynamic Material 3 tonal palettes.
   static const int seed = 0xFFF97316;

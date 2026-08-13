@@ -45,12 +45,12 @@ void main() {
     await tester.tap(find.text('Progress'));
     await tester.pump();
     expect(find.byType(ProgressPage), findsOneWidget);
-    expect(find.text('Track your progress'), findsOneWidget);
+    expect(find.text('Progres Belajar'), findsOneWidget);
 
     await tester.tap(find.text('Profile'));
     await tester.pump();
     expect(find.byType(ProfilePage), findsOneWidget);
-    expect(find.text('Your profile'), findsOneWidget);
+    expect(find.text('Profil'), findsOneWidget);
   });
 
   testWidgets('keeps tab state alive across switches via IndexedStack', (

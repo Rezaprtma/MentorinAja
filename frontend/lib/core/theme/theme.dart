@@ -17,3 +17,4 @@ export 'app_theme.dart';
 export 'app_theme_context.dart';
 export 'app_theme_extension.dart';
 export 'app_typography.dart';
+export 'theme_mode_controller.dart';

@@ -1,26 +1,43 @@
-# Documentation hub
+# Documentation
 
-This folder contains the main product, architecture, schema, and contributor guidance for MentorinAja. Start with the onboarding guide if you are new to the repository.
+Welcome to the MentorinAja documentation hub. These docs are the source of truth for the product's intent, its visual identity, its architecture, and how to work in this repository.
 
-## Start here
+- **Product** — what MentorinAja is and does.
+- **Design** — how it looks, feels, and behaves.
+- **Architecture** — how it is built.
+- **Development** — how to work here.
 
-- [../README.md](../README.md): repository overview and entry point
-- [development/GETTING_STARTED.md](development/GETTING_STARTED.md): install requirements and run the app locally
-- [development/Setup.md](development/Setup.md): concise setup reference for contributors
-- [development/RepositoryTooling.md](development/RepositoryTooling.md): simple developer workflow overview
+---
 
-## Core references
+## Quick Links
 
-- [PRD.md](PRD.md): product requirements and intent
-- [ERD.md](ERD.md): logical data model
-- [SCHEMA.md](SCHEMA.md): database implementation contract
-- [architecture/Architecture.md](architecture/Architecture.md): system architecture
-- [design/Design.md](design/Design.md): product experience and design guidance
-- [frontend/FlutterArchitecture.md](frontend/FlutterArchitecture.md): frontend architecture notes
+| Area | Document | Purpose |
+|---|---|---|
+| Product | [product/prd.md](product/prd.md) | Product requirements, vision, scope |
+| Design | [design/brandidentity.md](design/brandidentity.md) | Visual direction, colors, type, tone |
+| Design | [design/design-system.md](design/design-system.md) | Component and layout rules |
+| Design | [design/ui-patterns.md](design/ui-patterns.md) | Screen layouts and patterns |
+| Architecture | [architecture/frontend.md](architecture/frontend.md) | Flutter architecture and structure |
+| Development | [development/contributing.md](development/contributing.md) | Setup, workflow, standards |
 
-## Contribution guidance
+---
 
-1. Start with the getting-started guide if you are new to the repo.
-2. Read the relevant architecture or product document before changing behavior or contracts.
-3. Keep implementation docs aligned with the current setup flow.
-4. Avoid duplicating setup instructions across multiple documents.
+## Reading Order
+
+For a new contributor, read in this order:
+
+1. [product/prd.md](product/prd.md) — what we are building and why.
+2. [design/brandidentity.md](design/brandidentity.md) — the look and feel.
+3. [design/design-system.md](design/design-system.md) — the rules components follow.
+4. [design/ui-patterns.md](design/ui-patterns.md) — how screens are composed.
+5. [architecture/frontend.md](architecture/frontend.md) — how it is implemented.
+6. [development/contributing.md](development/contributing.md) — how to contribute.
+
+---
+
+## Documentation Principles
+
+1. **Concise.** Docs describe decisions and rules, not code listings.
+2. **Current.** Every doc reflects the repository as it exists today.
+3. **Sourced.** Product belongs in `product/`, design in `design/`, structure in `architecture/`, workflow in `development/`.
+4. **No fiction.** Planned systems are labeled as planned, never described as built.

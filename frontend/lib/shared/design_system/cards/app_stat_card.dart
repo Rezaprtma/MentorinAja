@@ -101,14 +101,14 @@ class AppStatCard extends StatelessWidget {
                 vertical: AppSpacing.xxs,
               ),
               decoration: BoxDecoration(
-                color: (trendUp == true ? AppColors.success : AppColors.error)
+                color: (trendUp == true ? ext.success : scheme.error)
                     .withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppRadius.pill),
               ),
               child: Text(
                 trend!,
                 style: AppTypeScale.labelSmall.copyWith(
-                  color: trendUp == true ? AppColors.success : AppColors.error,
+                  color: trendUp == true ? ext.success : scheme.error,
                 ),
               ),
             ),
