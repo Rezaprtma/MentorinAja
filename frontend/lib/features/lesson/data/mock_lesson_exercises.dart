@@ -26,8 +26,8 @@ abstract final class MockLessonExercises {
   ) {
     if (_isPlain(code)) return const [];
     final curated = _curated[course.id];
-    if (curated == null) return [_genericExplanation(course, code)];
-    return [curated.correction, curated.explanation];
+    if (curated == null) return [_genericExplanation(course, code), _genericWriting()];
+    return [curated.correction, curated.explanation, _genericWriting()];
   }
 
   /// Returns the exercise for [lesson], or null when the course has no code.
@@ -563,6 +563,22 @@ class CourseCard extends StatelessWidget {
           'Baris ini mengeksekusi operasi yang didefinisikannya: '
           '${line.isEmpty ? 'kode pada pelajaran ini' : line} adalah bagian '
           'dari alur program yang sedang kamu pelajari.',
+    );
+  }
+
+  static LessonExercise _genericWriting() {
+    return const LessonExercise(
+      type: LessonExerciseType.codeWriting,
+      gameType: GameType.codeOrdering,
+      title: 'Urutkan kode berikut',
+      instruction: 'Susun potongan kode agar menampilkan pesan "Hello World".',
+      code: 'print("Hello World")',
+      options: ['world")', 'print("', 'Hello '],
+      correctOrder: [1, 2, 0],
+      hint: 'Fungsi print diawali dengan nama fungsi lalu tanda kurung buka.',
+      explanation:
+          'Susunan yang benar adalah print(" lalu Hello lalu world") agar '
+          'membentuk perintah print("Hello world").',
     );
   }
 }

@@ -15,6 +15,18 @@ enum LessonExerciseType {
 
   /// Explain what a line or block of code does.
   codeExplanation,
+
+  /// Write code or assemble it from pieces.
+  codeWriting,
+}
+
+/// Category of game mechanics for an exercise.
+enum GameType {
+  codeOrdering,
+  tokenCompletion,
+  multipleChoice,
+  identifyError,
+  outputPrediction,
 }
 
 /// One fill-in-the-blank inside a [LessonExerciseType.codeCompletion] exercise.
@@ -55,6 +67,9 @@ class LessonExercise {
     this.choices = const [],
     this.hint,
     this.explanation,
+    this.gameType,
+    this.correctOrder,
+    this.expectedAnswer,
   });
 
   final LessonExerciseType type;
@@ -87,4 +102,13 @@ class LessonExercise {
 
   /// Why the correct answer is correct.
   final String? explanation;
+
+  /// The game type for code writing exercises.
+  final GameType? gameType;
+
+  /// The correct order of options.
+  final List<int>? correctOrder;
+
+  /// The expected text answer.
+  final String? expectedAnswer;
 }
