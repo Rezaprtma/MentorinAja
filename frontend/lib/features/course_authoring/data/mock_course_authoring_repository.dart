@@ -1,8 +1,7 @@
 /// In-memory [CourseAuthoringRepository] seeded with sample Bahasa Indonesia content.
 library;
 
-import 'package:frontend/features/lesson/domain/entities/lesson_content.dart';
-import 'package:frontend/features/lesson/domain/entities/lesson_exercise.dart';
+import 'package:frontend/shared/enums/enums.dart';
 
 import '../domain/entities/blank_draft.dart';
 import '../domain/entities/course_authoring_draft.dart';

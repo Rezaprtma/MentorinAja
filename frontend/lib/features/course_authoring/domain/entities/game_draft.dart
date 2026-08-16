@@ -1,7 +1,7 @@
 /// An interactive game attached to a lesson draft.
 library;
 
-import 'package:frontend/features/lesson/domain/entities/lesson_exercise.dart';
+import 'package:frontend/shared/enums/enums.dart';
 
 import 'blank_draft.dart';
 import 'game_choice_draft.dart';

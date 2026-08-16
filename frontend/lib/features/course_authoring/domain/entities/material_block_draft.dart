@@ -1,7 +1,7 @@
 /// A single material block inside a lesson draft.
 library;
 
-import 'package:frontend/features/lesson/domain/entities/lesson_content.dart';
+import 'package:frontend/shared/enums/enums.dart';
 
 class MaterialBlockDraft {
   const MaterialBlockDraft({

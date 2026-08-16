@@ -5,29 +5,9 @@
 /// player renders it without knowing how the exercise is solved.
 library;
 
-/// Kind of an interactive lesson exercise.
-enum LessonExerciseType {
-  /// Fill the blanks of an incomplete code snippet with the right tokens.
-  codeCompletion,
+import 'package:frontend/shared/enums/enums.dart';
 
-  /// Spot and fix an error in a buggy code snippet.
-  codeCorrection,
-
-  /// Explain what a line or block of code does.
-  codeExplanation,
-
-  /// Write code or assemble it from pieces.
-  codeWriting,
-}
-
-/// Category of game mechanics for an exercise.
-enum GameType {
-  codeOrdering,
-  tokenCompletion,
-  multipleChoice,
-  identifyError,
-  outputPrediction,
-}
+export 'package:frontend/shared/enums/enums.dart' show LessonExerciseType, GameType;
 
 /// One fill-in-the-blank inside a [LessonExerciseType.codeCompletion] exercise.
 class CodeCompletionBlank {

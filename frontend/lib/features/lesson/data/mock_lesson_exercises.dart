@@ -1,3 +1,6 @@
+/// Deterministic mock exercises for the Lesson Player.
+library;
+
 import 'package:frontend/features/course/course.dart';
 
 import '../domain/entities/lesson_exercise.dart';
@@ -26,7 +29,9 @@ abstract final class MockLessonExercises {
   ) {
     if (_isPlain(code)) return const [];
     final curated = _curated[course.id];
-    if (curated == null) return [_genericExplanation(course, code), _genericWriting()];
+    if (curated == null) {
+      return [_genericExplanation(course, code), _genericWriting()];
+    }
     return [curated.correction, curated.explanation, _genericWriting()];
   }
 

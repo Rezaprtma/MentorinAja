@@ -1,43 +1,11 @@
+/// Content block models for the Lesson Player.
+library;
+
+import 'package:frontend/shared/enums/enums.dart';
+
 import 'lesson_exercise.dart';
 
-/// Visual kind of a lesson content block.
-enum LessonContentBlockType {
-  /// A prose paragraph of explanation.
-  paragraph,
-
-  /// A monospaced code/example block.
-  code,
-
-  /// A bulleted list of goals or steps.
-  bulletList,
-
-  /// A highlighted tip or note.
-  tip,
-
-  /// An interactive exercise (see [LessonExercise]).
-  exercise,
-
-  /// A section heading.
-  heading,
-
-  /// A sub-section heading.
-  subheading,
-
-  /// A numbered/ordered list of steps.
-  numberedList,
-
-  /// A caution or warning callout.
-  warning,
-
-  /// A worked example illustration.
-  example,
-
-  /// A concise summary or key takeaway.
-  summary,
-
-  /// A checklist of actionable items.
-  checklist,
-}
+export 'package:frontend/shared/enums/enums.dart' show LessonContentBlockType;
 
 /// One renderable block inside a lesson.
 ///
