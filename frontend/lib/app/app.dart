@@ -84,6 +84,9 @@ class App extends StatelessWidget {
         return const CourseCreatePage();
       case _ when routeName.startsWith('/mentor/courses/'):
         final parts = routeName.split('/');
+        if (parts.length > 4 && parts[4] == 'lessons') {
+          return LessonEditorPage(courseId: parts[2], lessonId: parts[5]);
+        }
         return CourseEditorPage(courseId: parts[2]);
       case _ when routeName.contains('/lesson/'):
         final parts = routeName.split('/');

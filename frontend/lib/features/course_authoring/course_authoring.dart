@@ -14,3 +14,4 @@ export 'domain/repositories/course_authoring_repository.dart';
 export 'presentation/pages/course_create_page.dart';
 export 'presentation/pages/course_editor_page.dart';
 export 'presentation/pages/course_list_page.dart';
+export 'presentation/pages/lesson_editor_page.dart';
