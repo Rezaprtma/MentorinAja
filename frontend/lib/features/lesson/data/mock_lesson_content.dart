@@ -59,6 +59,19 @@ abstract final class MockLessonContent {
         text: _conceptParagraph(course, lesson),
       ),
       const LessonContentBlock(
+        type: LessonContentBlockType.subheading,
+        text: 'Langkah Pembelajaran',
+      ),
+      const LessonContentBlock(
+        type: LessonContentBlockType.numberedList,
+        items: [
+          'Baca teori dan pahami konsep dasar.',
+          'Pelajari contoh kode yang diberikan.',
+          'Kerjakan game interaktif untuk menguji pemahaman.',
+          'Selesaikan latihan menulis kode secara mandiri.',
+        ],
+      ),
+      const LessonContentBlock(
         type: LessonContentBlockType.warning,
         text:
             'Pastikan kamu sudah memahami materi sebelumnya. Konsep di '
@@ -80,6 +93,21 @@ abstract final class MockLessonContent {
             'langsung menerapkan "${lesson.title}" untuk menyelesaikan '
             'masalah nyata — mulai dari yang sederhana, lalu tingkatkan '
             'kompleksitasnya seiring pemahamanmu bertambah.',
+      ),
+      const LessonContentBlock(
+        type: LessonContentBlockType.summary,
+        text:
+            'Sebagai rangkuman, pemahaman tentang topik ini sangat krusial '
+            'karena akan terus digunakan pada materi-materi tingkat lanjut.',
+      ),
+      const LessonContentBlock(
+        type: LessonContentBlockType.checklist,
+        heading: 'TARGET MANDIRI',
+        items: [
+          'Saya sudah mencoba menjalankan kode contoh.',
+          'Saya mengerti alur logika dari baris per baris kode.',
+          'Saya siap melanjutkan ke tantangan game.',
+        ],
       ),
       LessonContentBlock(
         type: LessonContentBlockType.exercise,

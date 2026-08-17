@@ -31,27 +31,17 @@ class LessonContentBlockView extends StatelessWidget {
         block.exercise == null
             ? const SizedBox.shrink()
             : LessonExerciseView(exercise: block.exercise!),
-      LessonContentBlockType.heading => _HeadingView(
-        text: block.text ?? '',
-      ),
+      LessonContentBlockType.heading => _HeadingView(text: block.text ?? ''),
       LessonContentBlockType.subheading => _SubheadingView(
         text: block.text ?? '',
       ),
       LessonContentBlockType.numberedList => _NumberedListView(
         items: block.items,
       ),
-      LessonContentBlockType.warning => _WarningView(
-        text: block.text ?? '',
-      ),
-      LessonContentBlockType.example => _ExampleView(
-        text: block.text ?? '',
-      ),
-      LessonContentBlockType.summary => _SummaryView(
-        text: block.text ?? '',
-      ),
-      LessonContentBlockType.checklist => _ChecklistView(
-        items: block.items,
-      ),
+      LessonContentBlockType.warning => _WarningView(text: block.text ?? ''),
+      LessonContentBlockType.example => _ExampleView(text: block.text ?? ''),
+      LessonContentBlockType.summary => _SummaryView(text: block.text ?? ''),
+      LessonContentBlockType.checklist => _ChecklistView(items: block.items),
     };
 
     if (block.heading == null || block.heading!.isEmpty) return content;
@@ -232,11 +222,14 @@ class _HeadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: AppTypeScale.titleLarge.copyWith(
-        color: context.appColors.textPrimary,
-        fontWeight: FontWeight.w700,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Text(
+        text,
+        style: AppTypeScale.titleLarge.copyWith(
+          color: Theme.of(context).colorScheme.primary,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }
@@ -250,11 +243,14 @@ class _SubheadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: AppTypeScale.titleMedium.copyWith(
-        color: context.appColors.textPrimary,
-        fontWeight: FontWeight.w600,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+      child: Text(
+        text,
+        style: AppTypeScale.titleMedium.copyWith(
+          color: context.appColors.textPrimary,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }
@@ -283,22 +279,31 @@ class _NumberedListView extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                Container(
                   width: 24,
+                  height: 24,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(AppRadius.small),
+                  ),
                   child: Text(
-                    '${i + 1}.',
-                    style: AppTypeScale.bodyMedium.copyWith(
+                    '${i + 1}',
+                    style: AppTypeScale.labelMedium.copyWith(
                       color: ext.textSecondary,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpacing.xs),
+                const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
                     items[i],
                     style: AppTypeScale.bodyMedium.copyWith(
                       color: ext.textPrimary,
+                      height: 1.5,
                     ),
                   ),
                 ),
@@ -311,7 +316,7 @@ class _NumberedListView extends StatelessWidget {
   }
 }
 
-/// Warning callout — amber-toned caution block.
+/// Warning callout — amber-toned caution block with label.
 class _WarningView extends StatelessWidget {
   const _WarningView({required this.text});
 
@@ -327,16 +332,30 @@ class _WarningView extends StatelessWidget {
         color: ext.warningContainer,
         borderRadius: BorderRadius.circular(AppRadius.large),
       ),
-      child: Row(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.warning_amber_rounded,
-            size: AppIconSizes.md,
-            color: ext.onWarningContainer,
+          Row(
+            children: [
+              Icon(
+                Icons.warning_amber_rounded,
+                size: AppIconSizes.md,
+                color: ext.onWarningContainer,
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Text(
+                'PERINGATAN',
+                style: AppTypeScale.labelSmall.copyWith(
+                  color: ext.onWarningContainer,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: AppSpacing.sm),
-          Expanded(
+          const SizedBox(height: AppSpacing.sm),
+          Padding(
+            padding: const EdgeInsets.only(left: AppSpacing.md + AppSpacing.xs),
             child: Text(
               text,
               style: AppTypeScale.bodyMedium.copyWith(
@@ -351,49 +370,9 @@ class _WarningView extends StatelessWidget {
   }
 }
 
-/// Worked example illustration block.
+/// Worked example illustration block with CONTOH label.
 class _ExampleView extends StatelessWidget {
   const _ExampleView({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final ext = context.appColors;
-
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: ext.infoContainer,
-        borderRadius: BorderRadius.circular(AppRadius.large),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.auto_awesome_outlined,
-            size: AppIconSizes.md,
-            color: ext.onInfoContainer,
-          ),
-          const SizedBox(width: AppSpacing.sm),
-          Expanded(
-            child: Text(
-              text,
-              style: AppTypeScale.bodyMedium.copyWith(
-                color: ext.onInfoContainer,
-                height: 1.5,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Summary / key takeaway block.
-class _SummaryView extends StatelessWidget {
-  const _SummaryView({required this.text});
 
   final String text;
 
@@ -405,17 +384,31 @@ class _SummaryView extends StatelessWidget {
       padding: const EdgeInsets.all(AppSpacing.md),
       elevation: AppElevation.flat,
       radius: AppRadius.large,
-      borderSide: BorderSide(color: ext.border),
-      child: Row(
+      borderSide: BorderSide(color: ext.info),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            Icons.summarize_outlined,
-            size: AppIconSizes.md,
-            color: ext.textSecondary,
+          Row(
+            children: [
+              Icon(
+                Icons.auto_awesome_outlined,
+                size: AppIconSizes.md,
+                color: ext.info,
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Text(
+                'CONTOH',
+                style: AppTypeScale.labelSmall.copyWith(
+                  color: ext.info,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: AppSpacing.sm),
-          Expanded(
+          const SizedBox(height: AppSpacing.sm),
+          Padding(
+            padding: const EdgeInsets.only(left: AppSpacing.md + AppSpacing.xs),
             child: Text(
               text,
               style: AppTypeScale.bodyMedium.copyWith(
@@ -430,7 +423,61 @@ class _SummaryView extends StatelessWidget {
   }
 }
 
-/// Checklist of actionable items.
+/// Summary / key takeaway block with RANGKUMAN label on indigo container.
+class _SummaryView extends StatelessWidget {
+  const _SummaryView({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: scheme.secondaryContainer,
+        borderRadius: BorderRadius.circular(AppRadius.large),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.summarize_outlined,
+                size: AppIconSizes.md,
+                color: scheme.onSecondaryContainer,
+              ),
+              const SizedBox(width: AppSpacing.xs),
+              Text(
+                'RANGKUMAN',
+                style: AppTypeScale.labelSmall.copyWith(
+                  color: scheme.onSecondaryContainer,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Padding(
+            padding: const EdgeInsets.only(left: AppSpacing.md + AppSpacing.xs),
+            child: Text(
+              text,
+              style: AppTypeScale.bodyMedium.copyWith(
+                color: scheme.onSecondaryContainer,
+                height: 1.5,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Display-only checklist — styled checkboxes, not interactive.
 class _ChecklistView extends StatelessWidget {
   const _ChecklistView({required this.items});
 
@@ -441,7 +488,10 @@ class _ChecklistView extends StatelessWidget {
     final ext = context.appColors;
 
     return AppBaseCard(
-      padding: const EdgeInsets.all(AppSpacing.md),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       elevation: AppElevation.flat,
       radius: AppRadius.large,
       borderSide: BorderSide(color: ext.border),
@@ -449,25 +499,30 @@ class _ChecklistView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           for (var i = 0; i < items.length; i++) ...[
-            if (i > 0) const SizedBox(height: AppSpacing.sm),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.check_box_outline_blank_rounded,
-                  size: AppIconSizes.sm,
-                  color: ext.textSecondary,
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: Text(
-                    items[i],
-                    style: AppTypeScale.bodyMedium.copyWith(
-                      color: ext.textPrimary,
+            if (i > 0) Divider(height: 1, color: ext.divider),
+            SizedBox(
+              height: 48,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.check_box_outline_blank_rounded,
+                    size: AppIconSizes.sm,
+                    color: ext.textSecondary,
+                    semanticLabel: 'Belum selesai',
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Text(
+                      items[i],
+                      style: AppTypeScale.bodyMedium.copyWith(
+                        color: ext.textPrimary,
+                        height: 1.4,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ],

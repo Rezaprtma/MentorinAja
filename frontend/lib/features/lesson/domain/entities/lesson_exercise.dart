@@ -7,7 +7,8 @@ library;
 
 import 'package:frontend/shared/enums/enums.dart';
 
-export 'package:frontend/shared/enums/enums.dart' show LessonExerciseType, GameType;
+export 'package:frontend/shared/enums/enums.dart'
+    show LessonExerciseType, GameType;
 
 /// One fill-in-the-blank inside a [LessonExerciseType.codeCompletion] exercise.
 class CodeCompletionBlank {
@@ -91,4 +92,36 @@ class LessonExercise {
 
   /// The expected text answer.
   final String? expectedAnswer;
+
+  LessonExercise copyWith({
+    LessonExerciseType? type,
+    String? title,
+    String? instruction,
+    String? code,
+    String? correctedCode,
+    List<CodeCompletionBlank>? blanks,
+    List<String>? options,
+    List<ExerciseChoice>? choices,
+    String? hint,
+    String? explanation,
+    GameType? gameType,
+    List<int>? correctOrder,
+    String? expectedAnswer,
+  }) {
+    return LessonExercise(
+      type: type ?? this.type,
+      title: title ?? this.title,
+      instruction: instruction ?? this.instruction,
+      code: code ?? this.code,
+      correctedCode: correctedCode ?? this.correctedCode,
+      blanks: blanks ?? this.blanks,
+      options: options ?? this.options,
+      choices: choices ?? this.choices,
+      hint: hint ?? this.hint,
+      explanation: explanation ?? this.explanation,
+      gameType: gameType ?? this.gameType,
+      correctOrder: correctOrder ?? this.correctOrder,
+      expectedAnswer: expectedAnswer ?? this.expectedAnswer,
+    );
+  }
 }

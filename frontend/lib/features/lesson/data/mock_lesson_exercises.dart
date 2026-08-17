@@ -17,7 +17,10 @@ abstract final class MockLessonExercises {
   /// code. Curated courses always play their hand-written completion exercise.
   static LessonExercise? gameExercise(CourseDetail course, String code) {
     if (_isPlain(code)) return null;
-    return _curated[course.id]?.completion ?? _genericCompletion(course, code);
+    // Add gameType to the completion exercise
+    final exercise =
+        _curated[course.id]?.completion ?? _genericCompletion(course, code);
+    return exercise.copyWith(gameType: GameType.tokenCompletion);
   }
 
   /// Application exercises for the Latihan stage. Curated courses return a
@@ -574,16 +577,11 @@ class CourseCard extends StatelessWidget {
   static LessonExercise _genericWriting() {
     return const LessonExercise(
       type: LessonExerciseType.codeWriting,
-      gameType: GameType.codeOrdering,
-      title: 'Urutkan kode berikut',
-      instruction: 'Susun potongan kode agar menampilkan pesan "Hello World".',
-      code: 'print("Hello World")',
-      options: ['world")', 'print("', 'Hello '],
-      correctOrder: [1, 2, 0],
-      hint: 'Fungsi print diawali dengan nama fungsi lalu tanda kurung buka.',
-      explanation:
-          'Susunan yang benar adalah print(" lalu Hello lalu world") agar '
-          'membentuk perintah print("Hello world").',
+      title: 'Tulis Kode',
+      instruction: 'Tulis kode lengkap untuk menampilkan pesan "Hello World".',
+      expectedAnswer: 'print("Hello World")',
+      hint: 'Gunakan fungsi print() dengan argumen "Hello World".',
+      explanation: 'Fungsi print() digunakan untuk mencetak teks ke layar.',
     );
   }
 }

@@ -4,6 +4,7 @@ import '../../../domain/entities/lesson_exercise.dart';
 import 'code_completion_exercise.dart';
 import 'code_correction_exercise.dart';
 import 'code_explanation_exercise.dart';
+import 'code_writing_exercise.dart';
 
 /// Dispatches a [LessonExercise] to its reusable interactive widget.
 ///
@@ -40,7 +41,10 @@ class LessonExerciseView extends StatelessWidget {
         exercise: exercise,
         selfEvaluate: selfEvaluate,
       ),
-      LessonExerciseType.codeWriting => const SizedBox.shrink(),
+      LessonExerciseType.codeWriting => CodeWritingExercise(
+        exercise: exercise,
+        selfEvaluate: selfEvaluate,
+      ),
     };
   }
 }
