@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/shared/data/tech_brand_colors.dart';
+import 'package:frontend/shared/models/course_identifier.dart';
 
 /// Accent role that drives the surface tint of a course card.
 enum CourseAccent {
@@ -100,6 +101,9 @@ class MockCourse {
 
   /// Determines the card's tinted surface (fallback when [brand] is null).
   final CourseAccent accent;
+
+  /// Stable id resolving this course to the shared CourseDetailPage.
+  String get courseId => CourseIdentifier.slug(title);
 }
 
 /// Temporary local data powering the Home screen.

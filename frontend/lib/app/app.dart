@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:frontend/core/core.dart';
 import 'package:frontend/features/auth/auth.dart';
+import 'package:frontend/features/course/course.dart';
+import 'package:frontend/features/course_authoring/course_authoring.dart';
 import 'package:frontend/features/explore/explore.dart';
+import 'package:frontend/features/lesson/lesson.dart';
+import 'package:frontend/features/notifications/notifications.dart';
 import 'package:frontend/features/onboarding/onboarding.dart';
+import 'package:frontend/features/profile/profile.dart';
 import 'package:frontend/features/splash/splash.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
@@ -59,8 +64,42 @@ class App extends StatelessWidget {
         return const ExplorePage();
       case AppRoutes.courses:
         return const Scaffold(body: Center(child: Text('Courses')));
-      case AppRoutes.courseDetail:
-        return const Scaffold(body: Center(child: Text('Course Detail')));
+      case AppRoutes.notifications:
+        return const NotificationPage();
+      case AppRoutes.feedback:
+        return const FeedbackPage();
+      case AppRoutes.helpCenter:
+        return const HelpCenterPage();
+      case AppRoutes.about:
+        return const AboutPage();
+      case AppRoutes.privacyPolicy:
+        return const PrivacyPolicyPage();
+      case AppRoutes.userPolicy:
+        return const UserPolicyPage();
+      case AppRoutes.editProfile:
+        return const EditProfilePage();
+      case AppRoutes.mentorCourses:
+        return const CourseListPage();
+      case AppRoutes.mentorCourseCreate:
+        return const CourseCreatePage();
+      case _ when routeName.startsWith('/mentor/courses/'):
+        final parts = routeName.split('/');
+        return CourseEditorPage(courseId: parts[2]);
+      case _ when routeName.contains('/lesson/'):
+        final parts = routeName.split('/');
+        return CoursePlayerPage(
+          courseId: parts.length > 2 ? parts[2] : '',
+          lessonId: parts.length > 4 ? parts[4] : '',
+        );
+      case _ when routeName.endsWith('/completed'):
+        final parts = routeName.split('/');
+        return CourseCompletedPage(courseId: parts.length > 2 ? parts[2] : '');
+      case _ when routeName.startsWith('/course/'):
+        final id = routeName.replaceFirst(RegExp(r'^/course/'), '');
+        return CourseDetailPage(courseId: id);
+      case _ when routeName.startsWith('/category/'):
+        final name = routeName.replaceFirst(RegExp(r'^/category/'), '');
+        return CategoryDetailPage(categoryName: name);
       default:
         return const Scaffold(body: Center(child: Text('Not Found')));
     }

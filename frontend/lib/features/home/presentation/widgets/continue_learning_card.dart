@@ -52,6 +52,7 @@ class ContinueLearningCard extends StatelessWidget {
               TechLogo(
                 assetPath: AppIconPaths.techPython,
                 background: scheme.primaryContainer,
+                size: 56,
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(

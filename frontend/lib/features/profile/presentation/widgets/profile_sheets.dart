@@ -1,9 +1,10 @@
-/// Bottom-sheet builders for the Profile tab.
+/// Bottom-sheet builders for the Profile tab preferences.
 ///
 /// [showThemeSheet] hosts the color-mode picker driven by
-/// [ThemeModeController], and [showAboutSheet] presents lightweight product
-/// information. Both are thin helpers that reuse [AppBottomSheet] and the
-/// design-system radio/list components without carrying page state.
+/// [ThemeModeController], [showNotificationSettingsSheet] hosts the local
+/// notification toggles, and [showLanguageSheet] presents the language picker.
+/// All three are thin helpers that reuse [AppBottomSheet] and the design-system
+/// radio/switch components without carrying page state.
 library;
 
 import 'package:flutter/material.dart';
@@ -12,27 +13,45 @@ import 'package:frontend/shared/design_system/design_system.dart';
 
 /// Displays the theme selection sheet and applies the chosen mode.
 ///
-/// The sheet observes [ThemeModeController.instance] so the checkmarks track
-/// the active mode live, then records new choices through the same controller.
+/// The sheet observes [ThemeModeController.instance] so the icon-based options
+/// track the active mode live, then records new choices through the same
+/// controller. Each option leads with its semantic icon — sun, moon, system —
+/// and the selected icon adopts the brand active color.
 Future<void> showThemeSheet(BuildContext context) {
   return AppBottomSheet.show(
     context,
     title: 'Tema',
+    subtitle: 'Pilih tampilan aplikasi.',
     child: AnimatedBuilder(
       animation: ThemeModeController.instance,
       builder: (context, _) {
         final mode = ThemeModeController.instance.mode;
-        return AppRadioGroup<String>(
-          groupValue: _themeValue(mode),
-          onChanged: (value) {
-            if (value != null) {
-              ThemeModeController.instance.setMode(_themeMode(value));
-            }
-          },
-          options: const [
-            AppRadioOption(value: 'light', label: 'Terang'),
-            AppRadioOption(value: 'dark', label: 'Gelap'),
-            AppRadioOption(value: 'system', label: 'Ikuti Sistem'),
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _ThemeModeOption(
+              icon: Icons.light_mode_rounded,
+              label: 'Terang',
+              selected: mode == ThemeMode.light,
+              onTap: () =>
+                  ThemeModeController.instance.setMode(ThemeMode.light),
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            _ThemeModeOption(
+              icon: Icons.dark_mode_rounded,
+              label: 'Gelap',
+              selected: mode == ThemeMode.dark,
+              onTap: () => ThemeModeController.instance.setMode(ThemeMode.dark),
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            _ThemeModeOption(
+              icon: Icons.brightness_auto_rounded,
+              label: 'Ikuti Sistem',
+              selected: mode == ThemeMode.system,
+              onTap: () =>
+                  ThemeModeController.instance.setMode(ThemeMode.system),
+            ),
           ],
         );
       },
@@ -40,50 +59,46 @@ Future<void> showThemeSheet(BuildContext context) {
   );
 }
 
-/// Displays the product information sheet.
-Future<void> showAboutSheet(BuildContext context) {
-  final ext = context.appColors;
-
+/// Displays the notification preference sheet.
+///
+/// Holds the same local toggle state the former page did — persistence is
+/// deliberately not invented in this phase.
+Future<void> showNotificationSettingsSheet(BuildContext context) {
   return AppBottomSheet.show(
     context,
-    title: 'Tentang MentorinAja',
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 72,
-          height: 72,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(AppRadius.large),
-          ),
-          alignment: Alignment.center,
-          child: Icon(
-            Icons.school_rounded,
-            size: 40,
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Text(
-          'MentorinAja',
-          style: AppTypeScale.titleLarge.copyWith(color: ext.textPrimary),
-        ),
-        const SizedBox(height: AppSpacing.xxs),
-        Text(
-          'Versi 1.0.0',
-          style: AppTypeScale.bodySmall.copyWith(color: ext.textSecondary),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        Text(
-          'Platform pembelajaran Indonesia dengan dukungan mentor dan AI.',
-          textAlign: TextAlign.center,
-          style: AppTypeScale.bodyMedium.copyWith(color: ext.textSecondary),
+    title: 'Notifikasi',
+    subtitle: 'Atur notifikasi yang ingin kamu terima.',
+    child: const _NotificationSettingsSheet(),
+  );
+}
+
+/// Displays the language selection sheet.
+///
+/// Bahasa Indonesia is the active product language; other locales are marked
+/// as planned so the list stays honest without inventing a translation
+/// pipeline.
+Future<void> showLanguageSheet(BuildContext context) {
+  return AppBottomSheet.show(
+    context,
+    title: 'Bahasa',
+    subtitle: 'Pilih bahasa aplikasi.',
+    child: const AppRadioGroup<String>(
+      groupValue: 'id',
+      onChanged: _noop,
+      options: [
+        AppRadioOption(value: 'id', label: 'Bahasa Indonesia'),
+        AppRadioOption(
+          value: 'en',
+          label: 'English',
+          subtitle: 'Segera hadir.',
+          enabled: false,
         ),
       ],
     ),
   );
 }
+
+void _noop(String? value) {}
 
 /// Renders the Indonesian label for the active [ThemeMode].
 ///
@@ -95,14 +110,103 @@ String themeModeLabel(ThemeMode mode) => switch (mode) {
   ThemeMode.system => 'Ikuti Sistem',
 };
 
-String _themeValue(ThemeMode mode) => switch (mode) {
-  ThemeMode.light => 'light',
-  ThemeMode.dark => 'dark',
-  ThemeMode.system => 'system',
-};
+/// Local toggle state for the notification preference sheet.
+class _NotificationSettingsSheet extends StatefulWidget {
+  const _NotificationSettingsSheet();
 
-ThemeMode _themeMode(String value) => switch (value) {
-  'light' => ThemeMode.light,
-  'dark' => ThemeMode.dark,
-  _ => ThemeMode.system,
-};
+  @override
+  State<_NotificationSettingsSheet> createState() =>
+      _NotificationSettingsSheetState();
+}
+
+class _NotificationSettingsSheetState
+    extends State<_NotificationSettingsSheet> {
+  bool _courseUpdates = true;
+  bool _studyReminders = true;
+  bool _achievements = true;
+  bool _latestNews = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppSwitch(
+            value: _courseUpdates,
+            onChanged: (value) => setState(() => _courseUpdates = value),
+            label: 'Pembaruan Course',
+          ),
+          AppSwitch(
+            value: _studyReminders,
+            onChanged: (value) => setState(() => _studyReminders = value),
+            label: 'Pengingat Belajar',
+          ),
+          AppSwitch(
+            value: _achievements,
+            onChanged: (value) => setState(() => _achievements = value),
+            label: 'Pencapaian & Progress',
+          ),
+          AppSwitch(
+            value: _latestNews,
+            onChanged: (value) => setState(() => _latestNews = value),
+            label: 'Kabar Terbaru',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ThemeModeOption extends StatelessWidget {
+  const _ThemeModeOption({
+    required this.icon,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ext = context.appColors;
+    final scheme = Theme.of(context).colorScheme;
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppRadius.medium),
+      child: AnimatedContainer(
+        duration: AppDurations.fast,
+        decoration: BoxDecoration(
+          color: selected ? scheme.primaryContainer : Colors.transparent,
+          borderRadius: BorderRadius.circular(AppRadius.medium),
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm,
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: selected ? scheme.primary : ext.textDisabled,
+              size: AppIconSizes.lg,
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Text(
+              label,
+              style: AppTypeScale.bodyLarge.copyWith(
+                color: ext.textPrimary,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

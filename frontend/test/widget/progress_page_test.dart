@@ -113,8 +113,20 @@ void main() {
 
       expect(find.byType(CourseDistributionChart), findsOneWidget);
       expect(find.text('Total Course'), findsNWidgets(2));
-      expect(find.text('75%'), findsNothing);
-      expect(find.text('25%'), findsNothing);
+      expect(
+        find.descendant(
+          of: find.byType(CourseDistributionChart),
+          matching: find.text('75%'),
+        ),
+        findsNothing,
+      );
+      expect(
+        find.descendant(
+          of: find.byType(CourseDistributionChart),
+          matching: find.text('25%'),
+        ),
+        findsNothing,
+      );
       expect(find.text('4'), findsNWidgets(2));
 
       expect(tester.takeException(), isNull);
@@ -128,11 +140,23 @@ void main() {
 
     await _tapRingAt(tester, const Offset(0.8, 0.0));
     expect(find.text('3'), findsNWidgets(2));
-    expect(find.text('75%'), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.byType(CourseDistributionChart),
+        matching: find.text('75%'),
+      ),
+      findsOneWidget,
+    );
 
     await _tapRingAt(tester, const Offset(-0.7, -0.4));
     expect(find.text('1'), findsNWidgets(2));
-    expect(find.text('25%'), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.byType(CourseDistributionChart),
+        matching: find.text('25%'),
+      ),
+      findsOneWidget,
+    );
     expect(find.text('Selesai'), findsNWidgets(3));
 
     await tester.tapAt((await _ringRect(tester)).center);
@@ -150,11 +174,14 @@ void main() {
     await tester.pumpWidget(_buildApp());
     await tester.pump();
 
-    expect(find.text('72%'), findsOneWidget);
-    expect(find.text('45%'), findsOneWidget);
-    expect(find.text('28%'), findsOneWidget);
-    expect(find.text('Pelajaran 12 dari 20 • Fungsi'), findsOneWidget);
-    expect(find.text('Function Parameters'), findsOneWidget);
+    expect(find.text('60%'), findsOneWidget);
+    expect(find.text('44%'), findsOneWidget);
+    expect(find.text('25%'), findsOneWidget);
+    expect(
+      find.text('Pelajaran 12 dari 20 • Modularitas dan Import'),
+      findsOneWidget,
+    );
+    expect(find.text('Error Handling'), findsOneWidget);
     expect(find.text('Lanjutkan'), findsNWidgets(3));
 
     expect(tester.takeException(), isNull);
@@ -197,7 +224,7 @@ void main() {
 
     expect(find.byType(ActiveCourseCard), findsNothing);
     expect(find.text('Dasar Python'), findsNothing);
-    expect(find.text('72%'), findsNothing);
+    expect(find.text('60%'), findsNothing);
     expect(find.text('Lanjutkan'), findsNothing);
 
     expect(tester.takeException(), isNull);

@@ -18,6 +18,10 @@ class MockCourseAuthoringRepository implements CourseAuthoringRepository {
     _drafts.add(_seedPythonCourse());
   }
 
+  /// Shared instance so authoring screens observe one in-memory draft store.
+  static final MockCourseAuthoringRepository instance =
+      MockCourseAuthoringRepository();
+
   final List<CourseAuthoringDraft> _drafts = [];
 
   @override

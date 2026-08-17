@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'package:frontend/routing/route_names.dart';
 import 'package:frontend/shared/data/mock_refresh.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/tech/tech_logo.dart';
@@ -72,7 +73,11 @@ class _ExplorePageState extends State<ExplorePage> {
                       padding: EdgeInsets.zero,
                     ),
                     const SizedBox(height: AppSpacing.sm),
-                    _PopularCourseRail(courses: MockExploreData.popularCourses),
+                    _PopularCourseRail(
+                      courses: MockExploreData.popularCourses,
+                      onCourseTap: (course) =>
+                          _openCourse(context, course.courseId),
+                    ),
                   ],
                   const SizedBox(height: AppSpacing.lg),
                   AppSectionHeader(
@@ -120,9 +125,27 @@ class _ExplorePageState extends State<ExplorePage> {
           message: 'Coba kata kunci lain atau pilih kategori berbeda.',
         );
       }
-      return _CourseResultGrid(courses: results);
+      return _CourseResultGrid(
+        courses: results,
+        onCourseTap: (course) => _openCourse(context, course.courseId),
+      );
     }
-    return _CategoryGrid(categories: MockExploreData.discoveryCategories);
+    return _CategoryGrid(
+      categories: MockExploreData.discoveryCategories,
+      onCategoryTap: (category) => _openCategory(context, category.name),
+    );
+  }
+
+  void _openCourse(BuildContext context, String courseId) {
+    Navigator.of(context).pushNamed(
+      AppRoutes.resolve(AppRoutes.courseDetail, {'courseId': courseId}),
+    );
+  }
+
+  void _openCategory(BuildContext context, String categoryName) {
+    Navigator.of(context).pushNamed(
+      AppRoutes.resolve(AppRoutes.categoryDetail, {'category': categoryName}),
+    );
   }
 }
 
@@ -157,9 +180,10 @@ class _ExploreHeader extends StatelessWidget {
 
 /// Horizontal carousel of popular courses with a peek at the next card.
 class _PopularCourseRail extends StatelessWidget {
-  const _PopularCourseRail({required this.courses});
+  const _PopularCourseRail({required this.courses, required this.onCourseTap});
 
   final List<ExploreCourse> courses;
+  final ValueChanged<ExploreCourse> onCourseTap;
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +205,10 @@ class _PopularCourseRail extends StatelessWidget {
               return SizedBox(
                 width: cardWidth,
                 height: railHeight,
-                child: _PopularCourseCard(course: courses[index]),
+                child: _PopularCourseCard(
+                  course: courses[index],
+                  onTap: () => onCourseTap(courses[index]),
+                ),
               );
             },
           );
@@ -197,9 +224,10 @@ class _PopularCourseRail extends StatelessWidget {
 /// a translucent pill category and restrained decorative shapes that stay
 /// inside the card composition.
 class _PopularCourseCard extends StatelessWidget {
-  const _PopularCourseCard({required this.course});
+  const _PopularCourseCard({required this.course, this.onTap});
 
   final ExploreCourse course;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -207,6 +235,7 @@ class _PopularCourseCard extends StatelessWidget {
     final onColor = brand.onAccent;
 
     return AppBaseCard(
+      onTap: onTap,
       clipBehavior: Clip.antiAlias,
       color: brand.accent,
       radius: AppRadius.large,
@@ -346,9 +375,10 @@ class _CategoryPill extends StatelessWidget {
 /// device text scale so band, description and stack never overflow. Hosted
 /// inside the page's scroll view with non-scrollable physics.
 class _CategoryGrid extends StatelessWidget {
-  const _CategoryGrid({required this.categories});
+  const _CategoryGrid({required this.categories, this.onCategoryTap});
 
   final List<ExploreCategory> categories;
+  final ValueChanged<ExploreCategory>? onCategoryTap;
 
   @override
   Widget build(BuildContext context) {
@@ -366,7 +396,11 @@ class _CategoryGrid extends StatelessWidget {
       ),
       itemCount: categories.length,
       itemBuilder: (context, index) {
-        return CategoryDiscoveryCard(category: categories[index]);
+        final category = categories[index];
+        return CategoryDiscoveryCard(
+          category: category,
+          onTap: onCategoryTap == null ? null : () => onCategoryTap!(category),
+        );
       },
     );
   }
@@ -374,9 +408,10 @@ class _CategoryGrid extends StatelessWidget {
 
 /// Responsive course grid shown while searching or filtering categories.
 class _CourseResultGrid extends StatelessWidget {
-  const _CourseResultGrid({required this.courses});
+  const _CourseResultGrid({required this.courses, this.onCourseTap});
 
   final List<ExploreCourse> courses;
+  final ValueChanged<ExploreCourse>? onCourseTap;
 
   @override
   Widget build(BuildContext context) {
@@ -393,17 +428,20 @@ class _CourseResultGrid extends StatelessWidget {
         crossAxisSpacing: AppSpacing.sm,
       ),
       itemCount: courses.length,
-      itemBuilder: (context, index) =>
-          _CourseResultCard(course: courses[index]),
+      itemBuilder: (context, index) => _CourseResultCard(
+        course: courses[index],
+        onTap: onCourseTap == null ? null : () => onCourseTap!(courses[index]),
+      ),
     );
   }
 }
 
 /// Compact course card used in the filtered results grid.
 class _CourseResultCard extends StatelessWidget {
-  const _CourseResultCard({required this.course});
+  const _CourseResultCard({required this.course, this.onTap});
 
   final ExploreCourse course;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -411,6 +449,7 @@ class _CourseResultCard extends StatelessWidget {
     final brand = course.brand;
 
     return AppBaseCard(
+      onTap: onTap,
       clipBehavior: Clip.antiAlias,
       color: ext.card,
       radius: AppRadius.large,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
+import 'package:frontend/shared/widgets/widgets.dart';
 
 /// Compact AI-tutor entry point on the Home screen.
 ///
@@ -20,7 +22,7 @@ class AiTutorCard extends StatelessWidget {
 
     return Semantics(
       button: true,
-      label: 'Tanya Tutor AI-mu',
+      label: 'Tanya Mentorin AI-mu',
       child: AppBaseCard(
         onTap: onPressed,
         padding: const EdgeInsets.symmetric(
@@ -39,10 +41,11 @@ class AiTutorCard extends StatelessWidget {
                 color: scheme.primary,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.auto_awesome,
-                color: scheme.onPrimary,
-                size: AppIconSizes.md,
+              child: const AppSvg(
+                AppLogo.onBrand,
+                width: 26,
+                height: 26,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
@@ -52,7 +55,7 @@ class AiTutorCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Tutor AI-mu',
+                    'Mentorin AI-mu',
                     style: AppTypeScale.titleSmall.copyWith(
                       color: scheme.onPrimaryContainer,
                       fontWeight: FontWeight.w600,

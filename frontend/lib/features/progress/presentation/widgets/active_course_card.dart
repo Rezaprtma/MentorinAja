@@ -104,7 +104,6 @@ class ActiveCourseCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.lg),
           AppButton(
             label: 'Lanjutkan',
-            leadingIcon: Icons.play_arrow_rounded,
             size: AppButtonSize.small,
             isFullWidth: true,
             onPressed: onContinue,

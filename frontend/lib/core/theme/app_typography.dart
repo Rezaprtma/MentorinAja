@@ -130,6 +130,15 @@ abstract final class AppTypeScale {
     fontWeight: FontWeight.w400,
     letterSpacing: 0.4,
   );
+
+  // Code (JetBrains Mono)
+  static const TextStyle code = TextStyle(
+    fontFamily: AppFontFamilies.code,
+    fontSize: 13,
+    height: 1.60,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.2,
+  );
 }
 
 /// Typography entry point.

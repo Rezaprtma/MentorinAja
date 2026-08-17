@@ -11,3 +11,6 @@ export 'domain/entities/game_draft.dart';
 export 'domain/entities/lesson_draft.dart';
 export 'domain/entities/material_block_draft.dart';
 export 'domain/repositories/course_authoring_repository.dart';
+export 'presentation/pages/course_create_page.dart';
+export 'presentation/pages/course_editor_page.dart';
+export 'presentation/pages/course_list_page.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/shared/data/tech_brand_colors.dart';
+import 'package:frontend/shared/models/course_identifier.dart';
 
 /// A course the learner is enrolled in, carrying study progress.
 ///
@@ -47,6 +48,9 @@ class MockProgressCourse {
   /// Short lesson summary, e.g. "Pelajaran 12 dari 20 • Fungsi".
   String get lessonLabel =>
       'Pelajaran $completedLessons dari $lessonCount • $currentLesson';
+
+  /// Stable id resolving this course to the shared CourseDetailPage.
+  String get courseId => CourseIdentifier.slug(title);
 }
 
 /// Temporary local data powering the Progress screen.

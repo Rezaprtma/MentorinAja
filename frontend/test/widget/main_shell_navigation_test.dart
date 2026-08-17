@@ -2,14 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:frontend/app/main_shell.dart';
+import 'package:frontend/features/course/course.dart';
 import 'package:frontend/features/explore/explore.dart';
 import 'package:frontend/features/home/home.dart';
+import 'package:frontend/features/lesson/lesson.dart';
 import 'package:frontend/features/profile/profile.dart';
 import 'package:frontend/features/progress/progress.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 
 Widget _buildApp() {
   return MaterialApp(theme: AppTheme.light(), home: const MainShell());
+}
+
+void _setSurface(WidgetTester tester, Size size) {
+  tester.view.physicalSize = size;
+  tester.view.devicePixelRatio = 1.0;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+}
+
+/// Resolves the lesson and course routes so Progress resume can be asserted.
+Widget _buildAppWithRoutes() {
+  return MaterialApp(
+    theme: AppTheme.light(),
+    onGenerateRoute: (settings) {
+      final name = settings.name ?? '';
+      final parts = name.split('/');
+      return MaterialPageRoute(
+        settings: settings,
+        builder: (context) {
+          if (name.contains('/lesson/')) {
+            return CoursePlayerPage(
+              courseId: parts.length > 2 ? parts[2] : '',
+              lessonId: parts.length > 4 ? parts[4] : '',
+            );
+          }
+          if (name.startsWith('/course/')) {
+            return CourseDetailPage(courseId: parts.last);
+          }
+          return const Scaffold(body: SizedBox.shrink());
+        },
+      );
+    },
+    home: const MainShell(),
+  );
 }
 
 void main() {
@@ -110,5 +146,33 @@ void main() {
     expect(find.text('Untuk Kamu'), findsOneWidget);
     expect(find.byType(AppFloatingBottomNav), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);
+  });
+
+  testWidgets('Progress resume opens the current lesson directly', (
+    tester,
+  ) async {
+    _setSurface(tester, const Size(390, 844));
+    await tester.pumpWidget(_buildAppWithRoutes());
+
+    await tester.tap(find.text('Progress'));
+    await tester.pump();
+
+    await tester.scrollUntilVisible(
+      find.text('Lanjutkan').first,
+      200,
+      scrollable: find
+          .descendant(
+            of: find.byType(ProgressPage),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.tap(find.text('Lanjutkan').first);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(CoursePlayerPage), findsOneWidget);
+    expect(find.byType(CourseDetailPage), findsNothing);
+    expect(find.text('Dasar Python'), findsWidgets);
+    expect(tester.takeException(), isNull);
   });
 }

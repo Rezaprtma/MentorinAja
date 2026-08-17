@@ -41,18 +41,37 @@ abstract final class AppRoutes {
 
   static const String courseDetail = '/course/{courseId}';
   static const String lessonDetail = '/course/{courseId}/lesson/{lessonId}';
+  static const String courseCompleted = '/course/{courseId}/completed';
   static const String quiz = '/course/{courseId}/quiz/{quizId}';
 
   // -------------------------------------------------------------------------
   // Feature screens
   // -------------------------------------------------------------------------
 
+  static const String notifications = '/notifications';
+  static const String categoryDetail = '/category/{category}';
+  static const String feedback = '/support/feedback';
+  static const String helpCenter = '/support/help';
+  static const String about = '/support/about';
+  static const String privacyPolicy = '/legal/privacy';
+  static const String userPolicy = '/legal/terms';
+  static const String editProfile = '/profile/edit';
   static const String settings = '/settings';
   static const String practice = '/practice';
   static const String tutor = '/tutor';
   static const String conversation = '/conversation';
   static const String camera = '/camera';
   static const String voice = '/voice';
+
+  // -------------------------------------------------------------------------
+  // Mentor course authoring
+  // -------------------------------------------------------------------------
+
+  static const String mentorCourses = '/mentor/courses';
+  static const String mentorCourseCreate = '/mentor/courses/create';
+  static const String mentorCourseEditor = '/mentor/courses/{courseId}';
+  static const String mentorLessonEditor =
+      '/mentor/courses/{courseId}/lessons/{lessonId}';
 
   // -------------------------------------------------------------------------
   // Helpers

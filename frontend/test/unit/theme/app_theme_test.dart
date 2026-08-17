@@ -64,6 +64,22 @@ void main() {
         expect(theme.extension<AppThemeExtension>(), isNotNull);
       }
     });
+
+    test('app bar background matches the canvas with no surface tint', () {
+      final light = AppTheme.light();
+      final dark = AppTheme.dark();
+
+      expect(
+        light.appBarTheme.backgroundColor,
+        light.extension<AppThemeExtension>()!.background,
+      );
+      expect(
+        dark.appBarTheme.backgroundColor,
+        dark.extension<AppThemeExtension>()!.background,
+      );
+      expect(light.appBarTheme.surfaceTintColor, Colors.transparent);
+      expect(dark.appBarTheme.surfaceTintColor, Colors.transparent);
+    });
   });
 
   group('AppThemeExtension', () {

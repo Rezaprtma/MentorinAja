@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/shared/data/tech_brand_colors.dart';
+import 'package:frontend/shared/models/course_identifier.dart';
 
 /// A learning area a learner can browse.
 ///
@@ -57,6 +58,9 @@ class ExploreCourse {
   final int lessonCount;
   final double rating;
   final TechBrandColors brand;
+
+  /// Stable id resolving this course to the shared CourseDetailPage.
+  String get courseId => CourseIdentifier.slug(title);
 }
 
 /// Temporary local data powering the Explore screen.

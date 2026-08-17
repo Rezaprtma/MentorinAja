@@ -1,22 +1,25 @@
 /// Profile tab root — the learner's account and settings.
 ///
-/// Leads with the centered [ProfileIdentity], then groups settings into
-/// Preferensi, Dukungan, and Legal sections rendered by
-/// [ProfileSettingsSection], and ends with a destructive sign-out row. Mock
-/// actions surface through [AppNotificationService] toasts; the Tema row
-/// reflects the app-wide [ThemeModeController] state and reopens the picker.
-/// The page scrolls, supports pull-to-refresh through the shared [mockRefresh]
-/// seam, and constrains itself with [ResponsiveContainer] for tablets and
-/// desktops.
+/// Leads with the centered [ProfileIdentity] fed by [ProfileController], then
+/// groups settings into Preferensi, Dukungan, and Legal sections rendered by
+/// [ProfileSettingsSection], and ends with a destructive sign-out row. Edit
+/// Profil opens the focused editor; remaining mock actions surface through
+/// [AppNotificationService] toasts; the Preferensi rows open lightweight
+/// bottom sheets ([showThemeSheet], [showNotificationSettingsSheet],
+/// [showLanguageSheet]) while content-heavy support and legal pages navigate
+/// normally. The page scrolls, supports pull-to-refresh through the shared
+/// [mockRefresh] seam, and constrains itself with [ResponsiveContainer] for
+/// tablets and desktops.
 library;
 
 import 'package:flutter/material.dart';
 
+import 'package:frontend/routing/route_names.dart';
 import 'package:frontend/shared/data/mock_refresh.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
-import '../../mock_profile_data.dart';
+import '../../logic/profile_controller.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/profile_identity.dart';
 import '../widgets/profile_setting_row.dart';
@@ -51,11 +54,30 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   const ProfileHeader(),
                   const SizedBox(height: AppSpacing.lg),
-                  ProfileIdentity(
-                    displayName: MockProfileData.displayName,
-                    email: MockProfileData.email,
-                    onEdit: () => _mockToast(context, 'Edit Profil'),
+                  AnimatedBuilder(
+                    animation: ProfileController.instance,
+                    builder: (context, _) {
+                      final profile = ProfileController.instance;
+                      return ProfileIdentity(
+                        username: profile.username,
+                        email: profile.email,
+                        photoUrl: profile.photoUrl,
+                        onEdit: () => _open(context, AppRoutes.editProfile),
+                      );
+                    },
                   ),
+                  if (ProfileController.instance.isMentor) ...[
+                    ProfileSettingsSection(
+                      title: 'Mentor',
+                      rows: [
+                        ProfileSettingRow(
+                          icon: Icons.school_outlined,
+                          title: 'Kelola Course',
+                          onTap: () => _open(context, AppRoutes.mentorCourses),
+                        ),
+                      ],
+                    ),
+                  ],
                   ProfileSettingsSection(
                     title: 'Preferensi',
                     rows: [
@@ -73,13 +95,13 @@ class ProfilePage extends StatelessWidget {
                       ProfileSettingRow(
                         icon: Icons.notifications_outlined,
                         title: 'Notifikasi',
-                        onTap: () => _mockToast(context, 'Notifikasi'),
+                        onTap: () => showNotificationSettingsSheet(context),
                       ),
                       ProfileSettingRow(
                         icon: Icons.language_outlined,
                         title: 'Bahasa',
                         value: 'Bahasa Indonesia',
-                        onTap: () => _mockToast(context, 'Bahasa'),
+                        onTap: () => showLanguageSheet(context),
                       ),
                     ],
                   ),
@@ -89,17 +111,17 @@ class ProfilePage extends StatelessWidget {
                       ProfileSettingRow(
                         icon: Icons.feedback_outlined,
                         title: 'Masukan & Saran',
-                        onTap: () => _mockToast(context, 'Masukan & Saran'),
+                        onTap: () => _open(context, AppRoutes.feedback),
                       ),
                       ProfileSettingRow(
                         icon: Icons.help_outline,
                         title: 'Pusat Bantuan',
-                        onTap: () => _mockToast(context, 'Pusat Bantuan'),
+                        onTap: () => _open(context, AppRoutes.helpCenter),
                       ),
                       ProfileSettingRow(
                         icon: Icons.info_outline,
                         title: 'Tentang MentorinAja',
-                        onTap: () => showAboutSheet(context),
+                        onTap: () => _open(context, AppRoutes.about),
                       ),
                     ],
                   ),
@@ -109,12 +131,12 @@ class ProfilePage extends StatelessWidget {
                       ProfileSettingRow(
                         icon: Icons.privacy_tip_outlined,
                         title: 'Kebijakan Privasi',
-                        onTap: () => _mockToast(context, 'Kebijakan Privasi'),
+                        onTap: () => _open(context, AppRoutes.privacyPolicy),
                       ),
                       ProfileSettingRow(
                         icon: Icons.article_outlined,
                         title: 'Kebijakan Pengguna',
-                        onTap: () => _mockToast(context, 'Kebijakan Pengguna'),
+                        onTap: () => _open(context, AppRoutes.userPolicy),
                       ),
                     ],
                   ),
@@ -159,12 +181,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  void _mockToast(BuildContext context, String feature) {
-    AppToast.show(
-      context,
-      title: feature,
-      message: 'Fitur ini sedang dalam pengembangan.',
-      severity: AppFeedbackSeverity.info,
-    );
+  void _open(BuildContext context, String routeName) {
+    Navigator.of(context).pushNamed(routeName);
   }
 }

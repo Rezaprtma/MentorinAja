@@ -132,6 +132,7 @@ abstract final class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: extension.background,
         foregroundColor: extension.textPrimary,
+        surfaceTintColor: Colors.transparent,
         elevation: AppElevation.flat,
         scrolledUnderElevation: AppElevation.xs,
         centerTitle: false,
