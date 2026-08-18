@@ -1,10 +1,18 @@
-/// Design System foundation for MentorinAja.
-///
-/// Import this barrel for the full token + theme surface:
-///
-/// ```dart
-/// import 'package:frontend/core/theme/theme.dart';
-/// ```
+//**
+// frontend/core/theme/theme.dart
+//
+// frontend:
+// Theme system. Menyediakan colors, typography, spacing, dan theme configuration.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi theme rendering di light/dark mode.
+//**
 library;
 
 export 'app_colors.dart';

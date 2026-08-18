@@ -1,16 +1,23 @@
-/// In-memory [CourseAuthoringRepository] seeded with sample Bahasa Indonesia content.
+//**
+// frontend/features/course_authoring/data/mock_course_authoring_repository.dart
+//
+// frontend:
+// Mock data. Menyediakan sample data untuk development dan testing.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya menyediakan mock data.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi mock data coverage dan edge cases.
+//**
 library;
 
-import 'package:frontend/shared/enums/enums.dart';
-
-import '../domain/entities/blank_draft.dart';
 import '../domain/entities/course_authoring_draft.dart';
 import '../domain/entities/draft_status.dart';
-import '../domain/entities/exercise_draft.dart';
-import '../domain/entities/game_choice_draft.dart';
-import '../domain/entities/game_draft.dart';
 import '../domain/entities/lesson_draft.dart';
-import '../domain/entities/material_block_draft.dart';
 import '../domain/repositories/course_authoring_repository.dart';
 
 class MockCourseAuthoringRepository implements CourseAuthoringRepository {
@@ -18,7 +25,6 @@ class MockCourseAuthoringRepository implements CourseAuthoringRepository {
     _drafts.add(_seedPythonCourse());
   }
 
-  /// Shared instance so authoring screens observe one in-memory draft store.
   static final MockCourseAuthoringRepository instance =
       MockCourseAuthoringRepository();
 
@@ -154,65 +160,7 @@ class MockCourseAuthoringRepository implements CourseAuthoringRepository {
       objective: 'Memahami fungsi print dan menjalankan skrip Python.',
       estimatedMinutes: 15,
       order: 0,
-      materialBlocks: [
-        MaterialBlockDraft(
-          id: 'mb-1-1',
-          type: LessonContentBlockType.heading,
-          text: 'Apa itu Python?',
-          order: 0,
-        ),
-        MaterialBlockDraft(
-          id: 'mb-1-2',
-          type: LessonContentBlockType.paragraph,
-          text:
-              'Python adalah bahasa pemrograman yang mudah dipelajari and banyak digunakan di berbagai bidang.',
-          order: 1,
-        ),
-        MaterialBlockDraft(
-          id: 'mb-1-3',
-          type: LessonContentBlockType.code,
-          text: 'print("Hello, World!")',
-          label: 'Python',
-          order: 2,
-        ),
-      ],
-      games: [
-        GameDraft(
-          id: 'game-1-1',
-          gameType: GameType.codeOrdering,
-          instruction: 'Susun kode berikut agar mencetak "Halo".',
-          options: ['print', '(', '"Halo"', ')'],
-          correctOrder: [0, 1, 2, 3],
-          order: 0,
-        ),
-        GameDraft(
-          id: 'game-1-2',
-          gameType: GameType.multipleChoice,
-          instruction:
-              'Fungsi apa yang digunakan untuk mencetak teks di Python?',
-          choices: [
-            GameChoiceDraft(label: 'print()', isCorrect: true),
-            GameChoiceDraft(label: 'echo()', isCorrect: false),
-            GameChoiceDraft(label: 'write()', isCorrect: false),
-          ],
-          explanation:
-              'Fungsi print() digunakan untuk menampilkan output ke layar.',
-          order: 1,
-        ),
-      ],
-      exercises: [
-        ExerciseDraft(
-          id: 'ex-1-1',
-          type: LessonExerciseType.codeCompletion,
-          title: 'Lengkapi kode',
-          instruction: 'Lengkapi kode agar mencetak "Selamat Datang".',
-          code: '___("Selamat Datang")',
-          blanks: [BlankDraft(token: 'print')],
-          options: ['print', 'echo', 'log'],
-          hint: 'Gunakan fungsi bawaan Python untuk mencetak teks.',
-          order: 0,
-        ),
-      ],
+      materialPdfPath: 'assets/pdfs/python_hello_world.pdf',
     );
   }
 
@@ -224,95 +172,7 @@ class MockCourseAuthoringRepository implements CourseAuthoringRepository {
       objective: 'Mampu mendeklarasikan variabel dan memahami tipe data dasar.',
       estimatedMinutes: 20,
       order: 1,
-      materialBlocks: [
-        MaterialBlockDraft(
-          id: 'mb-2-1',
-          type: LessonContentBlockType.heading,
-          text: 'Variabel',
-          order: 0,
-        ),
-        MaterialBlockDraft(
-          id: 'mb-2-2',
-          type: LessonContentBlockType.paragraph,
-          text:
-              'Variabel adalah tempat menyimpan data. Di Python, variabel tidak perlu dideklarasikan tipe datanya.',
-          order: 1,
-        ),
-        MaterialBlockDraft(
-          id: 'mb-2-3',
-          type: LessonContentBlockType.code,
-          text: 'nama = "Budi"\numur = 17',
-          label: 'Python',
-          order: 2,
-        ),
-        MaterialBlockDraft(
-          id: 'mb-2-4',
-          type: LessonContentBlockType.bulletList,
-          items: [
-            'int — bilangan bulat',
-            'float — bilangan desimal',
-            'str — teks',
-          ],
-          order: 3,
-        ),
-      ],
-      games: [
-        GameDraft(
-          id: 'game-2-1',
-          gameType: GameType.tokenCompletion,
-          instruction: 'Lengkapi kode agar variabel nama berisi "Ani".',
-          code: '___ = "Ani"',
-          blanks: [BlankDraft(token: 'nama')],
-          options: ['nama', 'var', 'let'],
-          order: 0,
-        ),
-        GameDraft(
-          id: 'game-2-2',
-          gameType: GameType.outputPrediction,
-          instruction: 'Apa output dari kode berikut?',
-          code: 'x = 5\nprint(x + 3)',
-          expectedAnswer: '8',
-          order: 1,
-        ),
-        GameDraft(
-          id: 'game-2-3',
-          gameType: GameType.identifyError,
-          instruction: 'Temukan kesalahan pada kode berikut.',
-          code: 'nama = Budi\nprint(nama)',
-          choices: [
-            GameChoiceDraft(
-              label: 'Budi harus diapit tanda kutip',
-              isCorrect: true,
-            ),
-            GameChoiceDraft(label: 'print harus kapital', isCorrect: false),
-          ],
-          explanation:
-              'String di Python harus diapit tanda kutip, misalnya "Budi".',
-          order: 2,
-        ),
-      ],
-      exercises: [
-        ExerciseDraft(
-          id: 'ex-2-1',
-          type: LessonExerciseType.codeCorrection,
-          title: 'Perbaiki kode',
-          instruction: 'Perbaiki kode berikut agar berjalan tanpa error.',
-          code: 'nama = Budi\nprint(nama)',
-          correctedCode: 'nama = "Budi"\nprint(nama)',
-          choices: [
-            GameChoiceDraft(
-              label: 'Tambahkan tanda kutip pada Budi',
-              isCorrect: true,
-            ),
-            GameChoiceDraft(
-              label: 'Ubah print menjadi Print',
-              isCorrect: false,
-            ),
-          ],
-          explanation: 'String harus diapit tanda kutip.',
-          order: 0,
-        ),
-      ],
+      materialPdfPath: 'assets/pdfs/python_variabel.pdf',
     );
   }
 }

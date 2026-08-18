@@ -1,8 +1,22 @@
+//**
+// frontend/features/lesson/presentation/widgets/exercises/exercise_feedback.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Indigo hint callout revealed on request after a wrong answer.
 class ExerciseHintView extends StatelessWidget {
   const ExerciseHintView({super.key, required this.hint});
 
@@ -46,11 +60,6 @@ class ExerciseHintView extends StatelessWidget {
   }
 }
 
-/// Feedback panel shown after an exercise is answered.
-///
-/// Correct answers sit on a success container with a check mark; incorrect
-/// answers use the error container and offer an optional hint reveal. State is
-/// never communicated by color alone — an icon and text accompany every state.
 class ExerciseFeedbackPanel extends StatelessWidget {
   const ExerciseFeedbackPanel({
     super.key,
@@ -71,10 +80,15 @@ class ExerciseFeedbackPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ext = context.appColors;
     final scheme = Theme.of(context).colorScheme;
-    final container = isCorrect ? ext.successContainer : scheme.errorContainer;
-    final onContainer = isCorrect
+    final Color backgroundColor = isCorrect
+        ? ext.successContainer.withValues(alpha: 0.25)
+        : scheme.errorContainer.withValues(alpha: 0.25);
+    final Color textColor = isCorrect
         ? ext.onSuccessContainer
         : scheme.onErrorContainer;
+    final Color borderColor = isCorrect
+        ? ext.success.withValues(alpha: 0.4)
+        : scheme.error.withValues(alpha: 0.4);
     final icon = isCorrect ? Icons.check_circle_rounded : Icons.error_rounded;
 
     return AnimatedSwitcher(
@@ -83,8 +97,9 @@ class ExerciseFeedbackPanel extends StatelessWidget {
         key: ValueKey('$isCorrect-$message'),
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: container,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(AppRadius.medium),
+          border: Border.all(color: borderColor),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,13 +107,13 @@ class ExerciseFeedbackPanel extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(icon, size: AppIconSizes.md, color: onContainer),
+                Icon(icon, size: AppIconSizes.md, color: textColor),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
                   child: Text(
                     message,
                     style: AppTypeScale.bodyMedium.copyWith(
-                      color: onContainer,
+                      color: textColor,
                       fontWeight: FontWeight.w700,
                       height: 1.5,
                     ),
@@ -115,7 +130,7 @@ class ExerciseFeedbackPanel extends StatelessWidget {
                 child: Text(
                   explanation!,
                   style: AppTypeScale.bodySmall.copyWith(
-                    color: onContainer.withValues(alpha: 0.9),
+                    color: textColor.withValues(alpha: 0.95),
                     height: 1.5,
                   ),
                 ),
@@ -130,14 +145,14 @@ class ExerciseFeedbackPanel extends StatelessWidget {
                 child: TextButton(
                   onPressed: onShowHint,
                   style: TextButton.styleFrom(
-                    foregroundColor: onContainer,
+                    foregroundColor: textColor,
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(48, 40),
                   ),
                   child: Text(
                     'Lihat Petunjuk',
                     style: AppTypeScale.labelLarge.copyWith(
-                      color: onContainer,
+                      color: textColor,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

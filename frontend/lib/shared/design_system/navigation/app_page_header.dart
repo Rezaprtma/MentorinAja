@@ -1,14 +1,23 @@
+//**
+// frontend/shared/design_system/navigation/app_page_header.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import '../layout/app_gap.dart';
 
-/// Large, prominent title block for the top of a screen.
-///
-/// Used for screen headers (e.g. "My Profile", "Course Details") where the
-/// title is larger than a standard [AppBar] and may include a subtitle or
-/// trailing action. Typically placed inside [AppScrollablePage] or a
-/// [SliverToBoxAdapter].
 class AppPageHeader extends StatelessWidget {
   const AppPageHeader({
     super.key,
@@ -23,16 +32,12 @@ class AppPageHeader extends StatelessWidget {
     ),
   });
 
-  /// Primary heading in [headlineSmall] style.
   final String title;
 
-  /// Optional supporting text in [bodyMedium] style.
   final String? subtitle;
 
-  /// Optional trailing widget aligned to the end of the title row.
   final Widget? trailing;
 
-  /// Outer padding.
   final EdgeInsetsGeometry padding;
 
   @override

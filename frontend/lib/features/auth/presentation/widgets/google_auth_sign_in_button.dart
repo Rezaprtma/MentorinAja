@@ -1,3 +1,18 @@
+//**
+// frontend/features/auth/presentation/widgets/google_auth_sign_in_button.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -9,11 +24,6 @@ import '../../logic/auth_strings.dart';
 import '../../logic/google_auth_controller.dart';
 import 'google_auth_button.dart';
 
-/// Continue-with-Google action including its interaction feedback.
-///
-/// Reports the outcome through a compact [AppNotificationService] notification
-/// and forwards successful sign-ins to the authenticated home screen.
-/// TODO(backend): replace the mock service with the real Google OAuth flow.
 class GoogleAuthSignInButton extends StatefulWidget {
   const GoogleAuthSignInButton({super.key});
 

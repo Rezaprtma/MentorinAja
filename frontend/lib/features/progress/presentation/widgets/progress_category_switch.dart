@@ -1,16 +1,24 @@
+//**
+// frontend/features/progress/presentation/widgets/progress_category_switch.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Which course collection the Progress page currently shows.
 enum ProgressCategory { studying, completed }
 
-/// Two-state filter that selects the course collection below it.
-///
-/// A slim full-width pill rendered from existing tokens: the selected option is
-/// filled with the brand orange and white text so the active state reads
-/// instantly, while the idle option sits on a neutral track with dark text.
-/// Labels stay icon-free so the switch reads clean under the statistics card.
 class ProgressCategorySwitch extends StatelessWidget {
   const ProgressCategorySwitch({
     super.key,
@@ -18,10 +26,8 @@ class ProgressCategorySwitch extends StatelessWidget {
     required this.onChanged,
   });
 
-  /// The currently selected category.
   final ProgressCategory value;
 
-  /// Reports category changes; the parent owns the state.
   final ValueChanged<ProgressCategory> onChanged;
 
   @override

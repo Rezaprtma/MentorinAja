@@ -1,14 +1,23 @@
+//**
+// frontend/shared/design_system/navigation/app_section_header.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import '../layout/app_gap.dart';
 
-/// A titled row used as a section break inside lists and pages.
-///
-/// Provides consistent vertical spacing, title weight and an optional
-/// trailing action (e.g. "See all"). Screens compose [AppSectionHeader]
-/// to give scrollable content a clear visual hierarchy without hand-building
-/// title rows every time.
 class AppSectionHeader extends StatelessWidget {
   const AppSectionHeader({
     super.key,
@@ -21,16 +30,12 @@ class AppSectionHeader extends StatelessWidget {
     ),
   });
 
-  /// Primary heading text.
   final String title;
 
-  /// Optional supporting line below the heading.
   final String? subtitle;
 
-  /// Trailing widget (e.g. a "See all" [TextButton]).
   final Widget? trailing;
 
-  /// Outer padding; defaults to standard section inset.
   final EdgeInsetsGeometry padding;
 
   @override

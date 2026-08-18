@@ -1,9 +1,18 @@
-/// A titled group of settings rows for the Profile tab.
-///
-/// Renders an uppercase category label above the given rows, drawing a
-/// hairline divider between each pair aligned to the row title. The group
-/// rests directly on the page background so content reads as clean,
-/// card-free sections.
+//**
+// frontend/features/profile/presentation/widgets/profile_settings_section.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';

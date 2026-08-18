@@ -1,43 +1,27 @@
+//**
+// frontend/shared/design_system/buttons/app_button.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import '../layout/app_gap.dart';
 
-/// Visual variants of [AppButton], mapped 1:1 to Material 3 button types.
-enum AppButtonVariant {
-  /// Filled with the brand primary color — the main call to action.
-  primary,
+enum AppButtonVariant { primary, secondary, outlined, text, danger }
 
-  /// Tonal filled with the secondary container — supporting actions.
-  secondary,
+enum AppButtonSize { small, medium, large }
 
-  /// Bordered, transparent background — low emphasis.
-  outlined,
-
-  /// Borderless — the lowest emphasis.
-  text,
-
-  /// Filled with the error color — destructive or irreversible actions.
-  danger,
-}
-
-/// Height tiers for [AppButton].
-enum AppButtonSize {
-  /// 40dp — dense, compact contexts.
-  small,
-
-  /// 48dp — default touch-target-friendly height.
-  medium,
-
-  /// 56dp — primary CTAs and hero actions.
-  large,
-}
-
-/// The single entry point for all labeled buttons in the app.
-///
-/// Choosing one widget instead of one-per-variant keeps every button variant
-/// consistent: same loading, disabled, full-width and icon APIs, same touch
-/// targets, same state handling.
 class AppButton extends StatelessWidget {
   const AppButton({
     super.key,

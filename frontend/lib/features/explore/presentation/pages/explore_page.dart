@@ -1,3 +1,18 @@
+//**
+// frontend/features/explore/presentation/pages/explore_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -11,13 +26,6 @@ import 'package:frontend/shared/widgets/widgets.dart';
 import '../../mock_explore_data.dart';
 import '../widgets/category_discovery_card.dart';
 
-/// Course discovery surface — the Explore tab.
-///
-/// Presents a discovery-first catalog layout: header, search, learning-area
-/// categories, a horizontal "Kursus Populer" rail and a responsive "Untuk Kamu"
-/// category discovery grid. No promotional hero — Home owns that role. Search
-/// and category selection switch the catalog section into course results so
-/// the default view never reads as a plain course listing.
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
 
@@ -149,7 +157,6 @@ class _ExplorePageState extends State<ExplorePage> {
   }
 }
 
-/// Short page header.
 class _ExploreHeader extends StatelessWidget {
   const _ExploreHeader();
 
@@ -178,7 +185,6 @@ class _ExploreHeader extends StatelessWidget {
   }
 }
 
-/// Horizontal carousel of popular courses with a peek at the next card.
 class _PopularCourseRail extends StatelessWidget {
   const _PopularCourseRail({required this.courses, required this.onCourseTap});
 
@@ -218,11 +224,6 @@ class _PopularCourseRail extends StatelessWidget {
   }
 }
 
-/// Large vivid card for the popular course rail.
-///
-/// Uses the technology accent as a full-bleed surface with a white logo tile,
-/// a translucent pill category and restrained decorative shapes that stay
-/// inside the card composition.
 class _PopularCourseCard extends StatelessWidget {
   const _PopularCourseCard({required this.course, this.onTap});
 
@@ -332,7 +333,6 @@ class _PopularCourseCard extends StatelessWidget {
   }
 }
 
-/// Small rounded category label used on both card types.
 class _CategoryPill extends StatelessWidget {
   const _CategoryPill({
     required this.label,
@@ -368,12 +368,6 @@ class _CategoryPill extends StatelessWidget {
   }
 }
 
-/// Responsive category discovery grid for the default "Untuk Kamu" section.
-///
-/// Column count follows available width via
-/// [SliverGridDelegateWithMaxCrossAxisExtent]; item height scales with the
-/// device text scale so band, description and stack never overflow. Hosted
-/// inside the page's scroll view with non-scrollable physics.
 class _CategoryGrid extends StatelessWidget {
   const _CategoryGrid({required this.categories, this.onCategoryTap});
 
@@ -406,7 +400,6 @@ class _CategoryGrid extends StatelessWidget {
   }
 }
 
-/// Responsive course grid shown while searching or filtering categories.
 class _CourseResultGrid extends StatelessWidget {
   const _CourseResultGrid({required this.courses, this.onCourseTap});
 
@@ -436,7 +429,6 @@ class _CourseResultGrid extends StatelessWidget {
   }
 }
 
-/// Compact course card used in the filtered results grid.
 class _CourseResultCard extends StatelessWidget {
   const _CourseResultCard({required this.course, this.onTap});
 
@@ -556,7 +548,6 @@ class _CourseResultCard extends StatelessWidget {
   }
 }
 
-/// "Lihat Semua" action used by catalog sections.
 class _SeeAllButton extends StatelessWidget {
   const _SeeAllButton();
 

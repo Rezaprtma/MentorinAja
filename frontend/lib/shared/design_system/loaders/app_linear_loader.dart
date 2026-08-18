@@ -1,8 +1,22 @@
+//**
+// frontend/shared/design_system/loaders/app_linear_loader.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Horizontal progress indicator with optional label.
 class AppLinearLoader extends StatelessWidget {
   const AppLinearLoader({
     super.key,
@@ -13,7 +27,6 @@ class AppLinearLoader extends StatelessWidget {
     this.backgroundColor,
   });
 
-  /// 0.0–1.0; null renders an indeterminate bar.
   final double? value;
   final String? label;
   final Color? color;

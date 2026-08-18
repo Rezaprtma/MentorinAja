@@ -1,3 +1,18 @@
+//**
+// frontend/features/progress/presentation/widgets/progress_stats_panel.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -6,16 +21,6 @@ import 'package:frontend/shared/design_system/design_system.dart';
 
 import 'course_distribution_chart.dart';
 
-/// Learning-overview panel for the Progress page.
-///
-/// A premium two-column analytics card: the left holds the visual
-/// [CourseDistributionChart] — the purple/green split mirrored by its "Total
-/// Course" center — and the right stacks the three numeric course statistics
-/// as icon + value + supporting label, separated by subtle hairlines. The two
-/// columns relate through spacing and alignment rather than a vertical line.
-/// Interacting with a slice swaps the chart center to that slice's count and
-/// share, replacing any permanent legend. On extremely narrow surfaces the
-/// composition stacks into full-width metric rows below a centered chart.
 class ProgressStatsPanel extends StatelessWidget {
   const ProgressStatsPanel({
     super.key,
@@ -24,13 +29,10 @@ class ProgressStatsPanel extends StatelessWidget {
     required this.completedCount,
   });
 
-  /// All enrolled courses.
   final int totalCount;
 
-  /// Courses with progress strictly between 0 and 100 percent.
   final int activeCount;
 
-  /// Courses finished at 100 percent.
   final int completedCount;
 
   @override
@@ -137,8 +139,6 @@ class ProgressStatsPanel extends StatelessWidget {
   }
 }
 
-/// One statistic row: a neutral icon, a prominent value, and a supporting
-/// label beneath it.
 class _MetricTile extends StatelessWidget {
   const _MetricTile({
     required this.icon,
@@ -194,8 +194,6 @@ class _MetricTile extends StatelessWidget {
   }
 }
 
-/// A full-width metric row: quiet label on the left, strong value on the
-/// right, used on extremely narrow surfaces where vertical space is cheap.
 class _InlineMetric extends StatelessWidget {
   const _InlineMetric({required this.label, required this.value});
 

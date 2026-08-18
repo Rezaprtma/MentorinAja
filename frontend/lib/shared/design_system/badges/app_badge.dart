@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/badges/app_badge.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Small semantic status indicator.
-///
-/// Renders a pill-shaped label with background/text colors derived from
-/// [variant]. Use inline next to titles, inside lists, or as trailing widgets
-/// to communicate status at a glance.
 enum AppBadgeVariant { success, warning, error, info, neutral }
 
 class AppBadge extends StatelessWidget {

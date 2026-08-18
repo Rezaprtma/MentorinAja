@@ -1,15 +1,27 @@
+//**
+// frontend/shared/design_system/feedback/app_snack_bar.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Severity presets for [AppSnackBar] and [AppBanner].
 enum AppFeedbackSeverity { success, error, warning, info, neutral }
 
-/// Themed floating snack bar with semantic color variants.
 class AppSnackBar {
   AppSnackBar._();
 
-  /// Shows a floating snack bar at the bottom of the screen.
   static void show(
     BuildContext context,
     String message, {

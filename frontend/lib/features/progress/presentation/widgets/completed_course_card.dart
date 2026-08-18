@@ -1,3 +1,18 @@
+//**
+// frontend/features/progress/presentation/widgets/completed_course_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -5,18 +20,11 @@ import 'package:frontend/shared/widgets/tech/tech_logo.dart';
 
 import '../../mock_progress_data.dart';
 
-/// Card for a finished course.
-///
-/// Belongs to the same white card language as the active course cards: identical
-/// container, spacing, typography and logo treatment, with a subtle "Selesai"
-/// success badge and a fully filled green progress bar as the only differences.
 class CompletedCourseCard extends StatelessWidget {
   const CompletedCourseCard({super.key, required this.course, this.onTap});
 
-  /// The finished course to display.
   final MockProgressCourse course;
 
-  /// Reopens the completed course.
   final VoidCallback? onTap;
 
   @override

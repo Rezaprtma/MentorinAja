@@ -1,13 +1,23 @@
+//**
+// frontend/shared/design_system/content/app_code_block.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Monospaced code surface with a language label and a copy action.
-///
-/// Shared by the lesson reader and the AI Tutor chat so code always renders on
-/// a consistent, readable surface. Copying is handled internally; pass [onCopy]
-/// to react (for example, to show a toast) after the text is copied.
 class AppCodeBlock extends StatelessWidget {
   const AppCodeBlock({
     super.key,
@@ -17,16 +27,12 @@ class AppCodeBlock extends StatelessWidget {
     this.onCopy,
   });
 
-  /// The code text shown in the monospaced block.
   final String code;
 
-  /// Optional language label in the header row.
   final String? label;
 
-  /// Semantics + long-press label for the copy action.
   final String copyTooltip;
 
-  /// Called with [code] after a successful copy.
   final ValueChanged<String>? onCopy;
 
   Future<void> _copy(BuildContext context) async {

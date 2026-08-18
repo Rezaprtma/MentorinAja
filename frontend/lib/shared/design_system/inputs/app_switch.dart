@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/inputs/app_switch.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Labeled toggle switch.
-///
-/// A compact [SwitchListTile] wrapper that adds consistent label, subtitle
-/// and semantic support. The switch respects the current [Theme] colors
-/// (primary for active, onSurface for inactive).
 class AppSwitch extends StatelessWidget {
   const AppSwitch({
     super.key,
@@ -20,27 +30,20 @@ class AppSwitch extends StatelessWidget {
     this.inactiveColor,
   });
 
-  /// Current toggle state.
   final bool value;
 
-  /// Called when the user toggles the switch.
   final ValueChanged<bool>? onChanged;
 
-  /// Label text next to the switch.
   final String? label;
 
-  /// Secondary text below the label.
   final String? subtitle;
 
-  /// Whether the switch is interactive.
   final bool enabled;
 
   final EdgeInsetsGeometry? contentPadding;
 
-  /// Active track color; defaults to theme primary.
   final Color? activeColor;
 
-  /// Inactive track color.
   final Color? inactiveColor;
 
   @override

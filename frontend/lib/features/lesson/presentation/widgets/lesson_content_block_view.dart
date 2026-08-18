@@ -1,3 +1,18 @@
+//**
+// frontend/features/lesson/presentation/widgets/lesson_content_block_view.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -5,11 +20,6 @@ import 'package:frontend/shared/design_system/design_system.dart';
 import '../../domain/entities/lesson_content.dart';
 import 'exercises/lesson_exercise_view.dart';
 
-/// Renders a single [LessonContentBlock] on the correct design-system surface.
-///
-/// Paragraphs read as plain text, goals render as a success-check list, code
-/// appears in a monospaced block with a copy action, and tips sit on the
-/// indigo support container so the palette stays inside the brand budget.
 class LessonContentBlockView extends StatelessWidget {
   const LessonContentBlockView({super.key, required this.block});
 
@@ -57,7 +67,6 @@ class LessonContentBlockView extends StatelessWidget {
   }
 }
 
-/// Small phase label used to structure a lesson into tutor-like steps.
 class _PhaseHeading extends StatelessWidget {
   const _PhaseHeading({required this.label});
 
@@ -78,7 +87,6 @@ class _PhaseHeading extends StatelessWidget {
   }
 }
 
-/// Prose paragraph — the quietest surface in the lesson.
 class _ParagraphView extends StatelessWidget {
   const _ParagraphView({required this.text});
 
@@ -96,7 +104,6 @@ class _ParagraphView extends StatelessWidget {
   }
 }
 
-/// Check-marked goal list.
 class _BulletListView extends StatelessWidget {
   const _BulletListView({required this.items});
 
@@ -150,7 +157,6 @@ class _BulletListView extends StatelessWidget {
   }
 }
 
-/// Monospaced code block with a copy action.
 class _CodeBlockView extends StatelessWidget {
   const _CodeBlockView({required this.label, required this.code});
 
@@ -174,7 +180,6 @@ class _CodeBlockView extends StatelessWidget {
   }
 }
 
-/// Indigo tip callout — a warm mentor note, not an error or a warning.
 class _TipView extends StatelessWidget {
   const _TipView({required this.text});
 
@@ -214,7 +219,6 @@ class _TipView extends StatelessWidget {
   }
 }
 
-/// Section heading — bold title for a lesson section.
 class _HeadingView extends StatelessWidget {
   const _HeadingView({required this.text});
 
@@ -235,7 +239,6 @@ class _HeadingView extends StatelessWidget {
   }
 }
 
-/// Sub-section heading — smaller than heading.
 class _SubheadingView extends StatelessWidget {
   const _SubheadingView({required this.text});
 
@@ -256,7 +259,6 @@ class _SubheadingView extends StatelessWidget {
   }
 }
 
-/// Numbered/ordered list.
 class _NumberedListView extends StatelessWidget {
   const _NumberedListView({required this.items});
 
@@ -316,7 +318,6 @@ class _NumberedListView extends StatelessWidget {
   }
 }
 
-/// Warning callout — amber-toned caution block with label.
 class _WarningView extends StatelessWidget {
   const _WarningView({required this.text});
 
@@ -370,7 +371,6 @@ class _WarningView extends StatelessWidget {
   }
 }
 
-/// Worked example illustration block with CONTOH label.
 class _ExampleView extends StatelessWidget {
   const _ExampleView({required this.text});
 
@@ -423,7 +423,6 @@ class _ExampleView extends StatelessWidget {
   }
 }
 
-/// Summary / key takeaway block with RANGKUMAN label on indigo container.
 class _SummaryView extends StatelessWidget {
   const _SummaryView({required this.text});
 
@@ -477,7 +476,6 @@ class _SummaryView extends StatelessWidget {
   }
 }
 
-/// Display-only checklist — styled checkboxes, not interactive.
 class _ChecklistView extends StatelessWidget {
   const _ChecklistView({required this.items});
 

@@ -1,3 +1,18 @@
+//**
+// frontend/features/auth/presentation/screens/create_account_screen.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/routing/route_names.dart';
@@ -9,13 +24,6 @@ import '../../logic/verification_request_controller.dart';
 import '../widgets/auth_scaffold.dart';
 import '../widgets/google_auth_sign_in_button.dart';
 
-/// Premium create-account step of the passwordless flow.
-///
-/// Title is centered at the top with no subtitle. The form collects a
-/// username and email, then routes through the OTP step. A contained
-/// Continue CTA, an "or" divider, a Google sign-in option, and a
-/// one-line bottom link lead to Sign In. Terms & Privacy are pinned
-/// to the bottom of the viewport on every screen size.
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
 
@@ -160,7 +168,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   }
 }
 
-/// Hairline "or" separator with a centered label.
 class _OrDivider extends StatelessWidget {
   const _OrDivider();
 
@@ -184,7 +191,6 @@ class _OrDivider extends StatelessWidget {
   }
 }
 
-/// One-line prompt where only the link portion is clickable.
 class _AuthBottomLink extends StatelessWidget {
   const _AuthBottomLink({
     required this.prefix,
@@ -223,7 +229,6 @@ class _AuthBottomLink extends StatelessWidget {
   }
 }
 
-/// Static terms and privacy confirmation.
 class _TermsFooter extends StatelessWidget {
   const _TermsFooter();
 

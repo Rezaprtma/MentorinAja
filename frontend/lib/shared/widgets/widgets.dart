@@ -1,6 +1,18 @@
-/// Shared widgets barrel for MentorinAja.
-///
-/// Import this barrel for asset, shell, layout, and container widgets.
+//**
+// frontend/shared/widgets/widgets.dart
+//
+// frontend:
+// Shared widget. Menyediakan reusable UI components untuk feature screens.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering dan behavior.
+//**
 library;
 
 export 'asset/asset_widgets.dart';

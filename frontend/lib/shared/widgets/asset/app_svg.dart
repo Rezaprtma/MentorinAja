@@ -1,15 +1,21 @@
+//**
+// frontend/shared/widgets/asset/app_svg.dart
+//
+// frontend:
+// Shared widget. Menyediakan reusable UI components untuk feature screens.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering dan behavior.
+//**
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// SVG image widget backed by `flutter_svg`.
-///
-/// Renders an SVG asset with [BoxFit.contain] by default. Pass [color] to
-/// tint monochrome SVG artwork via [ColorFilter.mode]. [width]/[height] are
-/// optional; when omitted the natural SVG size is used.
-///
-/// ```dart
-/// AppSvg(AppIllustrations.onboardingWelcome, width: 240, height: 240);
-/// ```
 class AppSvg extends StatelessWidget {
   const AppSvg(
     this.assetPath, {
@@ -21,7 +27,6 @@ class AppSvg extends StatelessWidget {
     this.semanticsLabel,
   });
 
-  /// SVG asset path from the icon/image registry.
   final String assetPath;
 
   final double? width;

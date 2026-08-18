@@ -1,14 +1,23 @@
+//**
+// frontend/shared/design_system/inputs/app_otp_field.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// One-time-password input composed of individual digit boxes.
-///
-/// Each box is an independent [TextField] that auto-advances focus on input
-/// and retreats on backspace. Paste is supported — the pasted string is
-/// distributed across the remaining boxes. The aggregated value is reported
-/// via [onChanged] and [onCompleted] (when all digits are entered).
 class AppOtpField extends StatefulWidget {
   const AppOtpField({
     super.key,
@@ -22,28 +31,20 @@ class AppOtpField extends StatefulWidget {
     this.spacing = AppSpacing.sm,
   });
 
-  /// Number of digit boxes.
   final int length;
 
-  /// Called when all digits have been entered.
   final ValueChanged<String>? onCompleted;
 
-  /// Called on every change with the current aggregated value.
   final ValueChanged<String>? onChanged;
 
-  /// Whether the fields are editable.
   final bool enabled;
 
-  /// Optional error text shown below the fields.
   final String? error;
 
-  /// Whether the first box receives focus automatically.
   final bool autofocus;
 
-  /// Autofill hints attached to the first box (e.g. OTP code).
   final List<String> autofillHints;
 
-  /// Horizontal gap between boxes.
   final double spacing;
 
   @override
@@ -76,7 +77,6 @@ class _AppOtpFieldState extends State<AppOtpField> {
 
   void _onChanged(int index, String value) {
     if (value.length > 1) {
-      // Paste: distribute characters across boxes.
       final chars = value.split('');
       for (var i = 0; i < chars.length && (index + i) < widget.length; i++) {
         _controllers[index + i].text = chars[i];

@@ -1,3 +1,18 @@
+//**
+// frontend/features/progress/presentation/pages/progress_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/features/course/course.dart';
@@ -11,16 +26,6 @@ import '../widgets/progress_category_switch.dart';
 import '../widgets/progress_header.dart';
 import '../widgets/progress_stats_panel.dart';
 
-/// Progress tab root — the learner's enrolled courses and their completion.
-///
-/// Leads with one [ProgressStatsPanel] that summarizes the whole catalog, then
-/// a [ProgressCategorySwitch] that picks which [FilteredCourseList] renders.
-/// Only the selected category's cards are built, so the completed list stays
-/// cheap as it grows. The page scrolls and supports pull-to-refresh through the
-/// shared [mockRefresh] seam. Course lists and statistics derive live from
-/// [LearningProgressController], so finishing a lesson in the Lesson Player is
-/// reflected here immediately. The layout constrains itself with
-/// [ResponsiveContainer] so tablet line lengths stay readable.
 class ProgressPage extends StatefulWidget {
   const ProgressPage({
     super.key,
@@ -29,13 +34,10 @@ class ProgressPage extends StatefulWidget {
     this.onContinue,
   });
 
-  /// Switches the shell to the Explore tab (used by the empty-state CTA).
   final VoidCallback? onExplore;
 
-  /// Opens a course, receiving the tapped [MockProgressCourse].
   final ValueChanged<MockProgressCourse>? onCourseTap;
 
-  /// Resumes a course's next lesson.
   final ValueChanged<MockProgressCourse>? onContinue;
 
   @override
@@ -106,12 +108,6 @@ class _ProgressPageState extends State<ProgressPage> {
   }
 }
 
-/// Derived course statistics computed from live learning progress.
-///
-/// Total counts every started course, "active" means progress strictly between
-/// zero and a hundred percent and "completed" means progress reached one
-/// hundred percent. Display rows are projected onto [MockProgressCourse] so the
-/// existing progress widgets keep their shape.
 class _ProgressStats {
   const _ProgressStats({
     required this.total,
@@ -125,10 +121,8 @@ class _ProgressStats {
   final int active;
   final int completed;
 
-  /// Active courses ordered by most progress first.
   final List<MockProgressCourse> activeCourses;
 
-  /// Courses finished at 100 percent.
   final List<MockProgressCourse> completedCourses;
 
   factory _ProgressStats.fromLiveData(LearningProgressController progress) {

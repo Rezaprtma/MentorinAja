@@ -1,12 +1,18 @@
-/// Master asset registry barrel for MentorinAja.
-///
-/// Import this barrel to access every asset registry:
-///
-/// ```dart
-/// import 'package:frontend/core/assets/app_assets.dart';
-/// ```
-///
-/// Re-exports all individual registry classes so screens only need one import.
+//**
+// frontend/core/assets/app_assets.dart
+//
+// frontend:
+// Asset management. Menyediakan paths dan konfigurasi untuk icons, images, fonts.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi asset loading dan rendering.
+//**
 library;
 
 export 'app_audio.dart';

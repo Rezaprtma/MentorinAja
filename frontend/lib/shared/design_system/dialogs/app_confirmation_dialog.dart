@@ -1,11 +1,21 @@
+//**
+// frontend/shared/design_system/dialogs/app_confirmation_dialog.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 import '../buttons/app_button.dart';
 
-/// Confirmation dialog that returns a boolean result.
-///
-/// Presents a title, message and confirm/cancel buttons. The confirm button
-/// uses [AppButton.danger] when [isDestructive] is true. Returns `true` when
-/// confirmed, `false` when cancelled.
 class AppConfirmationDialog extends StatelessWidget {
   const AppConfirmationDialog({
     super.key,
@@ -26,7 +36,6 @@ class AppConfirmationDialog extends StatelessWidget {
   final bool isConfirmLoading;
   final Widget? icon;
 
-  /// Shows a confirmation dialog and returns `true` if confirmed.
   static Future<bool> show(
     BuildContext context, {
     String? title,

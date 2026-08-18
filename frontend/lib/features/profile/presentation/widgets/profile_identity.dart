@@ -1,12 +1,18 @@
-/// Centered identity header for the Profile tab.
-///
-/// Renders the avatar, username and email as the primary profile area above
-/// the settings groups. The avatar is the focal element — a large initial
-/// circle (or the selected photo via [ProfilePhotoAvatar]) wrapped in a faint
-/// brand ring — and the username sits dominant beneath it. The optional edit
-/// button opens the Edit Profil page and is the header's single primary
-/// action. Pure presentation — values arrive through the constructor so the
-/// widget stays reusable once real profile data lands.
+//**
+// frontend/features/profile/presentation/widgets/profile_identity.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';

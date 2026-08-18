@@ -1,3 +1,18 @@
+//**
+// frontend/features/lesson/presentation/widgets/exercises/code_completion_exercise.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -6,14 +21,6 @@ import '../../../domain/entities/lesson_exercise.dart';
 import 'exercise_card.dart';
 import 'exercise_feedback.dart';
 
-/// "Lengkapi Kode" exercise — the learner builds code by placing tokens into
-/// blanks.
-///
-/// The incomplete snippet renders its blanks as inline slots; the token pool
-/// below fills the next empty slot when tapped. In [selfEvaluate] mode the
-/// exercise checks itself as soon as every blank is filled and shows feedback
-/// inline; otherwise it waits for the submit button. Selection state is
-/// visible through fill, border and a check mark — never color alone.
 class CodeCompletionExercise extends StatefulWidget {
   const CodeCompletionExercise({
     super.key,
@@ -155,7 +162,6 @@ class _CodeCompletionExerciseState extends State<CodeCompletionExercise> {
   }
 }
 
-/// Renders the incomplete code with tappable inline blank slots.
 class _CompletionCodeSurface extends StatelessWidget {
   const _CompletionCodeSurface({
     required this.code,
@@ -171,9 +177,15 @@ class _CompletionCodeSurface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ext = context.appColors;
-    final scheme = Theme.of(context).colorScheme;
     final segments = code.split('____');
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final codeBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
+    final codeTextColor = isDark
+        ? const Color(0xFFF8FAFC)
+        : const Color(0xFF0F172A);
+    final codeBorderColor = isDark
+        ? const Color(0xFF1E293B)
+        : const Color(0xFFE2E8F0);
 
     final spans = <InlineSpan>[];
     for (var i = 0; i < segments.length; i++) {
@@ -198,16 +210,16 @@ class _CompletionCodeSurface extends StatelessWidget {
       width: double.infinity,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: scheme.surfaceContainerHighest,
+        color: codeBg,
         borderRadius: BorderRadius.circular(AppRadius.large),
-        border: Border.all(color: ext.border),
+        border: Border.all(color: codeBorderColor),
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Text.rich(
           TextSpan(
-            style: AppTypeScale.code.copyWith(color: ext.textPrimary),
+            style: AppTypeScale.code.copyWith(color: codeTextColor),
             children: spans,
           ),
         ),
@@ -216,7 +228,6 @@ class _CompletionCodeSurface extends StatelessWidget {
   }
 }
 
-/// One fillable slot in the code surface.
 class _BlankSlot extends StatelessWidget {
   const _BlankSlot({required this.token, this.onTap});
 
@@ -258,7 +269,6 @@ class _BlankSlot extends StatelessWidget {
   }
 }
 
-/// One token in the pool; shows how many blanks it currently fills.
 class _TokenChip extends StatelessWidget {
   const _TokenChip({
     required this.token,

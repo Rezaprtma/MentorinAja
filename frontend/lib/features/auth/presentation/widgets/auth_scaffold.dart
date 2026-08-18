@@ -1,15 +1,22 @@
+//**
+// frontend/features/auth/presentation/widgets/auth_scaffold.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Scrollable, responsive container for authentication screens.
-///
-/// Centers a single form column on large screens while keeping it edge-to-edge
-/// on phones. Content scrolls when the keyboard appears so nothing overflows.
-///
-/// Provide either [child] for a fixed composition or [contentBuilder] to receive
-/// the viewport [BoxConstraints] and derive proportional spacing (e.g. hero
-/// height, section gaps from the available height).
 class AuthScaffold extends StatelessWidget {
   const AuthScaffold({
     super.key,
@@ -24,23 +31,17 @@ class AuthScaffold extends StatelessWidget {
          'AuthScaffold requires either child or contentBuilder.',
        );
 
-  /// Static content for form-based screens.
   final Widget? child;
 
-  /// Builds content from the scrollable viewport constraints.
   final Widget Function(BuildContext context, BoxConstraints constraints)?
   contentBuilder;
 
-  /// Optional top app bar (e.g. back navigation on login).
   final PreferredSizeWidget? appBar;
 
-  /// Content width cap for tablets and desktops.
   final double maxWidth;
 
-  /// Decorative layer painted behind the content, filling the whole screen.
   final Widget? background;
 
-  /// Page background color; defaults to `appColors.background`.
   final Color? backgroundColor;
 
   @override

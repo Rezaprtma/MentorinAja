@@ -1,6 +1,18 @@
-/// Home feature public API.
-///
-/// Import this barrel for the Home screen and its widgets.
+//**
+// frontend/features/home/home.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 library;
 
 export 'mock_home_data.dart';

@@ -1,24 +1,40 @@
-/// Game view dispatcher — routes a [LessonExercise] to its game-specific
-/// interactive widget based on the exercise's [gameType].
+//**
+// frontend/features/lesson/presentation/widgets/games/game_view.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';
 
-import 'package:frontend/shared/design_system/design_system.dart';
-
 import '../../../domain/entities/lesson_exercise.dart';
 import 'code_ordering_game.dart';
+import 'identify_error_game.dart';
+import 'multiple_choice_game.dart';
+import 'output_prediction_game.dart';
 import 'token_completion_game.dart';
 
-/// Dispatches a [LessonExercise] to its game-specific interactive widget.
-///
-/// Uses the exercise's [gameType] to determine which game to render.
-/// If [gameType] is null, falls back to a generic token completion game.
 class GameView extends StatelessWidget {
-  const GameView({super.key, required this.exercise, this.selfEvaluate = true});
+  const GameView({
+    super.key,
+    required this.exercise,
+    this.selfEvaluate = true,
+    this.gameCounter,
+  });
 
   final LessonExercise exercise;
   final bool selfEvaluate;
+  final String? gameCounter;
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +44,28 @@ class GameView extends StatelessWidget {
       GameType.tokenCompletion => TokenCompletionGame(
         exercise: exercise,
         selfEvaluate: selfEvaluate,
+        gameCounter: gameCounter,
       ),
       GameType.codeOrdering => CodeOrderingGame(
         exercise: exercise,
         selfEvaluate: selfEvaluate,
+        gameCounter: gameCounter,
       ),
-      GameType.multipleChoice => _Placeholder(name: gameType.name),
-      GameType.identifyError => _Placeholder(name: gameType.name),
-      GameType.outputPrediction => _Placeholder(name: gameType.name),
+      GameType.multipleChoice => MultipleChoiceGame(
+        exercise: exercise,
+        selfEvaluate: selfEvaluate,
+        gameCounter: gameCounter,
+      ),
+      GameType.identifyError => IdentifyErrorGame(
+        exercise: exercise,
+        selfEvaluate: selfEvaluate,
+        gameCounter: gameCounter,
+      ),
+      GameType.outputPrediction => OutputPredictionGame(
+        exercise: exercise,
+        selfEvaluate: selfEvaluate,
+        gameCounter: gameCounter,
+      ),
     };
-  }
-}
-
-class _Placeholder extends StatelessWidget {
-  const _Placeholder({required this.name});
-
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppEmptyState(
-      compact: true,
-      icon: Icons.videogame_asset_outlined,
-      title: 'Game Segera Hadir',
-      message: 'Game $name belum tersedia.',
-    );
   }
 }

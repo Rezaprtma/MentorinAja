@@ -1,34 +1,28 @@
+//**
+// frontend/features/home/mock_home_data.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/shared/data/tech_brand_colors.dart';
 import 'package:frontend/shared/models/course_identifier.dart';
 
-/// Accent role that drives the surface tint of a course card.
-enum CourseAccent {
-  /// Warm primary tint for highlighted courses.
-  primary,
+enum CourseAccent { primary, secondary, neutral }
 
-  /// Cool secondary tint for supporting courses.
-  secondary,
+enum MockBannerKind { achievement, interest, discovery }
 
-  /// Neutral white surface with a soft border.
-  neutral,
-}
-
-/// Purpose-driven variant that selects the hero banner's visual treatment.
-enum MockBannerKind {
-  /// Achievement banner highlighting a daily-learning streak.
-  achievement,
-
-  /// Banner surfacing the learner's personalized interest progress.
-  interest,
-
-  /// Banner inviting exploration of new learning material.
-  discovery,
-}
-
-/// Promotional page shown inside the hero banner carousel.
 class MockBanner {
   const MockBanner({
     required this.kind,
@@ -43,33 +37,25 @@ class MockBanner {
     this.metricLabel,
   });
 
-  /// Which visual treatment this banner renders.
   final MockBannerKind kind;
 
   final String title;
   final String message;
   final String ctaLabel;
 
-  /// Consecutive learning days used by the achievement banner.
   final int? streakDays;
 
-  /// Technology logo asset path used by course and discovery banners.
   final String? iconPath;
 
-  /// Full illustration asset path used by the discovery banner.
   final String? illustrationPath;
 
-  /// Normalized progress (0–1) used by the interest banner's ring.
   final double? progress;
 
-  /// Short summary shown under the interest banner's ring.
   final String? progressLabel;
 
-  /// Short metric (e.g. "6 kursus") used by legacy discovery layouts.
   final String? metricLabel;
 }
 
-/// Recommended course preview shown on the Home screen.
 class MockCourse {
   const MockCourse({
     required this.title,
@@ -86,48 +72,30 @@ class MockCourse {
   final String category;
   final int lessonCount;
 
-  /// One short line summarizing what the course teaches.
   final String description;
 
-  /// SVG asset path of the real technology logo (see [AppIconPaths]).
   final String iconPath;
 
-  /// Technology-brand-derived card colors. When non-null the card uses these
-  /// instead of the generic [accent] palette.
   final TechBrandColors? brand;
 
-  /// Learner rating displayed on the card.
   final double rating;
 
-  /// Determines the card's tinted surface (fallback when [brand] is null).
   final CourseAccent accent;
 
-  /// Stable id resolving this course to the shared CourseDetailPage.
   String get courseId => CourseIdentifier.slug(title);
 }
 
-/// Temporary local data powering the Home screen.
-///
-/// These values are mock data used only for UI development. They are replaced
-/// by authentication, catalog and progress endpoints in a later phase, so
-/// screens must never branch on this module's specifics.
 abstract final class MockHomeData {
-  /// Mock learner identity shown in the greeting.
   static const String displayName = 'Rina';
 
-  /// In-progress course shown in the "Progres Saya" card.
   static const String courseTitle = 'Dasar Python';
 
-  /// Current lesson summary shown under the course title.
   static const String lessonLabel = 'Pelajaran 12 dari 20 • Fungsi';
 
-  /// Normalized course completion in the range 0.0–1.0.
   static const double courseProgress = 0.72;
 
-  /// Consecutive learning days in the current streak.
   static const int dayStreak = 7;
 
-  /// Promotional banners rendered as the swipeable hero carousel.
   static const List<MockBanner> homeBanners = [
     MockBanner(
       kind: MockBannerKind.achievement,
@@ -153,7 +121,6 @@ abstract final class MockHomeData {
     ),
   ];
 
-  /// Courses surfaced in the horizontally scrolling recommendation rail.
   static const List<MockCourse> recommendedCourses = [
     MockCourse(
       title: 'Dasar Python',

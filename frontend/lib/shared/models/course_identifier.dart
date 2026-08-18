@@ -1,20 +1,23 @@
-/// Shared helper for referencing courses across the app.
-///
-/// Every course is identified by a stable slug derived from its title so all
-/// entry points (Home, Explore, Progress, Category, Notifications) resolve to
-/// the same CourseDetailPage for the same course. Mock models expose this slug
-/// through a `courseId` getter; a future repository replaces it with a server
-/// id without changing screens.
+//**
+// frontend/shared/models/course_identifier.dart
+//
+// frontend:
+// Shared model. Menyediakan common data structures.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi model validation dan edge cases.
+//**
 library;
 
 abstract final class CourseIdentifier {
   CourseIdentifier._();
 
-  /// Lowercase, hyphen-separated slug for a course title.
-  ///
-  /// ```dart
-  /// CourseIdentifier.slug('HTML & CSS Modern') // → 'html-css-modern'
-  /// ```
   static String slug(String title) {
     return title
         .toLowerCase()

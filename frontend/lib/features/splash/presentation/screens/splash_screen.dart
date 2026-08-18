@@ -1,3 +1,18 @@
+//**
+// frontend/features/splash/presentation/screens/splash_screen.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,12 +22,6 @@ import 'package:frontend/core/theme/theme.dart';
 import '../../logic/splash_controller.dart';
 import '../../logic/splash_state.dart';
 
-/// Static splash screen displaying the brand logo on a solid background.
-///
-/// The orange background fills the viewport edge-to-edge (no SafeArea inset);
-/// only the centered logo sits inside the screen. Remains completely static for
-/// the minimum duration, then navigates to the resolved destination once
-/// initialization completes.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -69,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: FractionallySizedBox(
             widthFactor: 0.30,
             child: SvgPicture.asset(
-              'assets/icons/icon.svg',
+              'assets/icons/logo/icon.svg',
               fit: BoxFit.contain,
             ),
           ),

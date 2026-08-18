@@ -1,11 +1,22 @@
+//**
+// frontend/shared/design_system/chips/app_chips.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Filter chip — toggleable, used for multi-select scenarios.
-///
-/// Applies primary-container tint when selected and uses the global
-/// [ChipTheme] defaults from Material 3 for focus and hover overlays.
 class AppFilterChip extends StatelessWidget {
   const AppFilterChip({
     super.key,
@@ -56,7 +67,6 @@ class AppFilterChip extends StatelessWidget {
   }
 }
 
-/// Choice chip — single-select, used in a group where one must be active.
 class AppChoiceChip extends StatelessWidget {
   const AppChoiceChip({
     super.key,
@@ -100,9 +110,6 @@ class AppChoiceChip extends StatelessWidget {
   }
 }
 
-/// Input chip — compact chip with a trailing delete action.
-///
-/// Used for selected filters, tags and removable suggestions.
 class AppInputChip extends StatelessWidget {
   const AppInputChip({
     super.key,

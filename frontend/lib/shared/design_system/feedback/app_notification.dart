@@ -1,25 +1,26 @@
+//**
+// frontend/shared/design_system/feedback/app_notification.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Semantic variants of a notification.
-enum AppNotificationType {
-  /// Neutral/blue guidance.
-  info,
+enum AppNotificationType { info, success, error, warning }
 
-  /// Positive confirmation.
-  success,
-
-  /// Blocking or destructive outcome.
-  error,
-
-  /// Timely caution.
-  warning,
-}
-
-/// Static palette entry for a [AppNotificationType].
 @immutable
 class AppNotificationPalette {
   const AppNotificationPalette({
@@ -30,30 +31,17 @@ class AppNotificationPalette {
     required this.border,
   });
 
-  /// White card surface shared by every variant.
   final Color background;
 
-  /// Title color; carries the severity on the otherwise neutral card.
   final Color foreground;
 
-  /// Subtle icon accent (success/info/error/warning tint).
   final Color accent;
 
-  /// Neutral button surface for the compact action chip.
   final Color actionSurface;
 
-  /// Hairline card border separating the card from the page.
   final Color border;
 }
 
-/// Design-system notification card.
-///
-/// Single neutral visual language: every variant renders on a white surface
-/// with a subtle border and shadow, and only the title and icon tint reflect
-/// the [AppNotificationType]. The message always uses the secondary text tone.
-/// Layout `[icon] - [title]/[message] - optional [action]` with the text block
-/// vertically centered on the icon.
-/// Pure presentation — animation and lifecycle live in [AppNotificationService].
 class AppNotificationCard extends StatelessWidget {
   const AppNotificationCard({
     super.key,
@@ -65,17 +53,14 @@ class AppNotificationCard extends StatelessWidget {
     this.onClose,
   });
 
-  /// Which severity palette and icon to use.
   final AppNotificationType type;
 
   final String title;
   final String? message;
 
-  /// Optional trailing action button.
   final String? actionLabel;
   final VoidCallback? onAction;
 
-  /// Optional close button shown when there is no [actionLabel].
   final VoidCallback? onClose;
 
   @override
@@ -156,7 +141,6 @@ class AppNotificationCard extends StatelessWidget {
   }
 }
 
-/// Compact raised action placed inside the notification card.
 class _ActionChip extends StatelessWidget {
   const _ActionChip({
     required this.label,
@@ -195,11 +179,6 @@ class _ActionChip extends StatelessWidget {
   }
 }
 
-/// Global notification host.
-///
-/// Shows a single compact [AppNotificationCard] floating from the top SafeArea.
-/// Success/info/warning auto-dismiss; errors persist until dismissed or until
-/// an [actionLabel] is chosen. The card never blocks the rest of the UI.
 class AppNotificationService {
   AppNotificationService._();
 
@@ -239,7 +218,6 @@ class AppNotificationService {
     overlay.insert(entry);
   }
 
-  /// Dismisses the visible notification immediately.
   static void dismiss() {
     _current?.remove();
     _current = null;

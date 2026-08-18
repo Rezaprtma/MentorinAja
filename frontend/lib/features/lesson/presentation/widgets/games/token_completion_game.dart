@@ -1,11 +1,18 @@
-/// Token Completion Game — a reusable interactive game where the learner
-/// arranges tokens to match the code surface.
-///
-/// The game uses the same token chips and blank slots as the completion
-/// exercise, but presents them as a playful, self-contained game challenge.
-/// The learner must place every token in the correct order to complete the
-/// game. With [selfEvaluate] the game checks itself on every move and shows
-/// immediate feedback; otherwise the learner must submit explicitly.
+//**
+// frontend/features/lesson/presentation/widgets/games/token_completion_game.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -16,20 +23,17 @@ import '../../../domain/entities/lesson_exercise.dart';
 import '../exercises/exercise_card.dart';
 import '../exercises/exercise_feedback.dart';
 
-/// Token Completion Game for the Game stage.
-///
-/// The learner must place all tokens in the correct positions to solve the
-/// challenge. The game provides a fun context for the completion exercise
-/// mechanics.
 class TokenCompletionGame extends StatefulWidget {
   const TokenCompletionGame({
     super.key,
     required this.exercise,
     this.selfEvaluate = false,
+    this.gameCounter,
   });
 
   final LessonExercise exercise;
   final bool selfEvaluate;
+  final String? gameCounter;
 
   @override
   State<TokenCompletionGame> createState() => _TokenCompletionGameState();
@@ -101,6 +105,8 @@ class _TokenCompletionGameState extends State<TokenCompletionGame> {
 
     return ExerciseCard(
       exercise: exercise,
+      isGame: true,
+      gameCounter: widget.gameCounter,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -179,9 +185,15 @@ class _GameCodeSurface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ext = context.appColors;
-    final scheme = Theme.of(context).colorScheme;
     final segments = code.split('____');
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final codeBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
+    final codeTextColor = isDark
+        ? const Color(0xFFF8FAFC)
+        : const Color(0xFF0F172A);
+    final codeBorderColor = isDark
+        ? const Color(0xFF1E293B)
+        : const Color(0xFFE2E8F0);
 
     final spans = <InlineSpan>[];
     for (var i = 0; i < segments.length; i++) {
@@ -206,16 +218,16 @@ class _GameCodeSurface extends StatelessWidget {
       width: double.infinity,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: scheme.surfaceContainerHighest,
+        color: codeBg,
         borderRadius: BorderRadius.circular(AppRadius.large),
-        border: Border.all(color: ext.border),
+        border: Border.all(color: codeBorderColor),
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Text.rich(
           TextSpan(
-            style: AppTypeScale.code.copyWith(color: ext.textPrimary),
+            style: AppTypeScale.code.copyWith(color: codeTextColor),
             children: spans,
           ),
         ),

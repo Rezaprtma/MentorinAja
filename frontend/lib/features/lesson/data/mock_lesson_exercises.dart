@@ -1,31 +1,33 @@
-/// Deterministic mock exercises for the Lesson Player.
+//**
+// frontend/features/lesson/data/mock_lesson_exercises.dart
+//
+// frontend:
+// Mock data. Menyediakan sample data untuk development dan testing.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya menyediakan mock data.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi mock data coverage dan edge cases.
+//**
 library;
 
 import 'package:frontend/features/course/course.dart';
 
 import '../domain/entities/lesson_exercise.dart';
 
-/// Deterministic mock exercises for the Lesson Player.
-///
-/// Flagship courses carry hand-written exercises that match their technology;
-/// the rest fall back to a generic generator that derives a completion and an
-/// explanation exercise from the course snippet. Exercises rotate by lesson
-/// index so every lesson ends with a hands-on challenge. A future backend
-/// exercise API returns the same [LessonExercise] shape.
 abstract final class MockLessonExercises {
-  /// Completion challenge for the Game stage, or null when the course has no
-  /// code. Curated courses always play their hand-written completion exercise.
   static LessonExercise? gameExercise(CourseDetail course, String code) {
     if (_isPlain(code)) return null;
-    // Add gameType to the completion exercise
+
     final exercise =
         _curated[course.id]?.completion ?? _genericCompletion(course, code);
     return exercise.copyWith(gameType: GameType.tokenCompletion);
   }
 
-  /// Application exercises for the Latihan stage. Curated courses return a
-  /// correction and an explanation exercise; the rest fall back to a single
-  /// generic explanation. Empty when the course has no code.
   static List<LessonExercise> latihanExercises(
     CourseDetail course,
     String code,
@@ -38,7 +40,6 @@ abstract final class MockLessonExercises {
     return [curated.correction, curated.explanation, _genericWriting()];
   }
 
-  /// Returns the exercise for [lesson], or null when the course has no code.
   static LessonExercise? forLesson(
     CourseDetail course,
     CourseLesson lesson, {
@@ -62,10 +63,6 @@ abstract final class MockLessonExercises {
   }
 
   static bool _isPlain(String code) => code.trimLeft().startsWith('#');
-
-  // -------------------------------------------------------------------------
-  // Hand-written exercises per flagship course.
-  // -------------------------------------------------------------------------
 
   static const Map<String, _CuratedExercises> _curated = {
     'dasar-python': _CuratedExercises(
@@ -472,10 +469,6 @@ class CourseCard extends StatelessWidget {
     ),
   };
 
-  // -------------------------------------------------------------------------
-  // Generic generator for courses without hand-written exercises.
-  // -------------------------------------------------------------------------
-
   static LessonExercise _genericCompletion(CourseDetail course, String code) {
     final blanked = _pickIdentifier(code);
     final target = blanked ?? 'hasil';
@@ -586,7 +579,6 @@ class CourseCard extends StatelessWidget {
   }
 }
 
-/// Hand-written exercise set for one course.
 class _CuratedExercises {
   const _CuratedExercises({
     required this.completion,

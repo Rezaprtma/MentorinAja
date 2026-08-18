@@ -1,11 +1,22 @@
+//**
+// frontend/features/progress/presentation/widgets/progress_header.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Page header for the Progress tab.
-///
-/// A short title and one supporting line, kept deliberately slim so the
-/// course-progress content below stays the visual focus of the screen.
 class ProgressHeader extends StatelessWidget {
   const ProgressHeader({super.key});
 

@@ -1,27 +1,24 @@
+//**
+// frontend/shared/design_system/navigation/app_floating_bottom_navigation.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import 'app_bottom_navigation.dart';
 import '../layout/app_safe_area.dart';
 
-/// Floating, detached bottom navigation bar.
-///
-/// [AppFloatingBottomNav] renders a rounded capsule hover above the bottom
-/// edge instead of a full-width Material [NavigationBar]. It insets itself for
-/// safe areas, floats with horizontal margins, and highlights the active
-/// destination with a soft pill. Reusable across main-shell screens that need
-/// persistent tab navigation; pass the same [AppNavDestination] list the
-/// caller owns so every shell shares one definition.
-///
-/// ```dart
-/// AppFloatingBottomNav(
-///   currentIndex: index,
-///   onDestinationSelected: (i) => setState(() => index = i),
-///   destinations: const [
-///     AppNavDestination(icon: Icons.home_outlined, selectedIcon: Icons.home, label: 'Home'),
-///   ],
-/// )
-/// ```
 class AppFloatingBottomNav extends StatelessWidget {
   const AppFloatingBottomNav({
     super.key,
@@ -32,19 +29,14 @@ class AppFloatingBottomNav extends StatelessWidget {
     this.elevation = AppElevation.xs,
   });
 
-  /// Index of the currently active destination.
   final int currentIndex;
 
-  /// Called when a destination is tapped.
   final ValueChanged<int> onDestinationSelected;
 
-  /// The list of destinations rendered inside the bar.
   final List<AppNavDestination> destinations;
 
-  /// Bar surface color; defaults to the design-system card surface.
   final Color? backgroundColor;
 
-  /// Floating shadow strength; softens or lifts the bar.
   final double elevation;
 
   @override
@@ -83,7 +75,6 @@ class AppFloatingBottomNav extends StatelessWidget {
   }
 }
 
-/// A single tappable destination inside [AppFloatingBottomNav].
 class _FloatingNavItem extends StatelessWidget {
   const _FloatingNavItem({
     required this.destination,

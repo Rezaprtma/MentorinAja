@@ -1,8 +1,18 @@
-/// Lesson tile for the course editor lesson list.
-///
-/// Shows the lesson title, objective and per-tab readiness badges (Materi,
-/// Game, Latihan) on a tappable card. Deleting opens through [onDelete]; the
-/// surface navigates to the lesson editor via [onTap].
+//**
+// frontend/features/course_authoring/presentation/widgets/course_lesson_tile.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -26,6 +36,9 @@ class CourseLessonTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ext = context.appColors;
+    final hasPdf =
+        lesson.materialPdfPath != null &&
+        lesson.materialPdfPath!.trim().isNotEmpty;
 
     return AppBaseCard(
       onTap: onTap,
@@ -49,17 +62,17 @@ class CourseLessonTile extends StatelessWidget {
                         fontWeight: FontWeight.w800,
                       ),
                     ),
-                    if (lesson.objective != null) ...[
-                      const SizedBox(height: AppSpacing.xxs),
-                      Text(
-                        lesson.objective!,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTypeScale.bodySmall.copyWith(
-                          color: ext.textSecondary,
-                        ),
+                    const SizedBox(height: AppSpacing.xxs),
+                    Text(
+                      lesson.description.isNotEmpty
+                          ? lesson.description
+                          : 'Tidak ada deskripsi modul.',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypeScale.bodySmall.copyWith(
+                        color: ext.textSecondary,
                       ),
-                    ],
+                    ),
                   ],
                 ),
               ),
@@ -75,21 +88,7 @@ class CourseLessonTile extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          Wrap(
-            spacing: AppSpacing.xs,
-            runSpacing: AppSpacing.xs,
-            children: [
-              _ReadinessBadge(
-                label: 'Materi',
-                ready: lesson.materialBlocks.isNotEmpty,
-              ),
-              _ReadinessBadge(label: 'Game', ready: lesson.games.isNotEmpty),
-              _ReadinessBadge(
-                label: 'Latihan',
-                ready: lesson.exercises.isNotEmpty,
-              ),
-            ],
-          ),
+          _ReadinessBadge(label: 'Materi PDF', ready: hasPdf),
         ],
       ),
     );

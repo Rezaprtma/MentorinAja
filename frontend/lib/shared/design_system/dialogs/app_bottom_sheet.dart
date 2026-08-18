@@ -1,14 +1,23 @@
+//**
+// frontend/shared/design_system/dialogs/app_bottom_sheet.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import '../layout/app_gap.dart';
 
-/// Themed bottom sheet wrapper with a static [show] helper.
-///
-/// Composes a drag handle, an optional title and scrollable content inside
-/// the shell provided by `showModalBottomSheet`. The global [BottomSheetTheme]
-/// set in [AppTheme] handles radius and drag-handle visibility, but this
-/// widget gives fine-grained control over padding, scroll behavior and actions.
 class AppBottomSheet extends StatelessWidget {
   const AppBottomSheet({
     super.key,
@@ -30,7 +39,6 @@ class AppBottomSheet extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final bool scrollControlled;
 
-  /// Displays a modal bottom sheet.
   static Future<T?> show<T>(
     BuildContext context, {
     required Widget child,

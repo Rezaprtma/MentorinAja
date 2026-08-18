@@ -1,13 +1,22 @@
+//**
+// frontend/shared/design_system/navigation/app_app_bar.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Themed app bar with automatic back-button logic.
-///
-/// Wraps [AppBar] to standardize the top navigation bar across the app:
-/// consistent title style, back-button handling via [Navigator.canPop], and
-/// optional bottom widgets. Implements [PreferredSizeWidget] so it slots
-/// directly into [Scaffold.appBar].
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AppAppBar({
     super.key,
@@ -23,34 +32,24 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleSpacing,
   });
 
-  /// Simple text title; ignored when [titleWidget] is provided.
   final String? title;
 
-  /// Custom title widget; overrides [title].
   final Widget? titleWidget;
 
-  /// Custom leading widget; overrides automatic back-button logic.
   final Widget? leading;
 
-  /// Whether to show a back button when [Navigator.canPop] is true.
   final bool automaticallyImplyLeading;
 
-  /// Trailing action buttons.
   final List<Widget>? actions;
 
-  /// Optional bottom widget (e.g. [TabBar]).
   final PreferredSizeWidget? bottom;
 
-  /// Scroll-under elevation; defaults to [AppElevation.xs].
   final double? elevation;
 
-  /// Background color; defaults to theme background.
   final Color? backgroundColor;
 
-  /// Center the title; defaults to false on mobile, true on wider layouts.
   final bool? centerTitle;
 
-  /// Title spacing; defaults to standard.
   final double? titleSpacing;
 
   @override

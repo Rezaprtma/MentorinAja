@@ -1,15 +1,24 @@
+//**
+// frontend/features/progress/mock_progress_data.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/shared/data/tech_brand_colors.dart';
 import 'package:frontend/shared/models/course_identifier.dart';
 
-/// A course the learner is enrolled in, carrying study progress.
-///
-/// [progress] is an explicit snapshot of overall completion (lessons, quizzes
-/// and reading combined), so it is kept separate from the raw lesson counter
-/// that feeds the "Pelajaran X dari Y" line. This mirrors how the Home screen
-/// already reports progress alongside a lesson label.
 class MockProgressCourse {
   const MockProgressCourse({
     required this.title,
@@ -24,42 +33,27 @@ class MockProgressCourse {
 
   final String title;
 
-  /// Lessons finished so far.
   final int completedLessons;
 
-  /// Total lessons in the course.
   final int lessonCount;
 
-  /// The last lesson the learner studied.
   final String currentLesson;
 
-  /// The lesson queued to study next.
   final String nextLesson;
 
-  /// Normalized completion in the range 0.0–1.0.
   final double progress;
 
-  /// SVG asset path of the real technology logo (see [AppIconPaths]).
   final String iconPath;
 
-  /// Technology-brand-derived card colors.
   final TechBrandColors brand;
 
-  /// Short lesson summary, e.g. "Pelajaran 12 dari 20 • Fungsi".
   String get lessonLabel =>
       'Pelajaran $completedLessons dari $lessonCount • $currentLesson';
 
-  /// Stable id resolving this course to the shared CourseDetailPage.
   String get courseId => CourseIdentifier.slug(title);
 }
 
-/// Temporary local data powering the Progress screen.
-///
-/// These values mirror the courses already used on Home and Explore so the
-/// feature reads as one consistent catalog. Replaced by progress endpoints in
-/// a later phase; screens must never branch on this module's specifics.
 abstract final class MockProgressData {
-  /// Courses currently being studied, ordered by most progress first.
   static const List<MockProgressCourse> activeCourses = [
     MockProgressCourse(
       title: 'Dasar Python',
@@ -105,7 +99,6 @@ abstract final class MockProgressData {
     ),
   ];
 
-  /// Courses the learner already finished.
   static const List<MockProgressCourse> completedCourses = [
     MockProgressCourse(
       title: 'Laravel untuk Pemula',

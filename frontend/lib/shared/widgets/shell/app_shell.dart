@@ -1,33 +1,29 @@
+//**
+// frontend/shared/widgets/shell/app_shell.dart
+//
+// frontend:
+// Shared widget. Menyediakan reusable UI components untuk feature screens.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering dan behavior.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/behavior/app_behavior.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/layout/responsive_padding.dart';
 
-/// The outermost application layout.
-///
-/// [AppShell] wraps the entire app in responsive infrastructure: scroll
-/// behavior, keyboard dismissal, and a default page background. Every screen
-/// in the app is rendered inside an AppShell — screens never create their own
-/// [MaterialApp] or [Scaffold].
-///
-/// Safe-area handling is intentionally **not** applied here. Screens are
-/// responsible for their own SafeArea so that fullscreen screens (splash,
-/// onboarding) can paint their backgrounds edge-to-edge. Helper widgets such
-/// as [AppPage], [BodyContainer], and [AppSafeArea] provide SafeArea on demand.
-///
-/// ```dart
-/// MaterialApp(
-///   builder: (context, child) => AppShell(child: child!),
-/// )
-/// ```
 class AppShell extends StatelessWidget {
   const AppShell({super.key, required this.child, this.background});
 
-  /// The child route (typically [AppScaffold] or a page).
   final Widget child;
 
-  /// Page background color; defaults to `appColors.background`.
   final Color? background;
 
   @override
@@ -41,12 +37,6 @@ class AppShell extends StatelessWidget {
   }
 }
 
-/// Wrapper that creates a [Scaffold] with consistent theming.
-///
-/// Most screens do not create their own [Scaffold]. They receive one from
-/// [AppScaffold] or [AppPage]. Use this when you need a scaffold with
-/// specific [appBar], [bottomNavigationBar], or [floatingActionButton]
-/// configurations.
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
     super.key,
@@ -87,25 +77,6 @@ class AppScaffold extends StatelessWidget {
   }
 }
 
-/// A standard page scaffold with optional app bar, scrollable body,
-/// safe area, and responsive padding.
-///
-/// This is the most common screen shell. 90% of screens will use
-/// [AppPage] as their root widget.
-///
-/// ```dart
-/// class CourseListScreen extends StatelessWidget {
-///   @override
-///   Widget build(BuildContext context) {
-///     return AppPage(
-///       appBar: AppAppBar(title: 'Courses'),
-///       children: [
-///         // course tiles
-///       ],
-///     );
-///   }
-/// }
-/// ```
 class AppPage extends StatelessWidget {
   const AppPage({
     super.key,
@@ -123,16 +94,12 @@ class AppPage extends StatelessWidget {
     this.bottom,
   });
 
-  /// App bar; rendered at the top of the scaffold.
   final PreferredSizeWidget? appBar;
 
-  /// Raw body widget; mutually exclusive with [children].
   final Widget? body;
 
-  /// Scrollable children; mutually exclusive with [body].
   final List<Widget>? children;
 
-  /// Content padding; defaults to responsive padding.
   final EdgeInsetsGeometry? padding;
 
   final ScrollController? scrollController;
@@ -193,10 +160,6 @@ class AppPage extends StatelessWidget {
   }
 }
 
-/// A content container that constrains width on large screens.
-///
-/// On phones, content fills the screen. On tablets and desktops, content
-/// is centered and capped at [maxWidth] so line lengths stay readable.
 class PageContainer extends StatelessWidget {
   const PageContainer({
     super.key,
@@ -222,10 +185,6 @@ class PageContainer extends StatelessWidget {
   }
 }
 
-/// A content container with background surface and optional elevation.
-///
-/// Used to visually separate a content block from the page background
-/// (e.g. a form card on a settings page).
 class ContentContainer extends StatelessWidget {
   const ContentContainer({
     super.key,
@@ -273,10 +232,6 @@ class ContentContainer extends StatelessWidget {
   }
 }
 
-/// A scroll-constrained body container.
-///
-/// Constrains scroll extent on large screens so content doesn't stretch
-/// too wide. Wraps [SingleChildScrollView] with [AppSafeArea].
 class BodyContainer extends StatelessWidget {
   const BodyContainer({
     super.key,

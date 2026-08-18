@@ -1,14 +1,23 @@
+//**
+// frontend/shared/widgets/layout/responsive_layout.dart
+//
+// frontend:
+// Shared widget. Menyediakan reusable UI components untuk feature screens.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering dan behavior.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/responsive/app_breakpoints.dart';
 import '../../../core/theme/theme.dart';
 
-/// A container that constrains its child's width and centers it on large
-/// screens.
-///
-/// On phones, the child fills available width. On tablets and desktops,
-/// content is centered within [maxWidth] so line lengths stay readable.
-/// This is the primary content-width constraint for the entire app.
 class ResponsiveContainer extends StatelessWidget {
   const ResponsiveContainer({
     super.key,
@@ -34,10 +43,6 @@ class ResponsiveContainer extends StatelessWidget {
   }
 }
 
-/// A width-constraining container for form-like or article content.
-///
-/// Stricter than [ResponsiveContainer]. Used for reading-heavy layouts
-/// (articles, lesson content, quiz questions) where line length matters.
 class MaxWidthContainer extends StatelessWidget {
   const MaxWidthContainer({
     super.key,
@@ -63,19 +68,6 @@ class MaxWidthContainer extends StatelessWidget {
   }
 }
 
-/// A responsive grid that adapts column count to screen width.
-///
-/// Instead of manually choosing grid layouts per screen, declare intent:
-///
-/// ```dart
-/// AdaptiveGrid(
-///   phoneColumns: 1,
-///   tabletColumns: 2,
-///   desktopColumns: 3,
-///   spacing: AppSpacing.md,
-///   children: items.map((i) => CourseCard(course: i)).toList(),
-/// )
-/// ```
 class AdaptiveGrid extends StatelessWidget {
   const AdaptiveGrid({
     super.key,
@@ -128,10 +120,6 @@ class AdaptiveGrid extends StatelessWidget {
   }
 }
 
-/// A responsive column layout that switches between vertical and horizontal.
-///
-/// On phones: vertical stack. On wider screens: horizontal row with
-/// proportional widths. Useful for detail pages (image + info side by side).
 class AdaptiveColumn extends StatelessWidget {
   const AdaptiveColumn({
     super.key,

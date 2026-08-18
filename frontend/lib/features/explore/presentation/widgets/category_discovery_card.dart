@@ -1,3 +1,18 @@
+//**
+// frontend/features/explore/presentation/widgets/category_discovery_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/data/tech_brand_colors.dart';
@@ -6,19 +21,11 @@ import 'package:frontend/shared/widgets/widgets.dart';
 
 import '../../mock_explore_data.dart';
 
-/// A category discovery card for the "Untuk Kamu" section.
-///
-/// Announces a learning area through a colored title band, a one-line
-/// description and the supporting technology stack. It stays visually distinct
-/// from course cards — no rating, lesson count or watermark logo — so learners
-/// scan by area of study instead of by individual course.
 class CategoryDiscoveryCard extends StatelessWidget {
   const CategoryDiscoveryCard({super.key, required this.category, this.onTap});
 
-  /// The learning area this card represents.
   final ExploreCategory category;
 
-  /// Invoked when the learner taps the card.
   final VoidCallback? onTap;
 
   @override
@@ -81,7 +88,6 @@ class CategoryDiscoveryCard extends StatelessWidget {
   }
 }
 
-/// Colored title band carrying the category name and an open affordance.
 class _CategoryBand extends StatelessWidget {
   const _CategoryBand({required this.name, required this.brand});
 
@@ -145,10 +151,6 @@ class _CategoryBand extends StatelessWidget {
   }
 }
 
-/// Horizontal row of real technology logos with a "+n" overflow badge.
-///
-/// The row scales down as a whole when the card is too narrow, so a large
-/// stack never causes a horizontal overflow on small phones.
 class _TechStackRow extends StatelessWidget {
   const _TechStackRow({required this.stack, required this.brand});
 
@@ -182,7 +184,6 @@ class _TechStackRow extends StatelessWidget {
   }
 }
 
-/// Accent-filled pill announcing technology logos hidden behind the overflow.
 class _OverflowBadge extends StatelessWidget {
   const _OverflowBadge({required this.count, required this.brand});
 
@@ -210,7 +211,6 @@ class _OverflowBadge extends StatelessWidget {
   }
 }
 
-/// One technology logo on a white tile with an accent-tinted border.
 class _StackTile extends StatelessWidget {
   const _StackTile({required this.assetPath, required this.brand});
 

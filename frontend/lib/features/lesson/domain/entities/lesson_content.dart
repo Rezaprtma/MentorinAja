@@ -1,4 +1,18 @@
-/// Content block models for the Lesson Player.
+//**
+// frontend/features/lesson/domain/entities/lesson_content.dart
+//
+// frontend:
+// Entity/model. Mendefinisikan data structures untuk feature.
+//
+// backend:
+// Future: akan sesuai dengan backend data models.
+//
+// api:
+// Future: akan menjadi frontend expected contract untuk APIs.
+//
+// qa:
+// QA perlu memvalidasi data validation dan edge cases.
+//**
 library;
 
 import 'package:frontend/shared/enums/enums.dart';
@@ -7,14 +21,6 @@ import 'lesson_exercise.dart';
 
 export 'package:frontend/shared/enums/enums.dart' show LessonContentBlockType;
 
-/// One renderable block inside a lesson.
-///
-/// A block is a plain-text payload typed by [type]; the player maps each kind
-/// onto the matching design-system surface. [heading] labels the phase the
-/// block belongs to (e.g. "LIHAT CONTOH"), while [exercise] carries the full
-/// interactive exercise for [LessonContentBlockType.exercise]. Mock content is
-/// generated locally — a future backend returns structured lesson bodies in
-/// the same shape.
 class LessonContentBlock {
   const LessonContentBlock({
     required this.type,
@@ -27,18 +33,13 @@ class LessonContentBlock {
 
   final LessonContentBlockType type;
 
-  /// Body text for paragraphs, code and tips.
   final String? text;
 
-  /// Optional caption for a code block (e.g. a language tag).
   final String? label;
 
-  /// Items for a bullet list.
   final List<String> items;
 
-  /// Optional phase label rendered as an eyebrow above the block.
   final String? heading;
 
-  /// Interactive payload for [LessonContentBlockType.exercise].
   final LessonExercise? exercise;
 }

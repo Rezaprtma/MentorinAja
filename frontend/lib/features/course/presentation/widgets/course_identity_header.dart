@@ -1,3 +1,18 @@
+//**
+// frontend/features/course/presentation/widgets/course_identity_header.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -5,13 +20,6 @@ import 'package:frontend/shared/widgets/tech/tech_logo.dart';
 
 import '../../domain/entities/course_detail.dart';
 
-/// Identity block at the top of the Course Detail page.
-///
-/// Leads with the authentic technology logo, category, title and short
-/// description, then a restrained metadata row (rating, lessons, estimated
-/// time, students) and an enrollment progress bar when present. The
-/// technology accent is confined to the logo tile and a faint background
-/// circle so the brand palette stays orange/indigo/white.
 class CourseIdentityHeader extends StatelessWidget {
   const CourseIdentityHeader({super.key, required this.course});
 
@@ -140,7 +148,6 @@ class CourseIdentityHeader extends StatelessWidget {
   }
 }
 
-/// Small metadata row: icon + label.
 class _MetaItem extends StatelessWidget {
   const _MetaItem({required this.icon, required this.label});
 
@@ -168,7 +175,6 @@ class _MetaItem extends StatelessWidget {
   }
 }
 
-/// Enrollment progress row with a resume hint for started courses.
 class _EnrollmentProgress extends StatelessWidget {
   const _EnrollmentProgress({
     required this.course,

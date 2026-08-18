@@ -1,15 +1,18 @@
-/// Profile tab root — the learner's account and settings.
-///
-/// Leads with the centered [ProfileIdentity] fed by [ProfileController], then
-/// groups settings into Preferensi, Dukungan, and Legal sections rendered by
-/// [ProfileSettingsSection], and ends with a destructive sign-out row. Edit
-/// Profil opens the focused editor; remaining mock actions surface through
-/// [AppNotificationService] toasts; the Preferensi rows open lightweight
-/// bottom sheets ([showThemeSheet], [showNotificationSettingsSheet],
-/// [showLanguageSheet]) while content-heavy support and legal pages navigate
-/// normally. The page scrolls, supports pull-to-refresh through the shared
-/// [mockRefresh] seam, and constrains itself with [ResponsiveContainer] for
-/// tablets and desktops.
+//**
+// frontend/features/profile/presentation/pages/profile_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -29,7 +32,6 @@ import '../widgets/profile_sheets.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key, this.onSignOut});
 
-  /// Confirms sign-out; when null a mock success toast is shown instead.
   final VoidCallback? onSignOut;
 
   @override

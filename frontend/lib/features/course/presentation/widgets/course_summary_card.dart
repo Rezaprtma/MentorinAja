@@ -1,15 +1,24 @@
+//**
+// frontend/features/course/presentation/widgets/course_summary_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/data/tech_brand_colors.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/tech/tech_logo.dart';
 
-/// Compact course preview card reused across discovery surfaces.
-///
-/// Composes a technology logo tile, category pill, title, short description
-/// and lesson meta on a flat white surface. The technology accent appears only
-/// on the logo tile, the category pill and a faint border so the card reads
-/// clean and consistent next to any other card.
 class CourseSummaryCard extends StatelessWidget {
   const CourseSummaryCard({
     super.key,
@@ -134,7 +143,6 @@ class CourseSummaryCard extends StatelessWidget {
   }
 }
 
-/// Small brand-tinted category label used by course cards.
 class _CategoryPill extends StatelessWidget {
   const _CategoryPill({required this.label, required this.brand});
 

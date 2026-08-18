@@ -1,16 +1,25 @@
+//**
+// frontend/shared/transitions/page_transitions.dart
+//
+// frontend:
+// Page transitions. Menyediakan custom transition animations.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi transition animations dan performance.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Reusable page transition presets.
-///
-/// All transitions consume [AppDurations] and [AppEasing] for consistent
-/// motion. Each method returns a [Widget Function] that wraps a page in a
-/// [PageRouteBuilder] with the specified transition.
 abstract final class AppPageTransitions {
   const AppPageTransitions._();
 
-  /// Cross-fade — subtle, non-directional. Good for same-level screens.
   static PageRouteBuilder<T> fade<T>(Widget page, {String? name}) {
     return PageRouteBuilder<T>(
       settings: name != null ? RouteSettings(name: name) : null,
@@ -23,7 +32,6 @@ abstract final class AppPageTransitions {
     );
   }
 
-  /// Slide from right — standard push. Default for most navigation.
   static PageRouteBuilder<T> slideFromRight<T>(Widget page, {String? name}) {
     return PageRouteBuilder<T>(
       settings: name != null ? RouteSettings(name: name) : null,
@@ -40,7 +48,6 @@ abstract final class AppPageTransitions {
     );
   }
 
-  /// Slide from bottom — modal-style, sheets, login.
   static PageRouteBuilder<T> slideFromBottom<T>(Widget page, {String? name}) {
     return PageRouteBuilder<T>(
       settings: name != null ? RouteSettings(name: name) : null,
@@ -57,7 +64,6 @@ abstract final class AppPageTransitions {
     );
   }
 
-  /// Scale + fade — pop-in for dialogs and overlays.
   static PageRouteBuilder<T> scaleFade<T>(Widget page, {String? name}) {
     return PageRouteBuilder<T>(
       settings: name != null ? RouteSettings(name: name) : null,
@@ -84,7 +90,6 @@ abstract final class AppPageTransitions {
     );
   }
 
-  /// Fade + slide up — hero-style entrance (splash, onboarding).
   static PageRouteBuilder<T> fadeSlideUp<T>(Widget page, {String? name}) {
     return PageRouteBuilder<T>(
       settings: name != null ? RouteSettings(name: name) : null,
@@ -111,9 +116,6 @@ abstract final class AppPageTransitions {
     );
   }
 
-  /// Platform-adaptive: uses the platform's default transition.
-  ///
-  /// On iOS/macOS → cupertino-style slide. On Android/web → Material fade.
   static PageRouteBuilder<T> platform<T>(Widget page, {String? name}) {
     return PageRouteBuilder<T>(
       settings: name != null ? RouteSettings(name: name) : null,

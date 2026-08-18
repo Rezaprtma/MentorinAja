@@ -1,28 +1,31 @@
-/// A notification shown to the learner.
-///
-/// Carries the message, a timestamp and an optional deep link to a course.
-/// [isRead] drives the subtle unread styling; [courseId] makes the
-/// notification actionable when present.
+//**
+// frontend/features/notifications/domain/entities/app_notification.dart
+//
+// frontend:
+// Entity/model. Mendefinisikan data structures untuk feature.
+//
+// backend:
+// Future: akan sesuai dengan backend data models.
+//
+// api:
+// Future: akan menjadi frontend expected contract untuk APIs.
+//
+// qa:
+// QA perlu memvalidasi data validation dan edge cases.
+//**
 library;
 
-/// What a notification is about; drives its icon and tint.
 enum AppNotificationKind {
-  /// Content of an enrolled course was updated.
   courseUpdate,
 
-  /// The next lesson is ready to study.
   lessonReady,
 
-  /// A milestone in the learner's progress.
   progress,
 
-  /// A new course became available.
   newCourse,
 
-  /// A study reminder.
   reminder;
 
-  /// Broad bucket used by the feed filter bar.
   NotificationCategory get category => switch (this) {
     AppNotificationKind.courseUpdate ||
     AppNotificationKind.newCourse => NotificationCategory.course,
@@ -32,20 +35,15 @@ enum AppNotificationKind {
   };
 }
 
-/// Broad grouping of the feed used by the notification filter bar.
 enum NotificationCategory {
-  /// Study-related updates: ready lessons and progress milestones.
   belajar('Belajar'),
 
-  /// Catalog and course-content announcements.
   course('Course'),
 
-  /// Study reminders.
   pengingat('Pengingat');
 
   const NotificationCategory(this.label);
 
-  /// Indonesian label shown on the filter chip.
   final String label;
 }
 
@@ -68,10 +66,8 @@ class AppNotification {
   final DateTime createdAt;
   final bool isRead;
 
-  /// Stable course id to open when the notification is actionable.
   final String? courseId;
 
-  /// Short action label (e.g. "Buka Course"); defaulted by the UI.
   final String? actionLabel;
 
   AppNotification copyWith({bool? isRead}) {

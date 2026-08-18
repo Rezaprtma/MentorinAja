@@ -1,18 +1,21 @@
+//**
+// frontend/shared/widgets/asset/app_icon.dart
+//
+// frontend:
+// Shared widget. Menyediakan reusable UI components untuk feature screens.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering dan behavior.
+//**
 import 'package:flutter/material.dart';
 
-/// Unified icon widget that handles Material icons and custom asset icons.
-///
-/// [AppIcon] provides a single API for both Flutter's built-in [IconData]
-/// icons and custom PNG/SVG icon assets. When the project adds a custom
-/// icon font, this widget resolves codepoints from [AppIcons]. When SVG
-/// icons are added, it delegates to [AppSvg].
-///
-/// ```dart
-/// AppIcon(AppIcons.homeOutlined, size: 24);
-/// AppIcon.asset(AppIconPaths.bookmark, size: 20);
-/// ```
 class AppIcon extends StatelessWidget {
-  /// Creates an icon from Flutter [IconData] (Material or custom font).
   const AppIcon(
     this.iconData, {
     super.key,
@@ -25,10 +28,6 @@ class AppIcon extends StatelessWidget {
     this.opticalSize,
   }) : _assetPath = null;
 
-  /// Creates an icon from an asset path (PNG/SVG).
-  ///
-  /// Currently renders a placeholder. When SVG support is added, this
-  /// delegates to [AppSvg].
   const AppIcon.asset(
     String assetPath, {
     super.key,
@@ -42,10 +41,8 @@ class AppIcon extends StatelessWidget {
        grade = null,
        opticalSize = null;
 
-  /// The [IconData] to display. Null when using asset path.
   final IconData? iconData;
 
-  /// Asset path when using `AppIcon.asset()`.
   final String? _assetPath;
 
   final double? size;
@@ -83,12 +80,6 @@ class AppIcon extends StatelessWidget {
   }
 
   Widget _buildAssetIcon(BuildContext context) {
-    // TODO: When SVG support is added, detect format and delegate:
-    // if (_assetPath!.endsWith('.svg')) {
-    //   return AppSvg(_assetPath!, width: size, height: size, color: color);
-    // }
-
-    // For now, render as a placeholder.
     return Icon(
       Icons.image_outlined,
       size: size ?? 24,

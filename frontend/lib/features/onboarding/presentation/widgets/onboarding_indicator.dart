@@ -1,13 +1,22 @@
+//**
+// frontend/features/onboarding/presentation/widgets/onboarding_indicator.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/theme/theme.dart';
 
-/// Three-dot page indicator for the onboarding flow.
-///
-/// The active dot grows into a wide pill and uses the chapter [accent];
-/// inactive dots stay neutral. Width and color animate with
-/// [AppDurations.fast] and [AppEasing.standard]. Pass [inactiveColor] to
-/// adapt the quiet dots to the chapter background.
 class OnboardingIndicator extends StatelessWidget {
   const OnboardingIndicator({
     super.key,
@@ -21,7 +30,6 @@ class OnboardingIndicator extends StatelessWidget {
   final int current;
   final int total;
 
-  /// Inactive dot color; falls back to `surfaceContainerHighest`.
   final Color? inactiveColor;
 
   @override

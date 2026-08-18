@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/lists/app_tile.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// General-purpose themed list tile.
-///
-/// A thin wrapper over [ListTile] that applies the design-system text styles,
-/// icon colors and padding. Use as the default tile for any list that does not
-/// require a specialized layout.
 class AppTile extends StatelessWidget {
   const AppTile({
     super.key,

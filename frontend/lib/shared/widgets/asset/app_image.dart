@@ -1,16 +1,20 @@
+//**
+// frontend/shared/widgets/asset/app_image.dart
+//
+// frontend:
+// Shared widget. Menyediakan reusable UI components untuk feature screens.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering dan behavior.
+//**
 import 'package:flutter/material.dart';
 
-/// Unified image widget that handles asset, network, and memory images.
-///
-/// [AppImage] wraps Flutter's built-in image rendering with consistent
-/// error handling, placeholder support, and accessibility. When future
-/// image packages are added (cached_network_image, etc.), only this
-/// widget's internals change — screens continue using [AppImage].
-///
-/// ```dart
-/// AppImage.asset(AppImages.hero, width: 200);
-/// AppImage.network(url, semanticLabel: 'Course thumbnail');
-/// ```
 class AppImage extends StatelessWidget {
   const AppImage(
     this.path, {
@@ -32,7 +36,6 @@ class AppImage extends StatelessWidget {
     this.errorWidget,
   }) : _source = _ImageSource.asset;
 
-  /// Creates an image from a local asset path.
   const AppImage.asset(
     String assetPath, {
     super.key,
@@ -54,7 +57,6 @@ class AppImage extends StatelessWidget {
   }) : path = assetPath,
        _source = _ImageSource.asset;
 
-  /// Creates an image from a network URL.
   const AppImage.network(
     String url, {
     super.key,
@@ -76,7 +78,6 @@ class AppImage extends StatelessWidget {
   }) : path = url,
        _source = _ImageSource.network;
 
-  /// The image path or URL.
   final String path;
 
   final _ImageSource _source;
@@ -95,10 +96,8 @@ class AppImage extends StatelessWidget {
   final FilterQuality filterQuality;
   final bool isAntiAlias;
 
-  /// Widget shown while the image loads.
   final Widget? placeholder;
 
-  /// Widget shown when the image fails to load.
   final Widget? errorWidget;
 
   @override

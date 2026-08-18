@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/inputs/app_search_field.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Search / filter input with a leading magnifier and a clear button.
-///
-/// Built as a standalone [TextField] (not a form field) because search is
-/// typically uncontrolled and off the form validation path. Exposes [controller]
-/// for debounce or programmatic clearing.
 class AppSearchField extends StatefulWidget {
   const AppSearchField({
     super.key,
@@ -35,10 +45,8 @@ class AppSearchField extends StatefulWidget {
   final bool enabled;
   final TextInputAction textInputAction;
 
-  /// Optional custom prefix icon replacing the default magnifier.
   final Widget? prefix;
 
-  /// Optional custom trailing widget rendered before the clear button.
   final Widget? suffix;
 
   @override

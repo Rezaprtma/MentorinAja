@@ -1,13 +1,23 @@
+//**
+// frontend/features/auth/logic/auth_validators.dart
+//
+// frontend:
+// Controller. Mengelola state dan business logic untuk feature.
+//
+// backend:
+// Future: akan membutuhkan backend persistence dan API integration.
+//
+// api:
+// Future: akan melakukan API calls melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi state transitions dan edge cases.
+//**
 import 'auth_strings.dart';
 
-/// Form validation rules for the passwordless authentication screens.
-///
-/// Pure, stateless function references compatible with Flutter's
-/// `FormFieldValidator<String>`. No value is ever stored or transmitted.
 abstract final class AuthValidators {
   const AuthValidators._();
 
-  /// Validates a non-empty, well-formed email address.
   static String? email(String? value) {
     final email = value?.trim() ?? '';
     if (email.isEmpty) return AuthStrings.emailRequired;
@@ -17,7 +27,6 @@ abstract final class AuthValidators {
     return null;
   }
 
-  /// Validates a non-empty username (at least 3 characters).
   static String? username(String? value) {
     final username = value?.trim() ?? '';
     if (username.isEmpty) return AuthStrings.usernameRequired;
@@ -25,7 +34,6 @@ abstract final class AuthValidators {
     return null;
   }
 
-  /// Validates a complete numeric verification code of the expected length.
   static String? otp(String? value, {int expectedLength = 6}) {
     final code = value?.trim() ?? '';
     if (code.isEmpty) return AuthStrings.otpRequired;

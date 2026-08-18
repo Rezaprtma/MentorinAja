@@ -1,9 +1,18 @@
-/// Mentor course list — the landing screen of the authoring flow.
-///
-/// Fetches authored drafts from [CourseAuthoringRepository] and renders them
-/// as tappable cards showing title, lesson count and publication status. A
-/// prominent CTA opens the course creation form. Empty state invites the
-/// mentor to build the first course.
+//**
+// frontend/features/course_authoring/presentation/pages/course_list_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -20,10 +29,8 @@ import '../widgets/course_draft_card.dart';
 class CourseListPage extends StatelessWidget {
   const CourseListPage({super.key, this.repository, this.onOpenCourse});
 
-  /// Injected for tests; defaults to the shared in-memory mock repository.
   final CourseAuthoringRepository? repository;
 
-  /// Overrides navigation to the editor (used by tests).
   final void Function(String courseId)? onOpenCourse;
 
   @override
@@ -96,7 +103,6 @@ class CourseListPage extends StatelessWidget {
   }
 }
 
-/// Determines the status label and badge variant for a course draft.
 extension CourseDraftStatusUi on DraftStatus {
   String get label => switch (this) {
     DraftStatus.draft => 'Draft',
@@ -109,7 +115,6 @@ extension CourseDraftStatusUi on DraftStatus {
   };
 }
 
-/// Formats a draft's last-updated time as a short Indonesian label.
 String draftUpdatedLabel(DateTime updatedAt) {
   final now = DateTime.now();
   final difference = now.difference(updatedAt);

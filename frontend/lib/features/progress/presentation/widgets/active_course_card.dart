@@ -1,3 +1,18 @@
+//**
+// frontend/features/progress/presentation/widgets/active_course_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -5,13 +20,6 @@ import 'package:frontend/shared/widgets/tech/tech_logo.dart';
 
 import '../../mock_progress_data.dart';
 
-/// Card for a course the learner is currently studying.
-///
-/// The single reusable component rendered identically for every active course
-/// on the Progress page: a clean white card with the technology logo, title,
-/// lesson summary, an orange progress bar, the next lesson and a "Lanjutkan"
-/// action. Only the course data changes between instances — the layout,
-/// styling and spacing never vary.
 class ActiveCourseCard extends StatelessWidget {
   const ActiveCourseCard({
     super.key,
@@ -20,13 +28,10 @@ class ActiveCourseCard extends StatelessWidget {
     this.onContinue,
   });
 
-  /// The in-progress course to display.
   final MockProgressCourse course;
 
-  /// Opens the course.
   final VoidCallback? onTap;
 
-  /// Resumes the next lesson.
   final VoidCallback? onContinue;
 
   @override

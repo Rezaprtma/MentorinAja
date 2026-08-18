@@ -1,10 +1,18 @@
-/// Mentor course editor — the command center for one course draft.
-///
-/// Edits the course header (title and description), maintains the objectives
-/// list, and lists the course lessons with their readiness status. Each lesson
-/// opens its dedicated editor; a "Tambah Pelajaran" action creates a fresh
-/// lesson and jumps straight into it. Changes persist through
-/// [CourseAuthoringRepository].
+//**
+// frontend/features/course_authoring/presentation/pages/course_editor_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -12,13 +20,16 @@ import 'package:flutter/material.dart';
 import 'package:frontend/routing/route_names.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
+import 'package:frontend/shared/enums/enums.dart';
 
 import '../../data/mock_course_authoring_repository.dart';
 import '../../domain/entities/course_authoring_draft.dart';
+import '../../domain/entities/draft_status.dart';
 import '../../domain/entities/lesson_draft.dart';
+import '../../domain/entities/publish_validation.dart';
 import '../../domain/repositories/course_authoring_repository.dart';
-import '../widgets/course_objective_editor.dart';
 import '../widgets/course_lesson_tile.dart';
+import '../widgets/publish_validation_panel.dart';
 
 class CourseEditorPage extends StatefulWidget {
   const CourseEditorPage({
@@ -30,10 +41,8 @@ class CourseEditorPage extends StatefulWidget {
 
   final String courseId;
 
-  /// Injected for tests; defaults to the shared in-memory mock repository.
   final CourseAuthoringRepository? repository;
 
-  /// Overrides lesson navigation (used by tests).
   final void Function(String courseId, String lessonId)? onOpenLesson;
 
   @override
@@ -41,6 +50,16 @@ class CourseEditorPage extends StatefulWidget {
 }
 
 class _CourseEditorPageState extends State<CourseEditorPage> {
+  static const List<String> _categories = [
+    'Pemrograman',
+    'Mobile',
+    'Web',
+    'Data Science',
+    'Desain',
+  ];
+
+  static const List<String> _levels = ['Pemula', 'Menengah', 'Mahir'];
+
   late final CourseAuthoringRepository _repository =
       widget.repository ?? MockCourseAuthoringRepository.instance;
 
@@ -48,6 +67,10 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
 
   late final TextEditingController _titleController;
   late final TextEditingController _descriptionController;
+
+  String? _category;
+  String? _level;
+  ProgrammingLanguage? _language;
 
   @override
   void initState() {
@@ -57,6 +80,9 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
     _descriptionController = TextEditingController(
       text: draft?.description ?? '',
     );
+    _category = draft?.category;
+    _level = draft?.level;
+    _language = ProgrammingLanguage.fromString(draft?.language ?? '');
   }
 
   @override
@@ -73,6 +99,9 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
       draft.copyWith(
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
+        category: _category,
+        level: _level,
+        language: _language?.displayName ?? draft.language,
         updatedAt: DateTime.now(),
       ),
     );
@@ -82,27 +111,6 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
       message: 'Perubahan header course sudah disimpan.',
       severity: AppFeedbackSeverity.success,
     );
-  }
-
-  void _addObjective(String value) {
-    final draft = _draft;
-    if (draft == null || value.trim().isEmpty) return;
-    _repository.updateDraft(
-      draft.copyWith(
-        objectives: [...draft.objectives, value.trim()],
-        updatedAt: DateTime.now(),
-      ),
-    );
-    setState(() {});
-  }
-
-  void _removeObjective(int index) {
-    final draft = _draft;
-    if (draft == null) return;
-    final objectives = [...draft.objectives]..removeAt(index);
-    _repository.updateDraft(
-      draft.copyWith(objectives: objectives, updatedAt: DateTime.now()),
-    );
     setState(() {});
   }
 
@@ -111,8 +119,8 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
     if (draft == null) return;
     final lesson = LessonDraft(
       id: 'lesson-${DateTime.now().millisecondsSinceEpoch}',
-      title: 'Pelajaran Baru',
-      description: 'Deskripsi pelajaran baru.',
+      title: 'Modul Baru',
+      description: 'Deskripsi modul baru.',
       order: draft.lessons.length,
     );
     final updated = _repository.addLesson(draft.id, lesson);
@@ -123,8 +131,8 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
   void _removeLesson(LessonDraft lesson) async {
     final confirmed = await AppConfirmationDialog.show(
       context,
-      title: 'Hapus Pelajaran?',
-      message: 'Pelajaran "${lesson.title}" akan dihapus dari course.',
+      title: 'Hapus Modul?',
+      message: 'Modul "${lesson.title}" akan dihapus dari course.',
       confirmLabel: 'Hapus',
       cancelLabel: 'Batal',
       isDestructive: true,
@@ -146,6 +154,49 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
     );
   }
 
+  void _openPreview() {
+    Navigator.of(context).pushNamed(
+      AppRoutes.resolve(AppRoutes.mentorCoursePreview, {
+        'courseId': widget.courseId,
+      }),
+    );
+  }
+
+  void _handlePublish() {
+    final draft = _draft;
+    if (draft == null) return;
+
+    if (draft.status == DraftStatus.published) {
+      setState(() => _repository.unpublishCourse(draft.id));
+      AppToast.show(
+        context,
+        title: 'Course diturunkan.',
+        message: 'Course kembali menjadi draft.',
+        severity: AppFeedbackSeverity.warning,
+      );
+      return;
+    }
+
+    final validation = PublishValidator.validate(draft);
+    if (!validation.isValid) {
+      AppBottomSheet.show(
+        context,
+        title: 'Belum Siap Publikasi',
+        subtitle: 'Lengkapi persyaratan berikut sebelum mempublikasikan.',
+        child: PublishValidationPanel(validation: validation),
+      );
+      return;
+    }
+
+    setState(() => _repository.publishCourse(draft.id));
+    AppToast.show(
+      context,
+      title: 'Course dipublikasikan.',
+      message: 'Course sekarang terlihat oleh siswa.',
+      severity: AppFeedbackSeverity.success,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ext = context.appColors;
@@ -164,10 +215,27 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
     }
 
     final lessons = draft.lessons..sort((a, b) => a.order.compareTo(b.order));
+    final published = draft.status == DraftStatus.published;
 
     return Scaffold(
       backgroundColor: ext.background,
-      appBar: const AppAppBar(title: 'Edit Course'),
+      appBar: AppAppBar(
+        title: 'Edit Course',
+        actions: [
+          AppIconButton(
+            icon: Icons.visibility_outlined,
+            tooltip: 'Pratinjau',
+            onPressed: _openPreview,
+          ),
+          AppIconButton(
+            icon: published
+                ? Icons.unpublished_outlined
+                : Icons.publish_outlined,
+            tooltip: published ? 'Tarik Publikasi' : 'Publikasikan',
+            onPressed: _handlePublish,
+          ),
+        ],
+      ),
       body: ListView(
         padding: const EdgeInsets.only(
           left: AppSpacing.md,
@@ -197,6 +265,45 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
                   onChanged: (_) => setState(() {}),
                 ),
                 const SizedBox(height: AppSpacing.md),
+                Row(
+                  children: [
+                    Expanded(
+                      child: AppDropdownField.strings(
+                        initialValue: _category,
+                        items: _categories,
+                        label: 'Kategori',
+                        hint: 'Pilih kategori',
+                        onChanged: (value) => setState(() => _category = value),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: AppDropdownField.strings(
+                        initialValue: _level,
+                        items: _levels,
+                        label: 'Level',
+                        hint: 'Pilih level',
+                        onChanged: (value) => setState(() => _level = value),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.md),
+                AppDropdownField<ProgrammingLanguage>(
+                  initialValue: _language,
+                  items: ProgrammingLanguage.values
+                      .map(
+                        (lang) => DropdownMenuItem<ProgrammingLanguage>(
+                          value: lang,
+                          child: Text(lang.displayName),
+                        ),
+                      )
+                      .toList(),
+                  label: 'Bahasa Pemrograman',
+                  hint: 'Pilih bahasa',
+                  onChanged: (value) => setState(() => _language = value),
+                ),
+                const SizedBox(height: AppSpacing.md),
                 AppButton(
                   label: 'Simpan Perubahan',
                   variant: AppButtonVariant.secondary,
@@ -204,17 +311,11 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
                   onPressed: _saveHeader,
                 ),
                 const SizedBox(height: AppSpacing.xl),
-                CourseObjectiveEditor(
-                  objectives: draft.objectives,
-                  onAdd: _addObjective,
-                  onRemove: _removeObjective,
-                ),
-                const SizedBox(height: AppSpacing.xl),
                 Row(
                   children: [
                     Expanded(
                       child: Text(
-                        'PELAJARAN',
+                        'MODUL BELAJAR',
                         style: AppTypeScale.labelMedium.copyWith(
                           color: ext.textSecondary,
                           letterSpacing: 1.25,
@@ -234,8 +335,8 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
                   const AppEmptyState(
                     compact: true,
                     icon: Icons.play_lesson_outlined,
-                    title: 'Belum Ada Pelajaran',
-                    message: 'Tambahkan pelajaran pertama untuk course ini.',
+                    title: 'Belum Ada Modul',
+                    message: 'Tambahkan modul pertama untuk course ini.',
                   )
                 else
                   for (var i = 0; i < lessons.length; i++) ...[
@@ -249,7 +350,7 @@ class _CourseEditorPageState extends State<CourseEditorPage> {
                   ],
                 const SizedBox(height: AppSpacing.lg),
                 AppButton(
-                  label: 'Tambah Pelajaran',
+                  label: 'Tambah Modul',
                   leadingIcon: Icons.add,
                   variant: AppButtonVariant.outlined,
                   isFullWidth: true,

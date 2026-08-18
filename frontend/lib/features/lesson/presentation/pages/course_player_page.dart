@@ -1,3 +1,18 @@
+//**
+// frontend/features/lesson/presentation/pages/course_player_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/features/course/course.dart';
@@ -6,32 +21,28 @@ import 'package:frontend/routing/route_names.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
-import '../../data/mock_lesson_content.dart';
-import '../../data/mock_lesson_exercises.dart';
+import '../../data/mock_module_content_generator.dart';
+import '../../domain/entities/course_player_preview.dart';
+import '../../domain/entities/lesson_exercise.dart';
 import '../stages/game_stage.dart';
 import '../stages/latihan_stage.dart';
 import '../stages/materi_stage.dart';
 import '../widgets/learning_navigation_bar.dart';
 import '../widgets/lesson_stage_indicator.dart';
 
-/// Full-screen lesson experience for a single course lesson.
-///
-/// Splits the lesson into three stage views — Materi, Game, Latihan — swapped
-/// through an animated switch. The floating control bar moves between stages
-/// first and across lessons once the last stage is reached. Completing the
-/// last lesson routes to the course completion page.
 class CoursePlayerPage extends StatefulWidget {
   const CoursePlayerPage({
     super.key,
     required this.courseId,
     required this.lessonId,
+    this.preview,
   });
 
-  /// Stable course identifier (see [CourseIdentifier]).
   final String courseId;
 
-  /// Stable lesson identifier within the course.
   final String lessonId;
+
+  final CoursePlayerPreview? preview;
 
   @override
   State<CoursePlayerPage> createState() => _CoursePlayerPageState();
@@ -43,13 +54,15 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
       LearningProgressController.instance;
 
   int _stageIndex = 0;
+  int _gameIndex = 0;
 
   final GlobalKey<LearningNavigationBarState> _learningControlsKey =
       GlobalKey<LearningNavigationBarState>();
 
   @override
   Widget build(BuildContext context) {
-    final course = _courses.findById(widget.courseId);
+    final preview = widget.preview;
+    final course = preview?.course ?? _courses.findById(widget.courseId);
     if (course == null) {
       return _missingScaffold(title: 'Pelajaran', body: const _CourseMissing());
     }
@@ -57,7 +70,7 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
     return ListenableBuilder(
       listenable: _progress,
       builder: (context, _) {
-        final lessons = _progress.lessonStates(course.id);
+        final lessons = preview?.lessons ?? _progress.lessonStates(course.id);
         final index = lessons.indexWhere((l) => l.id == widget.lessonId);
         if (index < 0) {
           return _missingScaffold(
@@ -69,27 +82,39 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
         final lesson = lessons[index];
         final isLast = index == lessons.length - 1;
         final isDone = lesson.state == CourseLessonState.completed;
-        final code = MockLessonContent.snippetFor(course, lesson);
-        final materiBlocks = MockLessonContent.materiBlocks(
-          course,
-          lesson,
-          index: index,
-          total: lessons.length,
-        );
-        final gameExercise = MockLessonExercises.gameExercise(course, code);
-        final latihanExercises = MockLessonExercises.latihanExercises(
-          course,
-          code,
-        );
+
+        final games =
+            preview?.gameByLesson[lesson.id] ??
+            MockModuleContentGenerator.generateGames(
+              lessonId: lesson.id,
+              title: lesson.title,
+              language: _languageForCourse(course),
+            );
+        final latihanExercise =
+            preview?.latihanByLesson[lesson.id] ??
+            MockModuleContentGenerator.generateExercise(
+              lessonId: lesson.id,
+              title: lesson.title,
+              language: _languageForCourse(course),
+            );
 
         final stageView = switch (_stageIndex) {
-          0 => MateriStageView(lesson: lesson, blocks: materiBlocks),
+          0 => MateriStageView(lesson: lesson),
           1 => GameStageView(
             lesson: lesson,
             lessonNumber: index + 1,
-            exercise: gameExercise,
+            games: games,
+            gameIndex: _gameIndex,
           ),
-          _ => LatihanStageView(lesson: lesson, exercises: latihanExercises),
+          _ => LatihanStageView(
+            lesson: lesson,
+            exercise: latihanExercise,
+            onSuccess: () {
+              if (preview == null) {
+                _progress.completeLesson(course.id, lesson.id);
+              }
+            },
+          ),
         };
 
         return Scaffold(
@@ -135,7 +160,7 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
                 child: AnimatedSwitcher(
                   duration: AppDurations.medium,
                   child: KeyedSubtree(
-                    key: ValueKey<int>(_stageIndex),
+                    key: ValueKey<String>('${_stageIndex}_$_gameIndex'),
                     child: stageView,
                   ),
                 ),
@@ -144,11 +169,11 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
                 key: _learningControlsKey,
                 stageIndex: _stageIndex,
                 stageCount: 3,
-                hasPrevious: index > 0,
+                hasPrevious: index > 0 || _stageIndex > 0,
                 isLast: isLast,
                 isDone: isDone,
-                onUndo: _undoHandler(course, index),
-                onNext: () => _handleNext(course, index, isDone, isLast),
+                onUndo: _undoHandler(course, index, games),
+                onNext: () => _handleNext(course, index, isDone, isLast, games),
                 onEnd: () => _showEndSessionDialog(context),
               ),
             ],
@@ -158,34 +183,66 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
     );
   }
 
-  VoidCallback? _undoHandler(CourseDetail course, int index) {
-    if (_stageIndex > 0) {
-      return () => setState(() => _stageIndex -= 1);
+  VoidCallback? _undoHandler(
+    CourseDetail course,
+    int index,
+    List<LessonExercise> games,
+  ) {
+    if (_stageIndex == 2) {
+      return () => setState(() => _stageIndex = 1);
+    }
+    if (_stageIndex == 1) {
+      return () => setState(() => _stageIndex = 0);
     }
     if (index > 0) {
-      return () =>
-          _openLesson(course, _progress.lessonStates(course.id)[index - 1]);
+      return () => _openLesson(course, _lessonStates(course)[index - 1]);
     }
     return null;
   }
 
-  /// Friendly name of the active stage, used to contextualize the AI Tutor.
   String get _stageContextTitle => switch (_stageIndex) {
     0 => 'materi',
     1 => 'tantangan Game',
     _ => 'latihan',
   };
 
-  void _handleNext(CourseDetail course, int index, bool isDone, bool isLast) {
-    if (_stageIndex < 2) {
-      setState(() => _stageIndex += 1);
+  void _handleNext(
+    CourseDetail course,
+    int index,
+    bool isDone,
+    bool isLast,
+    List<LessonExercise> games,
+  ) {
+    if (_stageIndex == 0) {
+      setState(() => _stageIndex = 1);
+      return;
+    }
+    if (_stageIndex == 1) {
+      setState(() => _stageIndex = 2);
       return;
     }
     _onPrimary(course, index, isDone, isLast);
   }
 
   void _onPrimary(CourseDetail course, int index, bool isDone, bool isLast) {
-    final lesson = _progress.lessonStates(course.id)[index];
+    final preview = widget.preview;
+    if (preview != null) {
+      if (isLast) {
+        AppToast.show(
+          context,
+          title: 'Pratinjau Selesai',
+          message: 'Kamu sudah melihat seluruh pelajaran dalam pratinjau.',
+          severity: AppFeedbackSeverity.success,
+        );
+        Navigator.of(context).pop();
+        return;
+      }
+      _openLesson(course, preview.lessons[index + 1]);
+      return;
+    }
+
+    final lessons = _lessonStates(course);
+    final lesson = lessons[index];
     if (!isDone) {
       _progress.completeLesson(course.id, lesson.id);
       if (!isLast) {
@@ -205,17 +262,20 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
       return;
     }
 
-    final next = _progress.lessonStates(course.id)[index + 1];
-    _openLesson(course, next);
+    _openLesson(course, lessons[index + 1]);
   }
 
   void _openLesson(CourseDetail course, CourseLesson lesson) {
+    final route = widget.preview != null
+        ? AppRoutes.mentorLessonPreview
+        : AppRoutes.lessonDetail;
     Navigator.of(context).pushReplacementNamed(
-      AppRoutes.resolve(AppRoutes.lessonDetail, {
-        'courseId': course.id,
-        'lessonId': lesson.id,
-      }),
+      AppRoutes.resolve(route, {'courseId': course.id, 'lessonId': lesson.id}),
     );
+  }
+
+  List<CourseLesson> _lessonStates(CourseDetail course) {
+    return widget.preview?.lessons ?? _progress.lessonStates(course.id);
   }
 
   Future<void> _showEndSessionDialog(BuildContext context) async {
@@ -241,7 +301,6 @@ class _CoursePlayerPageState extends State<CoursePlayerPage> {
   }
 }
 
-/// Compact centered identity for the private-tutor lesson top bar.
 class _PlayerTitle extends StatelessWidget {
   const _PlayerTitle({required this.courseTitle, required this.lessonTitle});
 
@@ -275,7 +334,6 @@ class _PlayerTitle extends StatelessWidget {
   }
 }
 
-/// Shown when the course id does not resolve in the catalog.
 class _CourseMissing extends StatelessWidget {
   const _CourseMissing();
 
@@ -293,7 +351,6 @@ class _CourseMissing extends StatelessWidget {
   }
 }
 
-/// Shown when the lesson id does not exist inside the course.
 class _LessonMissing extends StatelessWidget {
   const _LessonMissing({this.onBack});
 
@@ -311,4 +368,21 @@ class _LessonMissing extends StatelessWidget {
       ),
     );
   }
+}
+
+String _languageForCourse(CourseDetail course) {
+  final title = course.title.toLowerCase();
+  if (title.contains('python')) return 'Python';
+  if (title.contains('javascript')) return 'JavaScript';
+  if (title.contains('typescript')) return 'TypeScript';
+  if (title.contains('php') || title.contains('laravel')) return 'PHP';
+  if (title.contains('flutter') || title.contains('dart')) return 'Dart';
+  if (title.contains('kotlin') || title.contains('android')) return 'Kotlin';
+  if (title.contains('swift') || title.contains('ios')) return 'Swift';
+  if (title.contains('sql') ||
+      title.contains('mysql') ||
+      title.contains('postgres'))
+    return 'SQL';
+  if (title.contains('html') || title.contains('css')) return 'HTML';
+  return 'Python';
 }

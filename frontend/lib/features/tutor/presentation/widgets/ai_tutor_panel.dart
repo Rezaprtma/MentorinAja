@@ -1,4 +1,18 @@
-/// Contextual Mentorin AI chat surface for the active lesson.
+//**
+// frontend/features/tutor/presentation/widgets/ai_tutor_panel.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -10,10 +24,6 @@ import 'package:frontend/shared/widgets/widgets.dart';
 import '../../application/tutor_controller.dart';
 import '../../domain/entities/tutor_message.dart';
 
-/// Opens the contextual Mentorin AI chat for the current lesson.
-///
-/// Compact screens get a near-full-height modal chat surface; wider screens
-/// render the same panel inside a centered dialog.
 Future<void> showAiTutorPanel(
   BuildContext context, {
   required TutorLessonContext lessonContext,
@@ -44,8 +54,6 @@ Future<void> showAiTutorPanel(
   );
 }
 
-/// Contextual Mentorin AI chat surface with message bubbles, code blocks,
-/// suggested prompts and a keyboard-safe composer.
 class AiTutorPanel extends StatefulWidget {
   const AiTutorPanel({
     super.key,

@@ -1,3 +1,18 @@
+//**
+// frontend/features/auth/presentation/screens/otp_verification_screen.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -10,18 +25,12 @@ import '../../logic/otp_verification_controller.dart';
 import '../widgets/auth_scaffold.dart';
 import 'otp_verification_config.dart';
 
-/// Verification-code step with a built-in numeric keypad.
-///
-/// Collects the code with auto-advancing boxes driven by an on-screen keypad so
-/// the platform soft keyboard never covers the UI. Verified codes raise a
-/// success notification, then replace the route with [OtpVerificationConfig.destination].
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({
     super.key,
     this.config = const OtpVerificationConfig(),
   });
 
-  /// Copy, code length and destination behaviour for this instance.
   final OtpVerificationConfig config;
 
   @override
@@ -214,7 +223,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 }
 
-/// The verified email plus a "change" action that returns to the form.
 class _EmailTarget extends StatelessWidget {
   const _EmailTarget({required this.target});
 
@@ -273,7 +281,6 @@ class _EmailTarget extends StatelessWidget {
   }
 }
 
-/// Countdown or clickable resend beneath the code boxes.
 class _ResendRow extends StatelessWidget {
   const _ResendRow({
     required this.label,
@@ -328,7 +335,6 @@ class _ResendRow extends StatelessWidget {
   }
 }
 
-/// Replays a horizontal shake whenever [trigger] changes (e.g. on OTP error).
 class _ShakeBox extends StatefulWidget {
   const _ShakeBox({required this.trigger, required this.child});
 

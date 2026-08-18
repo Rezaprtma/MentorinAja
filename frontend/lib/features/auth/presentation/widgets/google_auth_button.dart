@@ -1,22 +1,32 @@
+//**
+// frontend/features/auth/presentation/widgets/google_auth_button.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Google brand mark loaded from the official Google SVG asset.
-///
-/// Renders `assets/icons/google-icon.svg` unmodified so the multicolor G keeps
-/// Google's exact brand colors. No recolor, no OAuth, no network.
 class GoogleMark extends StatelessWidget {
   const GoogleMark({super.key, this.size = 20});
 
-  /// Render width/height in logical pixels.
   final double size;
 
   @override
   Widget build(BuildContext context) {
     return SvgPicture.asset(
-      'assets/icons/google-icon.svg',
+      'assets/icons/logo/google-icon.svg',
       width: size,
       height: size,
       fit: BoxFit.contain,
@@ -25,11 +35,6 @@ class GoogleMark extends StatelessWidget {
   }
 }
 
-/// Full-width Google sign-in button using Google's official icon assets.
-///
-/// A flat, white button with a hairline border, no elevation and a pill shape.
-/// It supports loading, disabled, hover and pressed feedback while keeping the
-/// official Google wordmark colors untouched.
 class GoogleAuthButton extends StatefulWidget {
   const GoogleAuthButton({
     super.key,

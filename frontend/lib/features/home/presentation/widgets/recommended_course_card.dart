@@ -1,3 +1,18 @@
+//**
+// frontend/features/home/presentation/widgets/recommended_course_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -6,19 +21,11 @@ import 'package:frontend/shared/widgets/widgets.dart';
 
 import '../../mock_home_data.dart';
 
-/// Vivid course card used in the Home "Untuk Kamu" recommendation rail.
-///
-/// The card surface is the course's brand accent with the real technology logo
-/// rendered directly on it — no mini container behind the icon. A soft white
-/// circle and a faint cropped copy of the logo decorate the background, and the
-/// footer carries the lesson count and rating in the brand's on-color.
 class RecommendedCourseCard extends StatelessWidget {
   const RecommendedCourseCard({super.key, required this.course, this.onTap});
 
-  /// The recommended course to display.
   final MockCourse course;
 
-  /// Opens the course detail.
   final VoidCallback? onTap;
 
   @override
@@ -136,7 +143,6 @@ class RecommendedCourseCard extends StatelessWidget {
     );
   }
 
-  /// Fallback palette used when the course has no brand colors.
   TechBrandColors _palette(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     return switch (course.accent) {

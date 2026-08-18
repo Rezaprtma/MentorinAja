@@ -1,14 +1,22 @@
+//**
+// frontend/shared/design_system/inputs/app_text_field.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// The fundamental text input.
-///
-/// Built on [TextFormField] so it integrates with `Form`/`FormField` validation
-/// out of the box. Consumes the global [InputDecorationTheme] set up in
-/// `AppTheme` and layers the design-system extensions on top: an optional
-/// clear button that only appears once there is text, icons, and inline
-/// validation/helper/error text.
 class AppTextField extends StatefulWidget {
   const AppTextField({
     super.key,

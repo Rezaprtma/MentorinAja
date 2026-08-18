@@ -1,10 +1,18 @@
-/// Onboarding feature public API.
-///
-/// Import this barrel for screen, widgets, and controller access.
-///
-/// ```dart
-/// import 'package:frontend/features/onboarding/onboarding.dart';
-/// ```
+//**
+// frontend/features/onboarding/onboarding.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 library;
 
 export 'logic/onboarding_controller.dart';

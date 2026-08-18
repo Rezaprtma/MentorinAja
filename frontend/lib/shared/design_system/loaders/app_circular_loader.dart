@@ -1,11 +1,22 @@
+//**
+// frontend/shared/design_system/loaders/app_circular_loader.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Centered circular progress indicator with optional label.
-///
-/// Wraps [CircularProgressIndicator] with consistent sizing, color and
-/// semantic labeling. Use inside [FutureBuilder]s and async page states.
 class AppCircularLoader extends StatelessWidget {
   const AppCircularLoader({
     super.key,

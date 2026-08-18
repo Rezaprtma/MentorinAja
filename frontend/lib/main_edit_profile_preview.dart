@@ -1,13 +1,24 @@
+//**
+// frontend/main_edit_profile_preview.dart
+//
+// frontend:
+// Development preview entrypoint. Untuk preview UI secara standalone.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi preview rendering.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/theme/theme.dart';
 import 'package:frontend/features/profile/profile.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Preview harness for the Edit Profil experience.
-///
-/// Boots straight into the editor so the focused username + photo flow can be
-/// exercised without a full app bootstrap.
 void main() {
   runApp(
     ListenableBuilder(

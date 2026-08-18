@@ -1,17 +1,26 @@
+//**
+// frontend/shared/design_system/feedback/app_toast.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'app_snack_bar.dart';
 import 'app_notification.dart';
 
-/// Convenience façade over [AppNotificationService].
-///
-/// Keeps the historical `AppToast.show` API while rendering the same reusable
-/// notification card used across the app. Maps [AppFeedbackSeverity] onto
-/// [AppNotificationType].
 class AppToast {
   AppToast._();
 
-  /// Display duration before a success/info notification animates back out.
   static const Duration displayDuration = Duration(seconds: 3);
 
   static void show(

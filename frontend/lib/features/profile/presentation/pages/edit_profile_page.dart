@@ -1,3 +1,18 @@
+//**
+// frontend/features/profile/presentation/pages/edit_profile_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -7,12 +22,6 @@ import '../../logic/profile_controller.dart';
 import '../../mock_profile_photos.dart';
 import '../widgets/profile_photo_avatar.dart';
 
-/// Edit Profil page — edits only the username and profile photo.
-///
-/// Keeps a single source of truth by writing through [ProfileController] and
-/// showing the shared [ProfilePhotoAvatar] with the locally selected photo
-/// until the user saves. Unchanged back navigation exits directly; dirty back
-/// navigation asks for confirmation before discarding.
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
 

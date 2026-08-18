@@ -1,15 +1,24 @@
+//**
+// frontend/features/course/presentation/widgets/course_outline_tile.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
 import '../../domain/entities/course_lesson.dart';
 
-/// One row of the course outline.
-///
-/// Renders the lesson number, title and estimated time, plus a state icon that
-/// communicates completed (success), current (brand), locked (disabled) or
-/// available (neutral). The row is a quiet surface — the state icon is the only
-/// signal and never relies on color alone.
 class CourseOutlineTile extends StatelessWidget {
   const CourseOutlineTile({
     super.key,
@@ -19,16 +28,12 @@ class CourseOutlineTile extends StatelessWidget {
     this.onTap,
   });
 
-  /// One-based position in the outline, rendered as "01".
   final int number;
 
   final CourseLesson lesson;
 
-  /// Whether this row is the last in the outline (hides the divider).
   final bool isLast;
 
-  /// Opens the lesson in the Lesson Player (locked lessons are blocked by the
-  /// caller); null renders the row without ink feedback.
   final VoidCallback? onTap;
 
   @override

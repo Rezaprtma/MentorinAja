@@ -1,3 +1,18 @@
+//**
+// frontend/features/course/presentation/pages/course_detail_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/routing/route_names.dart';
@@ -10,19 +25,9 @@ import '../../domain/entities/course_lesson.dart';
 import '../widgets/course_identity_header.dart';
 import '../widgets/course_outline_tile.dart';
 
-/// The single Course Detail experience for every entry point.
-///
-/// Home, Explore, Progress, Category and Notifications all resolve to this page
-/// through a stable course id. It leads with the identity header, then the long
-/// description, structured learning outcomes and the lesson outline, and ends
-/// with a sticky action bar offering save and start/continue. Save state is
-/// local only. Course state is live — the outline, the progress bar and the
-/// action reflect [LearningProgressController] so completing lessons upstream
-/// (or in the Lesson Player) is visible the moment the page rebuilds.
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({super.key, required this.courseId});
 
-  /// Stable id of the course to display (see [CourseIdentifier]).
   final String courseId;
 
   @override
@@ -151,7 +156,6 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
   }
 }
 
-/// Long description block.
 class _DescriptionSection extends StatelessWidget {
   const _DescriptionSection({required this.course});
 
@@ -187,7 +191,6 @@ class _DescriptionSection extends StatelessWidget {
   }
 }
 
-/// Structured list of learning outcomes.
 class _LearningOutcomesSection extends StatelessWidget {
   const _LearningOutcomesSection({required this.course});
 
@@ -251,13 +254,11 @@ class _LearningOutcomesSection extends StatelessWidget {
   }
 }
 
-/// Structured, tappable course outline.
 class _OutlineSection extends StatelessWidget {
   const _OutlineSection({required this.course, this.onLessonTap});
 
   final CourseDetail course;
 
-  /// Opens a lesson in the Lesson Player.
   final ValueChanged<CourseLesson>? onLessonTap;
 
   @override
@@ -298,7 +299,6 @@ class _OutlineSection extends StatelessWidget {
   }
 }
 
-/// Sticky save + start/continue action bar.
 class _ActionBar extends StatelessWidget {
   const _ActionBar({
     required this.saved,
@@ -369,7 +369,6 @@ class _ActionBar extends StatelessWidget {
   }
 }
 
-/// Shown when the resolved course does not exist in the catalog.
 class _NotFound extends StatelessWidget {
   const _NotFound();
 

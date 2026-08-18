@@ -1,14 +1,23 @@
+//**
+// frontend/shared/design_system/cards/app_stat_card.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import 'app_base_card.dart';
 
-/// A single stat metric: icon + value + label, optionally with a trend
-/// indicator.
-///
-/// Used on dashboards and profile screens to surface key numbers at a glance
-/// (courses completed, hours studied, streak count). The icon sits in a
-/// tinted container so it stands out without competing with the value.
 class AppStatCard extends StatelessWidget {
   const AppStatCard({
     super.key,
@@ -23,24 +32,18 @@ class AppStatCard extends StatelessWidget {
     this.height,
   });
 
-  /// The primary metric (e.g. "12", "84h", "95%").
   final String value;
 
-  /// Descriptive label below the value.
   final String label;
 
-  /// Optional leading icon rendered in a tinted circle.
   final IconData? icon;
 
-  /// Optional trend text (e.g. "+12%").
   final String? trend;
 
-  /// Whether the trend is positive (green) or negative (red).
   final bool? trendUp;
 
   final VoidCallback? onTap;
 
-  /// Accent color for the icon tint and optional value color.
   final Color? color;
 
   final double? width;

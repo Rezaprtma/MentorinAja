@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/animations/app_scale.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Animated scale wrapper for scale transitions.
-///
-/// Controlled scale that animates between values using [AppDurations.medium]
-/// and [AppEasing.standard]. Useful for grow/shrink effects (reveal, pop-in,
-/// focus expansion).
 class AppScale extends StatelessWidget {
   const AppScale({
     super.key,
@@ -35,7 +45,6 @@ class AppScale extends StatelessWidget {
   }
 }
 
-/// One-shot scale-in entrance animation (grows from small to full size).
 class AppScaleIn extends StatelessWidget {
   const AppScaleIn({
     super.key,

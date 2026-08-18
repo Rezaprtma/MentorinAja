@@ -1,15 +1,24 @@
+//**
+// frontend/features/home/presentation/widgets/horizontal_course_rail.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Horizontally scrolling rail that reveals part of the next card.
-///
-/// Measures its own width so every card is a responsive fraction of the
-/// viewport — with a ceiling for wide/tablet screens — which guarantees a
-/// predictable "peek" of the following card as a scroll affordance without any
-/// device-specific sizing.
 class HorizontalCourseRail extends StatelessWidget {
   const HorizontalCourseRail({
     super.key,
@@ -22,25 +31,18 @@ class HorizontalCourseRail extends StatelessWidget {
     this.padding,
   });
 
-  /// Number of cards in the rail.
   final int itemCount;
 
-  /// Builds one card for the given index.
   final IndexedWidgetBuilder itemBuilder;
 
-  /// Card width as a fraction of the available viewport.
   final double cardWidthFactor;
 
-  /// Upper bound for card width on wide screens.
   final double maxCardWidth;
 
-  /// Fixed card height so cards in the rail stay uniform.
   final double cardHeight;
 
-  /// Horizontal gap between cards.
   final double gap;
 
-  /// Optional outer padding of the scrollable rail.
   final EdgeInsetsGeometry? padding;
 
   @override

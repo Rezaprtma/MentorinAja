@@ -1,3 +1,18 @@
+//**
+// frontend/features/home/presentation/widgets/continue_learning_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
@@ -5,12 +20,6 @@ import 'package:frontend/shared/design_system/design_system.dart';
 
 import 'tech_logo.dart';
 
-/// Compact "Progres Saya" card on the Home screen.
-///
-/// A calm white card led by the course's real technology logo, the title and a
-/// compact lesson line. The progress bar shares a row with the percentage and a
-/// small play action that resumes the lesson — the whole card stays one dense,
-/// scannable learning-progress item without a large call-to-action button.
 class ContinueLearningCard extends StatelessWidget {
   const ContinueLearningCard({
     super.key,
@@ -20,16 +29,12 @@ class ContinueLearningCard extends StatelessWidget {
     required this.onContinue,
   });
 
-  /// Course name being resumed.
   final String courseTitle;
 
-  /// Current lesson line, e.g. "Pelajaran 12 dari 20 • Fungsi".
   final String lessonLabel;
 
-  /// Completion fraction in the range 0.0–1.0.
   final double progress;
 
-  /// Resumes the lesson.
   final VoidCallback onContinue;
 
   @override

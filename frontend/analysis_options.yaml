@@ -1,3 +1,9 @@
+# @packageDocumentation
+# Frontend: analysis_options.yaml
+# Backend: Not implemented
+# API: Not implemented
+# QA: Not implemented
+
 include: package:flutter_lints/flutter.yaml
 
 linter:

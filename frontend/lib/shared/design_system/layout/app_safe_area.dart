@@ -1,9 +1,20 @@
+//**
+// frontend/shared/design_system/layout/app_safe_area.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
-/// Application shell-agnostic safe-area wrapper.
-///
-/// Thin convenience over [SafeArea] that makes edge handling explicit and
-/// composable within any layout (including inside custom scaffolds).
 class AppSafeArea extends StatelessWidget {
   const AppSafeArea({
     super.key,
@@ -16,7 +27,6 @@ class AppSafeArea extends StatelessWidget {
     this.maintainBottomViewPadding = false,
   });
 
-  /// The content to inset.
   final Widget child;
 
   final bool top;
@@ -24,10 +34,8 @@ class AppSafeArea extends StatelessWidget {
   final bool left;
   final bool right;
 
-  /// Minimum insets to apply regardless of the device padding.
   final EdgeInsets minimum;
 
-  /// Whether to keep bottom padding for keyboard avoidance.
   final bool maintainBottomViewPadding;
 
   @override

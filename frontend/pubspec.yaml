@@ -1,3 +1,9 @@
+# @packageDocumentation
+# Frontend: pubspec.yaml
+# Backend: Not implemented
+# API: Not implemented
+# QA: Not implemented
+
 name: frontend
 description: MentorinAja Flutter frontend
 
@@ -20,6 +26,11 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/icons/auth/
+    - assets/icons/banners/
+    - assets/icons/language/
+    - assets/icons/logo/
+    - assets/icons/onboarding/
     - assets/audio/
     - assets/fonts/
     - assets/translations/

@@ -1,37 +1,35 @@
+//**
+// frontend/core/navigation/navigation_service.dart
+//
+// frontend:
+// Navigation service. Menyediakan navigation utilities dan InheritedWidget.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi navigation behavior dan deep linking.
+//**
 import 'package:flutter/material.dart';
 
-/// Imperative navigation API that decouples screens from the router
-/// implementation.
-///
-/// Screens call `NavigationService.of(context).push(...)` instead of
-/// `Navigator.of(context).push(...)`. This abstraction makes it trivial to
-/// swap the navigation backend (Navigator → GoRouter → auto_route) without
-/// touching screen code.
-///
-/// Obtain via `NavigationService.of(context)` or inject via constructor.
 class NavigationService {
   NavigationService(this._navigatorKey);
 
   final GlobalKey<NavigatorState> _navigatorKey;
 
-  /// The current [NavigatorState]. Returns `null` if not yet mounted.
   NavigatorState? get _navigator => _navigatorKey.currentState;
 
-  /// Static accessor for descendant widgets.
   static NavigationService of(BuildContext context) {
     return _InheritedNavigationService.of(context);
   }
 
-  // -------------------------------------------------------------------------
-  // Push
-  // -------------------------------------------------------------------------
-
-  /// Pushes a new route onto the stack.
   Future<T?> push<T>(String routeName, {Object? arguments}) {
     return _navigator!.pushNamed<T>(routeName, arguments: arguments);
   }
 
-  /// Pushes a [PageRoute] with a custom [PageRouteBuilder].
   Future<T?> pushCustom<T>(
     Widget page, {
     RouteSettings? settings,
@@ -55,11 +53,6 @@ class NavigationService {
     );
   }
 
-  // -------------------------------------------------------------------------
-  // Push replacement
-  // -------------------------------------------------------------------------
-
-  /// Replaces the current route.
   Future<T?> pushReplacement<T, TO>(
     String routeName, {
     Object? arguments,
@@ -72,7 +65,6 @@ class NavigationService {
     );
   }
 
-  /// Replaces the current route with a custom [PageRoute].
   Future<T?> pushReplacementCustom<T, TO>(Widget page, {TO? result}) {
     return _navigator!.pushReplacement<T, TO>(
       MaterialPageRoute(builder: (_) => page),
@@ -80,11 +72,6 @@ class NavigationService {
     );
   }
 
-  // -------------------------------------------------------------------------
-  // Push and remove
-  // -------------------------------------------------------------------------
-
-  /// Pushes a route and removes all previous routes.
   Future<T?> pushAndRemoveAll<T>(String routeName, {Object? arguments}) {
     return _navigator!.pushNamedAndRemoveUntil<T>(
       routeName,
@@ -93,7 +80,6 @@ class NavigationService {
     );
   }
 
-  /// Pushes a route and removes routes until [predicate] returns true.
   Future<T?> pushUntil<T>(
     String routeName, {
     required bool Function(Route<dynamic>) predicate,
@@ -106,11 +92,6 @@ class NavigationService {
     );
   }
 
-  // -------------------------------------------------------------------------
-  // Pop
-  // -------------------------------------------------------------------------
-
-  /// Pops the current route. Returns `true` if a route was popped.
   bool pop<T>([T? result]) {
     if (_navigator == null) return false;
     if (_navigator!.canPop()) {
@@ -120,30 +101,21 @@ class NavigationService {
     return false;
   }
 
-  /// Pops routes until [predicate] returns true.
   void popUntil(bool Function(Route<dynamic>) predicate) {
     _navigator?.popUntil(predicate);
   }
 
-  /// Pops all routes, returning to the root.
   void popToRoot() {
     _navigator?.popUntil((route) => route.isFirst);
   }
 
-  /// Attempts a maybePop (respects WillPopScope / PopScope).
   Future<bool> maybePop<T>([T? result]) async {
     if (_navigator == null) return false;
     return _navigator!.maybePop<T>(result);
   }
 
-  // -------------------------------------------------------------------------
-  // Context helpers
-  // -------------------------------------------------------------------------
-
-  /// Whether the current navigator can pop (has more than one route).
   bool get canPop => _navigator?.canPop() ?? false;
 
-  /// The current route name, if available.
   String? get currentRouteName {
     String? currentPath;
     _navigator?.popUntil((route) {
@@ -154,7 +126,6 @@ class NavigationService {
   }
 }
 
-/// Inherited widget that provides [NavigationService] down the tree.
 class _InheritedNavigationService extends InheritedWidget {
   const _InheritedNavigationService({
     required this.service,
@@ -175,7 +146,6 @@ class _InheritedNavigationService extends InheritedWidget {
       service != oldWidget.service;
 }
 
-/// Provider widget that makes [NavigationService] available to descendants.
 class NavigationProvider extends StatelessWidget {
   const NavigationProvider({
     super.key,

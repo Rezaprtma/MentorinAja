@@ -1,17 +1,24 @@
+//**
+// frontend/features/lesson/presentation/widgets/learning_navigation_bar.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Floating icon-only control bar for the learning workspace.
-///
-/// Carries the session controls — previous, next, voice and leave — that float
-/// above the lesson content. The previous/next pair uses matching navigation
-/// arrows, voice exposes on/off states through its icon, and the leave control
-/// carries the destructive red treatment as the rightmost endpoint. The bar
-/// auto-hides after a short period of inactivity; a tap on the lesson content
-/// or the collapsed [↑] affordance restores it.
 class LearningNavigationBar extends StatefulWidget {
   const LearningNavigationBar({
     super.key,
@@ -25,42 +32,29 @@ class LearningNavigationBar extends StatefulWidget {
     this.onEnd,
   });
 
-  /// Index of the active stage inside the player flow.
   final int stageIndex;
 
-  /// Total number of stages in the flow.
   final int stageCount;
 
-  /// Whether a previous lesson exists.
   final bool hasPrevious;
 
-  /// Whether this is the last lesson of the course.
   final bool isLast;
 
-  /// Whether the current lesson is already completed.
   final bool isDone;
 
-  /// Moves back: previous stage when possible, previous lesson otherwise.
   final VoidCallback? onUndo;
 
-  /// Moves forward: next stage when possible, completes the lesson otherwise.
   final VoidCallback? onNext;
 
-  /// Ends the session with a confirmation.
   final VoidCallback? onEnd;
 
-  /// Vertical space the floating bar reserves at the bottom of lesson content
-  /// so exercises, feedback and inputs are never hidden behind it.
   static const double reservedContentSpace = 96;
 
   @override
   State<LearningNavigationBar> createState() => LearningNavigationBarState();
 }
 
-/// State for [LearningNavigationBar]; public so the lesson player can reset
-/// the inactivity timer when the learner interacts with the lesson content.
 class LearningNavigationBarState extends State<LearningNavigationBar> {
-  /// Idle time before the control bar hides itself.
   static const Duration inactivityDelay = Duration(seconds: 4);
 
   bool _visible = true;
@@ -79,7 +73,6 @@ class LearningNavigationBarState extends State<LearningNavigationBar> {
     super.dispose();
   }
 
-  /// Brings the controls back (when hidden) and restarts the inactivity timer.
   void poke() {
     _hideTimer?.cancel();
     if (!_visible) {
@@ -100,6 +93,11 @@ class LearningNavigationBarState extends State<LearningNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    final isKeyboardOpen = MediaQuery.viewInsetsOf(context).bottom > 0;
+    if (isKeyboardOpen) {
+      return const SizedBox.shrink();
+    }
+
     return Positioned(
       left: 0,
       right: 0,
@@ -223,6 +221,7 @@ class LearningNavigationBarState extends State<LearningNavigationBar> {
 
   Widget _endButton(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final ext = context.appColors;
 
     return IconButton(
       onPressed: () {
@@ -231,9 +230,9 @@ class LearningNavigationBarState extends State<LearningNavigationBar> {
       },
       tooltip: 'Akhiri sesi belajar',
       icon: const Icon(Icons.logout_rounded, size: AppIconSizes.lg),
-      color: scheme.onError,
+      color: widget.isDone ? ext.onSuccess : scheme.onError,
       style: IconButton.styleFrom(
-        backgroundColor: scheme.error,
+        backgroundColor: widget.isDone ? ext.success : scheme.error,
         shape: const CircleBorder(),
       ),
     );

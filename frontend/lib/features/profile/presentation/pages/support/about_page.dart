@@ -1,14 +1,24 @@
+//**
+// frontend/features/profile/presentation/pages/support/about_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
-/// Product information screen.
-///
-/// Leads with the brand card (logo, name, version, tagline), then the mission
-/// and what the product offers, so the page has a clear hierarchy from identity
-/// to substance.
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
@@ -134,7 +144,6 @@ class AboutPage extends StatelessWidget {
   }
 }
 
-/// One product capability row on the About screen.
 class _FeatureRow extends StatelessWidget {
   const _FeatureRow({
     required this.icon,

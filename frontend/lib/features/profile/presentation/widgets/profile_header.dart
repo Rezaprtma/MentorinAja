@@ -1,7 +1,18 @@
-/// Page header for the Profile tab.
-///
-/// A short title and one supporting line, mirroring the Progress/Explore
-/// headers so all three tabs open with the same slim intro treatment.
+//**
+// frontend/features/profile/presentation/widgets/profile_header.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';

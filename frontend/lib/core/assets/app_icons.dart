@@ -1,23 +1,22 @@
+//**
+// frontend/core/assets/app_icons.dart
+//
+// frontend:
+// Asset management. Menyediakan paths dan konfigurasi untuk icons, images, fonts.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi asset loading dan rendering.
+//**
 import 'package:flutter/material.dart';
 
-/// Custom icon asset paths and [IconData] registry.
-///
-/// Provides two things:
-/// 1. Asset paths for custom SVG/PNG icons under `assets/icons/`
-/// 2. An [IconData] registry that maps custom icons to codepoints for
-///    use with Flutter's [Icon] widget
-///
-/// When a custom icon font is added, register its codepoints here.
-/// When SVG icons are added, register their paths here.
-///
-/// Asset files do not exist yet. Add them under `assets/icons/` and the
-/// constants resolve automatically.
 abstract final class AppIconPaths {
   const AppIconPaths._();
-
-  // -------------------------------------------------------------------------
-  // Navigation icons
-  // -------------------------------------------------------------------------
 
   static const String home = 'assets/icons/home.png';
   static const String homeFilled = 'assets/icons/home_filled.png';
@@ -30,10 +29,6 @@ abstract final class AppIconPaths {
   static const String progress = 'assets/icons/progress.png';
   static const String progressFilled = 'assets/icons/progress_filled.png';
 
-  // -------------------------------------------------------------------------
-  // Action icons
-  // -------------------------------------------------------------------------
-
   static const String bookmark = 'assets/icons/bookmark.png';
   static const String bookmarkFilled = 'assets/icons/bookmark_filled.png';
   static const String like = 'assets/icons/like.png';
@@ -41,10 +36,6 @@ abstract final class AppIconPaths {
   static const String share = 'assets/icons/share.png';
   static const String download = 'assets/icons/download.png';
   static const String downloadFilled = 'assets/icons/download_filled.png';
-
-  // -------------------------------------------------------------------------
-  // Feature icons
-  // -------------------------------------------------------------------------
 
   static const String certificate = 'assets/icons/certificate.png';
   static const String achievement = 'assets/icons/achievement.png';
@@ -57,39 +48,50 @@ abstract final class AppIconPaths {
   static const String audio = 'assets/icons/audio.png';
   static const String document = 'assets/icons/document.png';
 
-  // -------------------------------------------------------------------------
-  // Technology icons
-  // -------------------------------------------------------------------------
+  static const String techPython = 'assets/icons/language/language-python.svg';
+  static const String techPhp = 'assets/icons/language/language-php.svg';
+  static const String techMysql = 'assets/icons/language/language-mysql.svg';
+  static const String techJavascript =
+      'assets/icons/language/language-javascript.svg';
+  static const String techTypescript =
+      'assets/icons/language/language-typescript.svg';
+  static const String techCss = 'assets/icons/language/language-css.svg';
+  static const String techLaravel =
+      'assets/icons/language/language-laravel.svg';
+  static const String techFlutter =
+      'assets/icons/language/language-flutter.svg';
+  static const String techDart = 'assets/icons/language/language-dart.svg';
+  static const String techCpp = 'assets/icons/language/language-c++.svg';
+  static const String techJava = 'assets/icons/language/language-java.svg';
+  static const String techCsharp = 'assets/icons/language/language-c#.svg';
+  static const String techKotlin = 'assets/icons/language/language-kotlin.svg';
+  static const String techSwift = 'assets/icons/language/language-swift.svg';
+  static const String techNodejs = 'assets/icons/language/language-nodejs.svg';
+  static const String techGo = 'assets/icons/language/language-go.svg';
+  static const String techPostgresql =
+      'assets/icons/language/language-postgresql.svg';
+  static const String techSqllite =
+      'assets/icons/language/language-sqllite.svg';
+  static const String techAngular =
+      'assets/icons/language/language-angular.svg';
+  static const String techC = 'assets/icons/language/language-c.svg';
+  static const String techDjango = 'assets/icons/language/language-django.svg';
+  static const String techExpress =
+      'assets/icons/language/language-expresjs.svg';
+  static const String techHtml = 'assets/icons/language/language-html.svg';
+  static const String techNextjs = 'assets/icons/language/language-nextjs.svg';
+  static const String techR = 'assets/icons/language/language-r.svg';
+  static const String techReact = 'assets/icons/language/language-react.svg';
+  static const String techRuby = 'assets/icons/language/language-ruby.svg';
+  static const String techRust = 'assets/icons/language/language-rust.svg';
+  static const String techSolidity =
+      'assets/icons/language/language-solidity.svg';
+  static const String techSql = 'assets/icons/language/language-sql.svg';
+  static const String techTerminal =
+      'assets/icons/language/language-terminal.svg';
+  static const String techVuejs = 'assets/icons/language/language-vuejs.svg';
 
-  static const String techPython = 'assets/icons/python.svg';
-  static const String techPhp = 'assets/icons/php.svg';
-  static const String techMysql = 'assets/icons/mysql.svg';
-  static const String techJavascript = 'assets/icons/javascript.svg';
-  static const String techTypescript = 'assets/icons/typescript-icon.svg';
-  static const String techCss = 'assets/icons/css.svg';
-  static const String techLaravel = 'assets/icons/laravel.svg';
-  static const String techFlutter = 'assets/icons/flutter.svg';
-  static const String techDart = 'assets/icons/dart.svg';
-  static const String techCpp = 'assets/icons/c++.svg';
-  static const String techJava = 'assets/icons/java.svg';
-  static const String techCsharp = 'assets/icons/C#.svg';
-  static const String techKotlin = 'assets/icons/kotlin.svg';
-  static const String techSwift = 'assets/icons/swift.svg';
-  static const String techNodejs = 'assets/icons/nodejs-logo.svg';
-  static const String techGo = 'assets/icons/go.svg';
-  static const String techPostgresql = 'assets/icons/postgresql.svg';
-  static const String techSqllite = 'assets/icons/sqllite.svg';
-
-  // -------------------------------------------------------------------------
-  // Hero banner artwork
-  // -------------------------------------------------------------------------
-
-  /// Discovery illustration used on the Home hero carousel.
-  static const String banner3 = 'assets/icons/banner3.svg';
-
-  // -------------------------------------------------------------------------
-  // UI icons
-  // -------------------------------------------------------------------------
+  static const String banner3 = 'assets/icons/banners/banner3.svg';
 
   static const String sun = 'assets/icons/sun.png';
   static const String moon = 'assets/icons/moon.png';
@@ -107,33 +109,8 @@ abstract final class AppIconPaths {
   static const String chevronDown = 'assets/icons/chevron_down.png';
 }
 
-/// Registry of custom [IconData] for use with Flutter's [Icon] widget.
-///
-/// When a custom icon font is added (e.g. from a design tool export),
-/// register its codepoints here. The font family name must match the
-/// family declared in `pubspec.yaml` under `flutter/fonts`.
-///
-/// Usage:
-/// ```dart
-/// Icon(AppIcons.customBookmark, size: 24);
-/// ```
 abstract final class AppIcons {
   const AppIcons._();
-
-  // -------------------------------------------------------------------------
-  // Placeholder — will be populated when custom icon font is added
-  // -------------------------------------------------------------------------
-
-  // Example (uncomment when icon font is registered):
-  // static const IconData customBookmark = IconData(
-  //   0xe001,
-  //   fontFamily: 'AppCustomIcons',
-  //   fontPackage: null,
-  // );
-
-  // -------------------------------------------------------------------------
-  // Material icon aliases for convenience
-  // -------------------------------------------------------------------------
 
   static const IconData homeOutlined = Icons.home_outlined;
   static const IconData homeFilled = Icons.home;

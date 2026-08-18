@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/animations/app_animated_container.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Themed [AnimatedContainer] with the design-system motion tokens.
-///
-/// Animates changes to decoration, size and padding using [AppDurations.medium]
-/// and [AppEasing.standard] by default, so every property change in the app
-/// shares the same rhythm.
 class AppAnimatedContainer extends StatelessWidget {
   const AppAnimatedContainer({
     super.key,
@@ -50,10 +60,6 @@ class AppAnimatedContainer extends StatelessWidget {
   }
 }
 
-/// Themed [AnimatedSwitcher] that cross-fades between child changes.
-///
-/// Use when a container's content changes dynamically (e.g. loading → data)
-/// and you want a smooth visual transition.
 class AppAnimatedSwitcher extends StatelessWidget {
   const AppAnimatedSwitcher({
     super.key,

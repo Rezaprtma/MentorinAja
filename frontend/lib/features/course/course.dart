@@ -1,7 +1,18 @@
-/// Course feature public API.
-///
-/// Import this barrel for the shared course detail experience, its entities,
-/// the live progress store and the mock repositories.
+//**
+// frontend/features/course/course.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 library;
 
 export 'application/learning_progress_controller.dart';

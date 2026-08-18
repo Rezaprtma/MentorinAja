@@ -1,3 +1,18 @@
+//**
+// frontend/features/auth/presentation/screens/authentication_screen.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 import 'package:frontend/routing/route_names.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -8,12 +23,6 @@ import '../widgets/auth_ambient_background.dart';
 import '../widgets/auth_scaffold.dart';
 import '../widgets/google_auth_sign_in_button.dart';
 
-/// Premium authentication landing — the single visual entry point.
-///
-/// The Auth hero is the identity; a short tagline frames it. Below sit the
-/// primary CTA (Continue with Google), a divider, the Create Account action and
-/// a Sign In text link, with Terms & Privacy pinned to the bottom of the
-/// viewport on every screen size.
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({super.key});
 
@@ -33,13 +42,12 @@ class AuthenticationScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Positions the hero slightly lower so it becomes the focal point.
               const Spacer(flex: 3),
               Center(
                 child: AppFadeIn(
                   duration: AppDurations.slower,
                   child: AppSvg(
-                    'assets/icons/auth.svg',
+                    'assets/icons/auth/auth.svg',
                     width: heroSize,
                     height: heroSize,
                     semanticsLabel: 'Welcome illustration',
@@ -74,7 +82,7 @@ class AuthenticationScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              // Pushes Terms to the bottom across all screen sizes.
+
               const Spacer(flex: 2),
               const SafeArea(
                 top: false,
@@ -96,7 +104,6 @@ class AuthenticationScreen extends StatelessWidget {
   }
 }
 
-/// Hairline "or" separator with a centered label.
 class _OrDivider extends StatelessWidget {
   const _OrDivider();
 
@@ -120,7 +127,6 @@ class _OrDivider extends StatelessWidget {
   }
 }
 
-/// Tagline headline paired with a short supporting description.
 class _Tagline extends StatelessWidget {
   const _Tagline();
 
@@ -152,9 +158,6 @@ class _Tagline extends StatelessWidget {
   }
 }
 
-/// "Already have an account?" prompt with a primary-colored Sign In link.
-///
-/// Rendered as a single horizontal line — the prefix text never wraps.
 class _SignInPrompt extends StatelessWidget {
   const _SignInPrompt({required this.onSignIn});
 
@@ -193,7 +196,6 @@ class _SignInPrompt extends StatelessWidget {
   }
 }
 
-/// Static terms and privacy confirmation.
 class _TermsFooter extends StatelessWidget {
   const _TermsFooter();
 

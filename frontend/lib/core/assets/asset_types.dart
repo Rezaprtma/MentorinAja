@@ -1,10 +1,20 @@
-/// Asset type definitions for MentorinAja.
-///
-/// Enums and types used across the asset system. Keeping them in one file
-/// ensures consistent vocabulary and prevents duplicate enum definitions.
+//**
+// frontend/core/assets/asset_types.dart
+//
+// frontend:
+// Asset management. Menyediakan paths dan konfigurasi untuk icons, images, fonts.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi asset loading dan rendering.
+//**
 library;
 
-/// Supported raster image formats.
 enum AssetImageFormat {
   png('png'),
   webp('webp'),
@@ -16,7 +26,6 @@ enum AssetImageFormat {
   final String extension;
 }
 
-/// Animation source format.
 enum AssetAnimationFormat {
   rive('riv');
 
@@ -24,7 +33,6 @@ enum AssetAnimationFormat {
   final String extension;
 }
 
-/// Audio file format.
 enum AssetAudioFormat {
   mp3('mp3'),
   wav('wav'),
@@ -36,8 +44,6 @@ enum AssetAudioFormat {
   final String extension;
 }
 
-/// Categories for illustrations. Each category maps to a specific user-facing
-/// context so screens pick the correct illustration without hardcoding paths.
 enum IllustrationCategory {
   emptyState,
   error,
@@ -53,10 +59,8 @@ enum IllustrationCategory {
   quiz,
 }
 
-/// Audio usage categories for future audio routing and volume control.
 enum AudioCategory { sfx, music, voice, ambient, notification }
 
-/// Semantic size presets for icons that need platform-adaptive sizing.
 enum AppIconSize {
   xs(16),
   sm(20),

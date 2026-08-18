@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/buttons/app_icon_button.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Accessible icon-only button.
-///
-/// Wraps the Material [IconButton] with the design tokens. A [tooltip] is
-/// recommended — and required for accessibility — since icon-only buttons have
-/// no visible label; the tooltip doubles as the semantics label.
 class AppIconButton extends StatelessWidget {
   const AppIconButton({
     super.key,
@@ -21,31 +31,22 @@ class AppIconButton extends StatelessWidget {
     this.visualDensity = VisualDensity.standard,
   });
 
-  /// The glyph to render.
   final IconData icon;
 
-  /// Tap handler; null disables the button.
   final VoidCallback? onPressed;
 
-  /// Semantics + long-press label. Strongly recommended.
   final String? tooltip;
 
-  /// Icon size; defaults to [AppIconSizes.lg].
   final double iconSize;
 
-  /// Icon color; defaults to `onSurfaceVariant`.
   final Color? color;
 
-  /// Fill color. When set the button becomes a filled tonal icon button.
   final Color? backgroundColor;
 
-  /// Optional border color (pairs with [backgroundColor]).
   final Color? borderColor;
 
-  /// Disabled icon color.
   final Color? disabledColor;
 
-  /// Tap target density.
   final VisualDensity visualDensity;
 
   @override

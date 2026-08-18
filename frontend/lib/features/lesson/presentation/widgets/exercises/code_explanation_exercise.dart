@@ -1,3 +1,18 @@
+//**
+// frontend/features/lesson/presentation/widgets/exercises/code_explanation_exercise.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -6,10 +21,6 @@ import '../../../domain/entities/lesson_exercise.dart';
 import 'exercise_card.dart';
 import 'exercise_feedback.dart';
 
-/// "Jelaskan Kode" exercise that checks conceptual understanding.
-///
-/// With [selfEvaluate] the choice is checked the moment it is selected, so a
-/// wrong pick shows feedback immediately and stays open for a retry.
 class CodeExplanationExercise extends StatefulWidget {
   const CodeExplanationExercise({
     super.key,
@@ -118,23 +129,29 @@ class _CodeSnippet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ext = context.appColors;
-    final scheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final codeBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
+    final codeTextColor = isDark
+        ? const Color(0xFFF8FAFC)
+        : const Color(0xFF0F172A);
+    final codeBorderColor = isDark
+        ? const Color(0xFF1E293B)
+        : const Color(0xFFE2E8F0);
 
     return Container(
       width: double.infinity,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: scheme.surfaceContainerHighest,
+        color: codeBg,
         borderRadius: BorderRadius.circular(AppRadius.large),
-        border: Border.all(color: ext.border),
+        border: Border.all(color: codeBorderColor),
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Text(
           code,
-          style: AppTypeScale.code.copyWith(color: ext.textPrimary),
+          style: AppTypeScale.code.copyWith(color: codeTextColor),
         ),
       ),
     );

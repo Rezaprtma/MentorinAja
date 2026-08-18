@@ -1,22 +1,24 @@
-/// Bottom-sheet builders for the Profile tab preferences.
-///
-/// [showThemeSheet] hosts the color-mode picker driven by
-/// [ThemeModeController], [showNotificationSettingsSheet] hosts the local
-/// notification toggles, and [showLanguageSheet] presents the language picker.
-/// All three are thin helpers that reuse [AppBottomSheet] and the design-system
-/// radio/switch components without carrying page state.
+//**
+// frontend/features/profile/presentation/widgets/profile_sheets.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Displays the theme selection sheet and applies the chosen mode.
-///
-/// The sheet observes [ThemeModeController.instance] so the icon-based options
-/// track the active mode live, then records new choices through the same
-/// controller. Each option leads with its semantic icon — sun, moon, system —
-/// and the selected icon adopts the brand active color.
 Future<void> showThemeSheet(BuildContext context) {
   return AppBottomSheet.show(
     context,
@@ -59,10 +61,6 @@ Future<void> showThemeSheet(BuildContext context) {
   );
 }
 
-/// Displays the notification preference sheet.
-///
-/// Holds the same local toggle state the former page did — persistence is
-/// deliberately not invented in this phase.
 Future<void> showNotificationSettingsSheet(BuildContext context) {
   return AppBottomSheet.show(
     context,
@@ -72,11 +70,6 @@ Future<void> showNotificationSettingsSheet(BuildContext context) {
   );
 }
 
-/// Displays the language selection sheet.
-///
-/// Bahasa Indonesia is the active product language; other locales are marked
-/// as planned so the list stays honest without inventing a translation
-/// pipeline.
 Future<void> showLanguageSheet(BuildContext context) {
   return AppBottomSheet.show(
     context,
@@ -100,17 +93,12 @@ Future<void> showLanguageSheet(BuildContext context) {
 
 void _noop(String? value) {}
 
-/// Renders the Indonesian label for the active [ThemeMode].
-///
-/// Shared by the theme sheet and the Preferensi row so a single source keeps
-/// the picker and the page's current-value label in sync.
 String themeModeLabel(ThemeMode mode) => switch (mode) {
   ThemeMode.light => 'Terang',
   ThemeMode.dark => 'Gelap',
   ThemeMode.system => 'Ikuti Sistem',
 };
 
-/// Local toggle state for the notification preference sheet.
 class _NotificationSettingsSheet extends StatefulWidget {
   const _NotificationSettingsSheet();
 

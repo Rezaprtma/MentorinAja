@@ -1,18 +1,27 @@
+//**
+// frontend/shared/design_system/dialogs/app_loading_dialog.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Modal dialog that blocks interaction while a background task runs.
-///
-/// Uses `showDialog` with `barrierDismissible: false` and `PopScope` to
-/// prevent back-button dismissal. Call [AppLoadingDialog.hide] when the
-/// operation completes.
 class AppLoadingDialog extends StatelessWidget {
   const AppLoadingDialog({super.key, this.message});
 
   final String? message;
 
-  /// Displays a non-dismissible loading dialog.
   static Future<void> show(BuildContext context, {String? message}) {
     return showDialog<void>(
       context: context,
@@ -22,7 +31,6 @@ class AppLoadingDialog extends StatelessWidget {
     );
   }
 
-  /// Pops the currently displayed loading dialog.
   static void hide(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pop();
   }

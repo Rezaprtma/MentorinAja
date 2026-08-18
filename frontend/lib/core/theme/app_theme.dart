@@ -1,3 +1,18 @@
+//**
+// frontend/core/theme/app_theme.dart
+//
+// frontend:
+// Theme system. Menyediakan colors, typography, spacing, dan theme configuration.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi theme rendering di light/dark mode.
+//**
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -7,31 +22,19 @@ import 'app_spacing.dart';
 import 'app_theme_extension.dart';
 import 'app_typography.dart';
 
-/// Theme factory for the MentorinAja design system.
-///
-/// Every theme is Material 3, is built from the design tokens (never raw
-/// values), and registers the semantic [AppThemeExtension] so the whole app
-/// reads a consistent palette. The `fromColorScheme`/`dynamic` entry points
-/// make the system ready for OS dynamic color without any package today.
 abstract final class AppTheme {
   const AppTheme._();
 
-  /// Light theme. Pass a custom [colorScheme] to override branding (used when
-  /// a dynamic system palette is available).
   static ThemeData light({ColorScheme? colorScheme}) {
     final scheme = colorScheme ?? _buildLightColorScheme();
     return _build(scheme, AppThemeExtension.light);
   }
 
-  /// Dark theme. Pass a custom [colorScheme] to override branding.
   static ThemeData dark({ColorScheme? colorScheme}) {
     final scheme = colorScheme ?? _buildDarkColorScheme();
     return _build(scheme, AppThemeExtension.dark);
   }
 
-  /// Builds a theme from any [ColorScheme], deriving the semantic palette from
-  /// [brightness]. This is the seam a future dynamic-color adapter uses to
-  /// inject the platform's tonal palette.
   static ThemeData fromColorScheme(
     ColorScheme colorScheme, {
     AppThemeExtension? themeExtension,
@@ -44,10 +47,6 @@ abstract final class AppTheme {
     );
   }
 
-  /// Dynamic-color-ready theme derived from a seed.
-  ///
-  /// Without an OS dynamic-color package this is deterministic: pass a [seed]
-  /// (defaults to the brand orange) and a Material 3 [DynamicSchemeVariant].
   static ThemeData dynamic(
     Brightness brightness, {
     Color seed = const Color(AppColors.seed),

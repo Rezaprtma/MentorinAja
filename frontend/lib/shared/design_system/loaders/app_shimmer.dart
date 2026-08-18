@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/loaders/app_shimmer.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Animated gradient overlay that simulates a shimmer effect.
-///
-/// Wraps [child] in a [ShaderMask] that animates a diagonal gradient. Apply
-/// over skeleton placeholders to create the popular "content loading" effect.
-/// The animation repeats indefinitely using the design-system motion tokens.
 class AppShimmer extends StatefulWidget {
   const AppShimmer({
     super.key,

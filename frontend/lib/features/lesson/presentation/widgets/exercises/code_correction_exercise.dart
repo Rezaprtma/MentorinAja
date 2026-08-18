@@ -1,3 +1,18 @@
+//**
+// frontend/features/lesson/presentation/widgets/exercises/code_correction_exercise.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -6,11 +21,6 @@ import '../../../domain/entities/lesson_exercise.dart';
 import 'exercise_card.dart';
 import 'exercise_feedback.dart';
 
-/// "Perbaiki Kode" exercise for spotting and fixing a bug.
-///
-/// With [selfEvaluate] the answer is checked the moment a choice is selected;
-/// otherwise the learner submits explicitly. A wrong pick keeps the options
-/// open for a retry until the correct fix is found.
 class CodeCorrectionExercise extends StatefulWidget {
   const CodeCorrectionExercise({
     super.key,
@@ -132,15 +142,25 @@ class _CodeSurface extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ext = context.appColors;
-    final scheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final codeBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
+    final codeTextColor = isDark
+        ? const Color(0xFFF8FAFC)
+        : const Color(0xFF0F172A);
+    final codeBorderColor = isDark
+        ? const Color(0xFF1E293B)
+        : const Color(0xFFE2E8F0);
 
     return Container(
       width: double.infinity,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: success ? ext.successContainer : scheme.surfaceContainerHighest,
+        color: success ? ext.successContainer.withValues(alpha: 0.25) : codeBg,
         borderRadius: BorderRadius.circular(AppRadius.large),
-        border: Border.all(color: success ? ext.success : ext.border),
+        border: Border.all(
+          color: success ? ext.success.withValues(alpha: 0.5) : codeBorderColor,
+          width: success ? 1.5 : 1.0,
+        ),
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -148,7 +168,7 @@ class _CodeSurface extends StatelessWidget {
         child: Text(
           code,
           style: AppTypeScale.code.copyWith(
-            color: success ? ext.onSuccessContainer : ext.textPrimary,
+            color: success ? ext.onSuccessContainer : codeTextColor,
           ),
         ),
       ),

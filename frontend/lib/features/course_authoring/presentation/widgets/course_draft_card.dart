@@ -1,13 +1,25 @@
-/// Draft course card for the mentor course list.
-///
-/// Shows the course title, description, lesson count, status badge and the
-/// last-updated time on a tappable [AppBaseCard]. The whole surface navigates
-/// to the course editor.
+//**
+// frontend/features/course_authoring/presentation/widgets/course_draft_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
+import 'package:frontend/shared/enums/enums.dart';
+import 'package:frontend/shared/widgets/asset/app_svg.dart';
 
 import '../../domain/entities/course_authoring_draft.dart';
 import '../pages/course_list_page.dart';
@@ -22,6 +34,7 @@ class CourseDraftCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ext = context.appColors;
     final scheme = Theme.of(context).colorScheme;
+    final lang = ProgrammingLanguage.fromString(draft.language);
 
     return AppBaseCard(
       onTap: onTap,
@@ -35,15 +48,19 @@ class CourseDraftCard extends StatelessWidget {
               Container(
                 width: 44,
                 height: 44,
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: scheme.primaryContainer,
+                  color:
+                      lang?.brandColors.background ?? scheme.primaryContainer,
                   borderRadius: BorderRadius.circular(AppRadius.medium),
                 ),
-                child: Icon(
-                  Icons.code_rounded,
-                  size: AppIconSizes.md,
-                  color: scheme.onPrimaryContainer,
-                ),
+                child: lang != null
+                    ? AppSvg(lang.iconPath)
+                    : Icon(
+                        Icons.code_rounded,
+                        size: AppIconSizes.md,
+                        color: scheme.onPrimaryContainer,
+                      ),
               ),
               const SizedBox(width: AppSpacing.sm),
               Expanded(

@@ -1,20 +1,22 @@
+//**
+// frontend/shared/widgets/asset/app_asset_precacher.dart
+//
+// frontend:
+// Shared widget. Menyediakan reusable UI components untuk feature screens.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering dan behavior.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/asset_config.dart';
 
-/// Widget that precaches assets at specific points in the app lifecycle.
-///
-/// Wrap the MaterialApp (or specific screens) with [AssetPrecacher] to
-/// ensure critical assets are loaded into memory before they're needed.
-/// This eliminates first-render jank for frequently accessed images.
-///
-/// ```dart
-/// MaterialApp(
-///   builder: (context, child) => AssetPrecacher(
-///     child: AppShell(child: child!),
-///   ),
-/// )
-/// ```
 class AssetPrecacher extends StatefulWidget {
   const AssetPrecacher({
     super.key,
@@ -25,10 +27,8 @@ class AssetPrecacher extends StatefulWidget {
 
   final Widget child;
 
-  /// Assets to precache immediately when the widget mounts.
   final List<String> precacheOnStartup;
 
-  /// Assets to precache after the first frame renders.
   final List<String> precacheAfterBuild;
 
   @override
@@ -74,10 +74,7 @@ class _AssetPrecacherState extends State<AssetPrecacher> {
   void _precacheAsset(String assetPath) {
     try {
       precacheImage(AssetImage(assetPath), context);
-    } catch (_) {
-      // Asset doesn't exist yet — silently ignore. Once the asset file
-      // is added to the project, precaching will work automatically.
-    }
+    } catch (_) {}
   }
 
   @override

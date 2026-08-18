@@ -1,14 +1,22 @@
-/// Temporary identity data backing the Profile screen.
-///
-/// These values are mock data used only for UI development. They are replaced
-/// by the authentication and profile endpoints in a later phase, so screens
-/// must never branch on this module's specifics.
+//**
+// frontend/features/profile/mock_profile_data.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 library;
 
 abstract final class MockProfileData {
-  /// Mock learner display name, kept in sync with the Home greeting.
   static const String displayName = 'Rina';
 
-  /// Mock learner email shown in the identity card.
   static const String email = 'rina@mentorinaja.id';
 }

@@ -1,35 +1,26 @@
-/// Logo and brandmark asset paths.
-///
-/// Organized by use surface so screens pick the correct variant without
-/// guessing. Every path is a compile-time constant — typos become errors.
-///
-/// The brand creates two SVG logomarks of the same mascot: a full-color
-/// orange mark for light surfaces and a pale, monochrome mark for the brand
-/// orange surface. Use [onLight] and [onBrand] instead of a raw asset path.
+//**
+// frontend/core/assets/app_logo.dart
+//
+// frontend:
+// Asset management. Menyediakan paths dan konfigurasi untuk icons, images, fonts.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi asset loading dan rendering.
+//**
 abstract final class AppLogo {
   const AppLogo._();
 
-  // -------------------------------------------------------------------------
-  // Brand logomark variants
-  // -------------------------------------------------------------------------
+  static const String onLight = 'assets/icons/logo/icon-w.svg';
 
-  /// Full-color orange mark — for white and other light surfaces.
-  static const String onLight = 'assets/icons/icon-w.svg';
+  static const String onBrand = 'assets/icons/logo/icon.svg';
 
-  /// Pale monochrome mark — for brand and colored surfaces (indigo, orange).
-  static const String onBrand = 'assets/icons/icon.svg';
+  static const String primary = 'assets/icons/logo/icon.svg';
 
-  // -------------------------------------------------------------------------
-  // Primary logo asset
-  // -------------------------------------------------------------------------
-
-  /// Legacy single-source logo constant; prefer [onLight]/[onBrand].
-  static const String primary = 'assets/icons/icon.svg';
-
-  // -------------------------------------------------------------------------
-  // Splash
-  // -------------------------------------------------------------------------
-
-  /// Splash screen logo.
-  static const String splash = 'assets/icons/icon.svg';
+  static const String splash = 'assets/icons/logo/icon.svg';
 }

@@ -1,3 +1,18 @@
+//**
+// frontend/features/explore/mock_explore_data.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
@@ -5,11 +20,6 @@ import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/shared/data/tech_brand_colors.dart';
 import 'package:frontend/shared/models/course_identifier.dart';
 
-/// A learning area a learner can browse.
-///
-/// Carries a domain name, a short description and the supporting technology
-/// stack so discovery reads by area of study rather than by individual course.
-/// A technology mark (SVG or Material icon) drives the category chip.
 class ExploreCategory {
   const ExploreCategory({
     required this.name,
@@ -20,26 +30,19 @@ class ExploreCategory {
     required this.brand,
   });
 
-  /// Display name of the learning area.
   final String name;
 
-  /// One-line invitation describing what is learned inside the area.
   final String description;
 
-  /// SVG asset paths of the technologies taught in the area.
   final List<String> stack;
 
-  /// SVG asset of the leading technology logo, when available.
   final String? iconPath;
 
-  /// Fallback Material icon used when no technology logo applies.
   final IconData? icon;
 
-  /// Brand colors driving the chip's active state and card band.
   final TechBrandColors brand;
 }
 
-/// A course available for discovery in the Explore surface.
 class ExploreCourse {
   const ExploreCourse({
     required this.title,
@@ -59,13 +62,10 @@ class ExploreCourse {
   final double rating;
   final TechBrandColors brand;
 
-  /// Stable id resolving this course to the shared CourseDetailPage.
   String get courseId => CourseIdentifier.slug(title);
 }
 
-/// Temporary local data powering the Explore screen.
 abstract final class MockExploreData {
-  /// Learning areas, always led by an "all" option.
   static const List<ExploreCategory> categories = [
     ExploreCategory(
       name: 'Semua',
@@ -170,14 +170,11 @@ abstract final class MockExploreData {
     ),
   ];
 
-  /// Learning areas shown in the "Untuk Kamu" discovery section.
   static List<ExploreCategory> get discoveryCategories =>
       categories.where((category) => category.name != 'Semua').toList();
 
-  /// Courses shown in the horizontal "Kursus Populer" rail.
   static List<ExploreCourse> get popularCourses => allCourses.take(6).toList();
 
-  /// Full catalog used by search and category filtering.
   static const List<ExploreCourse> allCourses = [
     ExploreCourse(
       title: 'Flutter untuk Pemula',

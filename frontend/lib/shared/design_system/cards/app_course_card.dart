@@ -1,15 +1,24 @@
+//**
+// frontend/shared/design_system/cards/app_course_card.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import '../badges/app_badge.dart';
 import 'app_base_card.dart';
 
-/// Vertical card for displaying a course preview.
-///
-/// Composes a cover image, title, instructor name and optional metadata row.
-/// Typically used in horizontal scrolling lists or grid layouts. The cover
-/// area accepts any [Widget] so screens can supply an [Image.network],
-/// placeholder, or custom illustration.
 class AppCourseCard extends StatelessWidget {
   const AppCourseCard({
     super.key,
@@ -24,22 +33,16 @@ class AppCourseCard extends StatelessWidget {
     this.onLongPress,
   });
 
-  /// Cover area rendered at the top of the card; typically 16:9 aspect ratio.
   final Widget? cover;
 
-  /// Course title.
   final String title;
 
-  /// Instructor or category label.
   final String? subtitle;
 
-  /// Bottom metadata row (e.g. duration, lesson count).
   final Widget? meta;
 
-  /// Optional badge (e.g. "New", "Free") positioned top-right of the cover.
   final String? badge;
 
-  /// Optional trailing widget in the bottom row.
   final Widget? trailing;
 
   final VoidCallback? onTap;

@@ -1,10 +1,20 @@
+//**
+// frontend/features/lesson/presentation/stages/lesson_stage.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 
-/// The three stage views inside the Course Player flow.
-///
-/// A lesson is split into teaching (Materi), a hands-on challenge (Game) and
-/// application exercises (Latihan). Each stage carries its own label, icon and
-/// intro copy used by the stage intro card and the top indicator.
 enum LessonStage {
   materi(
     label: 'MATERI',

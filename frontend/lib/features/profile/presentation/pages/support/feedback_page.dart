@@ -1,13 +1,23 @@
+//**
+// frontend/features/profile/presentation/pages/support/feedback_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
-/// Feedback and suggestion form.
-///
-/// Lets the learner pick a category, write a message with a live character
-/// counter and submit. Submission is a local mock that swaps the form for a
-/// clear success state — no backend endpoint is invented.
 class FeedbackPage extends StatefulWidget {
   const FeedbackPage({super.key});
 
@@ -76,7 +86,6 @@ class _FeedbackPageState extends State<FeedbackPage> {
   }
 }
 
-/// The feedback entry form shown before submission.
 class _FeedbackForm extends StatelessWidget {
   const _FeedbackForm({
     required this.messageController,

@@ -1,3 +1,18 @@
+//**
+// frontend/app/app.dart
+//
+// frontend:
+// Root MaterialApp widget. Configures theme, routing, error handling, dan initial route.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya bertanggung jawab terhadap konfigurasi Flutter app.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui routing dan controllers.
+//
+// qa:
+// QA perlu memvalidasi theme rendering, routing behavior, dan error handling.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/core.dart';
@@ -84,6 +99,10 @@ class App extends StatelessWidget {
         return const CourseCreatePage();
       case _ when routeName.startsWith('/mentor/courses/'):
         final parts = routeName.split('/');
+        if (parts.length > 4 && parts[4] == 'preview') {
+          final lessonId = parts.length > 5 ? parts[5] : '';
+          return _buildCoursePreview(parts[2], lessonId);
+        }
         if (parts.length > 4 && parts[4] == 'lessons') {
           return LessonEditorPage(courseId: parts[2], lessonId: parts[5]);
         }
@@ -106,5 +125,23 @@ class App extends StatelessWidget {
       default:
         return const Scaffold(body: Center(child: Text('Not Found')));
     }
+  }
+
+  Widget _buildCoursePreview(String courseId, String lessonId) {
+    final draft = MockCourseAuthoringRepository.instance.findDraft(courseId);
+    if (draft == null) {
+      return const Scaffold(
+        body: Center(child: Text('Course Tidak Ditemukan')),
+      );
+    }
+    final preview = const AuthoringPreviewAdapter().toPreview(draft);
+    final resolvedLesson = lessonId.isEmpty
+        ? (preview.lessons.isEmpty ? '' : preview.lessons.first.id)
+        : lessonId;
+    return CoursePlayerPage(
+      courseId: courseId,
+      lessonId: resolvedLesson,
+      preview: preview,
+    );
   }
 }

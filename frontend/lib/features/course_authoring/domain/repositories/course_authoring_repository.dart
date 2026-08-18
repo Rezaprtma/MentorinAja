@@ -1,4 +1,18 @@
-/// Data source seam for course authoring drafts.
+//**
+// frontend/features/course_authoring/domain/repositories/course_authoring_repository.dart
+//
+// frontend:
+// Repository interface. Mendefinisikan kontrak data untuk feature.
+//
+// backend:
+// Future: akan diimplementasikan dengan real backend calls.
+//
+// api:
+// Future: akan menjadi integration point untuk backend APIs.
+//
+// qa:
+// QA perlu memvalidasi data flow dan error handling.
+//**
 library;
 
 import '../entities/course_authoring_draft.dart';

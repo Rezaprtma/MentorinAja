@@ -1,3 +1,18 @@
+//**
+// frontend/features/explore/presentation/pages/category_detail_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/features/course/course.dart';
@@ -8,16 +23,9 @@ import 'package:frontend/shared/widgets/widgets.dart';
 
 import '../../mock_explore_data.dart';
 
-/// Full-screen listing of a single learning area.
-///
-/// Receives the category name from the route, resolves its supporting
-/// technology stack and lists every catalog course in that area as a
-/// [CourseSummaryCard]. Course taps open the shared CourseDetailPage through
-/// the stable course id.
 class CategoryDetailPage extends StatelessWidget {
   const CategoryDetailPage({super.key, required this.categoryName});
 
-  /// Display name of the learning area, e.g. "Mobile App".
   final String categoryName;
 
   @override
@@ -82,7 +90,6 @@ class CategoryDetailPage extends StatelessWidget {
   }
 }
 
-/// Brand-tinted banner describing the learning area.
 class _CategoryHero extends StatelessWidget {
   const _CategoryHero({required this.category});
 
@@ -152,7 +159,6 @@ class _CategoryHero extends StatelessWidget {
   }
 }
 
-/// White technology logo tile with a soft shadow, used inside the hero.
 class _StackTile extends StatelessWidget {
   const _StackTile({required this.assetPath});
 
@@ -180,7 +186,6 @@ class _StackTile extends StatelessWidget {
   }
 }
 
-/// Responsive grid of course summary cards for the category.
 class _CourseGrid extends StatelessWidget {
   const _CourseGrid({required this.courses});
 

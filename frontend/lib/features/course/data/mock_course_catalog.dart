@@ -1,3 +1,18 @@
+//**
+// frontend/features/course/data/mock_course_catalog.dart
+//
+// frontend:
+// Mock data. Menyediakan sample data untuk development dan testing.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya menyediakan mock data.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi mock data coverage dan edge cases.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
@@ -6,13 +21,7 @@ import 'package:frontend/shared/data/tech_brand_colors.dart';
 import '../domain/entities/course_detail.dart';
 import '../domain/entities/course_lesson.dart';
 
-/// Canonical mock course catalog backing [MockCourseRepository].
-///
-/// Mirrors the titles already used on Home, Explore and Progress so every entry
-/// point resolves to the same course record. Lesson states model an enrollment
-/// snapshot for courses shown as in-progress on the Progress tab.
 abstract final class MockCourseCatalog {
-  /// Full catalog keyed by stable course id.
   static final List<CourseDetail> courses = <CourseDetail>[
     CourseDetail(
       id: 'dasar-python',
@@ -717,8 +726,6 @@ abstract final class MockCourseCatalog {
     ),
   ];
 
-  /// Builds a lesson outline from [titles], marking [completed] finished
-  /// lessons and [current] as the next lesson to study.
   static List<CourseLesson> _lessons(
     List<String> titles, {
     int completed = 0,

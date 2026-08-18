@@ -1,10 +1,20 @@
+//**
+// frontend/shared/design_system/dialogs/app_alert_dialog.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
-/// Themed alert dialog with a static [show] helper.
-///
-/// Renders a Material 3 [AlertDialog] with the design tokens and wraps it in a
-/// standard `showDialog` call. The static helper keeps dialog presentation
-/// consistent and reduces boilerplate at call sites.
 class AppAlertDialog extends StatelessWidget {
   const AppAlertDialog({
     super.key,
@@ -23,7 +33,6 @@ class AppAlertDialog extends StatelessWidget {
   final List<Widget>? actions;
   final bool dismissible;
 
-  /// Displays a themed alert dialog.
   static Future<T?> show<T>(
     BuildContext context, {
     String? title,

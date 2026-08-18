@@ -1,13 +1,22 @@
+//**
+// frontend/shared/design_system/cards/app_base_card.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Foundation card widget used by all card variants.
-///
-/// Wraps Material [Card] with the design tokens: consistent radius, surface
-/// color, elevation and optional ink feedback when [onTap] is provided. Cards
-/// are the primary container for grouped content (course previews, stats,
-/// info blocks) and appear in lists, grids and standalone positions.
 class AppBaseCard extends StatelessWidget {
   const AppBaseCard({
     super.key,
@@ -27,22 +36,16 @@ class AppBaseCard extends StatelessWidget {
 
   final Widget child;
 
-  /// Inner padding.
   final EdgeInsetsGeometry padding;
 
-  /// Card background; defaults to theme card color.
   final Color? color;
 
-  /// Surface lift; defaults to [AppElevation.sm].
   final double elevation;
 
-  /// Corner radius; defaults to [AppRadius.large].
   final double? radius;
 
-  /// Optional border; set to get an outlined card.
   final BorderSide? borderSide;
 
-  /// Tap handler; renders an [InkWell] when non-null.
   final VoidCallback? onTap;
 
   final VoidCallback? onLongPress;

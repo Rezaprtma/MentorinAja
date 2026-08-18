@@ -1,6 +1,18 @@
-/// Profile feature public API.
-///
-/// Import this barrel for profile feature screens, widgets and mock data.
+//**
+// frontend/features/profile/profile.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 library;
 
 export 'logic/profile_controller.dart';

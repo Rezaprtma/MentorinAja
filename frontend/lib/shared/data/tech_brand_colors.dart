@@ -1,9 +1,20 @@
+//**
+// frontend/shared/data/tech_brand_colors.dart
+//
+// frontend:
+// Shared data. Menyediakan common mock data dan utilities.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi data coverage dan edge cases.
+//**
 import 'package:flutter/material.dart';
 
-/// Brand-derived color triple for a technology course card.
-///
-/// Each technology carries its own background, accent, and on-color so the
-/// card immediately communicates which technology it represents.
 class TechBrandColors {
   const TechBrandColors({
     required this.background,

@@ -1,10 +1,24 @@
+//**
+// frontend/features/profile/presentation/widgets/profile_photo_avatar.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
 import '../../mock_profile_photos.dart';
 
-/// Profile avatar that falls back to the initial circle when no photo is set.
 class ProfilePhotoAvatar extends StatelessWidget {
   const ProfilePhotoAvatar({
     super.key,

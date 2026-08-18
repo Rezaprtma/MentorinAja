@@ -1,13 +1,20 @@
+//**
+// frontend/features/auth/presentation/widgets/auth_ambient_background.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
-/// Subtle ambient decoration behind the authentication content.
-///
-/// Paints a long flowing organic ridge plus two flat translucent corner circles
-/// (top-left and bottom-right) so the white page gains quiet depth without
-/// competing with the Auth hero. All shapes use the design system's orange
-/// family at 4–8% opacity, are drawn from Flutter primitives (no gradients, no
-/// assets), stay static, and never sit above content — the only motion on the
-/// screen is the Auth Lottie.
 class AuthAmbientBackground extends StatelessWidget {
   const AuthAmbientBackground({super.key});
 
@@ -27,7 +34,6 @@ class AuthAmbientBackground extends StatelessWidget {
   }
 }
 
-/// Paints the ambient wave and corner shapes, scaled to the canvas size.
 class _AmbientBackgroundPainter extends CustomPainter {
   _AmbientBackgroundPainter({
     required this.primary,
@@ -58,8 +64,6 @@ class _AmbientBackgroundPainter extends CustomPainter {
       alpha: 0.07,
     );
 
-    // One continuous asymmetric ridge that crests near the hero's lower half,
-    // undulates behind the actions, and flows off the right edge.
     final wave = Path()
       ..moveTo(-w * 0.03, h * 0.72)
       ..cubicTo(w * 0.10, h * 0.58, w * 0.24, h * 0.40, w * 0.42, h * 0.44)
@@ -77,7 +81,6 @@ class _AmbientBackgroundPainter extends CustomPainter {
     );
   }
 
-  /// Draws a flat translucent circle (no gradient) used for quiet depth.
   void _paintFlatCircle(
     Canvas canvas, {
     required Offset center,

@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/buttons/app_floating_action_button.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Themed floating action button.
-///
-/// Use the default constructor for a circular [FloatingActionButton] and
-/// [AppFloatingActionButton.extended] for a labeled one. Defaults follow the
-/// M3 spec (primary container surface) but are overridable per screen.
 class AppFloatingActionButton extends StatelessWidget {
   const AppFloatingActionButton({
     super.key,
@@ -21,7 +31,6 @@ class AppFloatingActionButton extends StatelessWidget {
   }) : _extended = false,
        label = null;
 
-  /// Extended FAB with a visible label.
   const AppFloatingActionButton.extended({
     super.key,
     required this.icon,

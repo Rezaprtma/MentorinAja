@@ -1,9 +1,20 @@
+//**
+// frontend/features/onboarding/logic/onboarding_controller.dart
+//
+// frontend:
+// Controller. Mengelola state dan business logic untuk feature.
+//
+// backend:
+// Future: akan membutuhkan backend persistence dan API integration.
+//
+// api:
+// Future: akan melakukan API calls melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi state transitions dan edge cases.
+//**
 import 'package:flutter/foundation.dart';
 
-/// Manages onboarding page state and navigation decisions.
-///
-/// Exposes immutable snapshots for the UI layer. Performs no widget
-/// operations — pure state holder.
 class OnboardingController extends ChangeNotifier {
   OnboardingController({this.totalPages = 3});
 
@@ -11,16 +22,12 @@ class OnboardingController extends ChangeNotifier {
 
   int _currentPage = 0;
 
-  /// Zero-based index of the visible page.
   int get currentPage => _currentPage;
 
-  /// Whether the current page is the last page.
   bool get isLastPage => _currentPage == totalPages - 1;
 
-  /// Whether the current page is the first page.
   bool get isFirstPage => _currentPage == 0;
 
-  /// Updates the current page when the [PageController] reports a change.
   void onPageChanged(int page) {
     if (_isDisposed || page == _currentPage) return;
     _currentPage = page;

@@ -1,9 +1,19 @@
-/// An authored lesson inside a course draft.
+//**
+// frontend/features/course_authoring/domain/entities/lesson_draft.dart
+//
+// frontend:
+// Entity/model. Mendefinisikan data structures untuk feature.
+//
+// backend:
+// Future: akan sesuai dengan backend data models.
+//
+// api:
+// Future: akan menjadi frontend expected contract untuk APIs.
+//
+// qa:
+// QA perlu memvalidasi data validation dan edge cases.
+//**
 library;
-
-import 'exercise_draft.dart';
-import 'game_draft.dart';
-import 'material_block_draft.dart';
 
 class LessonDraft {
   const LessonDraft({
@@ -13,9 +23,7 @@ class LessonDraft {
     this.objective,
     this.estimatedMinutes = 10,
     this.order = 0,
-    this.materialBlocks = const [],
-    this.games = const [],
-    this.exercises = const [],
+    this.materialPdfPath,
   });
 
   final String id;
@@ -24,9 +32,8 @@ class LessonDraft {
   final String? objective;
   final int estimatedMinutes;
   final int order;
-  final List<MaterialBlockDraft> materialBlocks;
-  final List<GameDraft> games;
-  final List<ExerciseDraft> exercises;
+
+  final String? materialPdfPath;
 
   LessonDraft copyWith({
     String? id,
@@ -35,9 +42,7 @@ class LessonDraft {
     String? objective,
     int? estimatedMinutes,
     int? order,
-    List<MaterialBlockDraft>? materialBlocks,
-    List<GameDraft>? games,
-    List<ExerciseDraft>? exercises,
+    String? materialPdfPath,
   }) {
     return LessonDraft(
       id: id ?? this.id,
@@ -46,9 +51,7 @@ class LessonDraft {
       objective: objective ?? this.objective,
       estimatedMinutes: estimatedMinutes ?? this.estimatedMinutes,
       order: order ?? this.order,
-      materialBlocks: materialBlocks ?? this.materialBlocks,
-      games: games ?? this.games,
-      exercises: exercises ?? this.exercises,
+      materialPdfPath: materialPdfPath ?? this.materialPdfPath,
     );
   }
 }

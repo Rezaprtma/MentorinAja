@@ -1,14 +1,24 @@
+//**
+// frontend/features/lesson/presentation/widgets/stages/stage_intro_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
 import '../../stages/lesson_stage.dart';
 
-/// Identifies the current [LessonStage] at the top of each stage view.
-///
-/// Shows the stage chip, its icon and a short stage-specific description so
-/// every stage opens with clear context. The lesson title stays in the player
-/// app bar, so it is not repeated here.
 class StageIntroCard extends StatelessWidget {
   const StageIntroCard({super.key, required this.stage});
 

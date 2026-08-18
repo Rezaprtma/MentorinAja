@@ -1,13 +1,23 @@
+//**
+// frontend/shared/design_system/loaders/app_skeleton.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import 'app_shimmer.dart';
 
-/// Placeholder shape used during content loading.
-///
-/// Renders a rounded rectangle or circle filled with the current theme's
-/// `surfaceContainerHighest` color. Wrap in [AppShimmer] to add the
-/// animated gradient overlay.
 class AppSkeleton extends StatelessWidget {
   const AppSkeleton({
     super.key,
@@ -24,7 +34,6 @@ class AppSkeleton extends StatelessWidget {
   final bool circle;
   final Color? color;
 
-  /// Convenience for a text-line skeleton (full width, fixed height).
   const AppSkeleton.text({
     super.key,
     this.height = 14,
@@ -33,7 +42,6 @@ class AppSkeleton extends StatelessWidget {
   }) : width = double.infinity,
        circle = false;
 
-  /// Convenience for a circular avatar skeleton.
   const AppSkeleton.circle({super.key, double size = 40, this.color})
     : width = size,
       height = size,
@@ -54,7 +62,6 @@ class AppSkeleton extends StatelessWidget {
   }
 }
 
-/// Pre-built skeleton layout for a typical card placeholder.
 class AppSkeletonCard extends StatelessWidget {
   const AppSkeletonCard({super.key, this.showImage = true});
 
@@ -85,7 +92,6 @@ class AppSkeletonCard extends StatelessWidget {
   }
 }
 
-/// Pre-built skeleton for a list tile.
 class AppSkeletonTile extends StatelessWidget {
   const AppSkeletonTile({super.key});
 

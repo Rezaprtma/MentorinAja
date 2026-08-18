@@ -1,3 +1,18 @@
+//**
+// frontend/features/auth/logic/otp_verification_controller.dart
+//
+// frontend:
+// Controller. Mengelola state dan business logic untuk feature.
+//
+// backend:
+// Future: akan membutuhkan backend persistence dan API integration.
+//
+// api:
+// Future: akan melakukan API calls melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi state transitions dan edge cases.
+//**
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -5,12 +20,6 @@ import 'package:flutter/foundation.dart';
 import 'auth_flow.dart';
 import 'auth_validators.dart';
 
-/// State for the verification-code step.
-///
-/// Owns the OTP slice of the flow: the entered code, verify loading, an inline
-/// error that drives the shake animation, and the resend countdown. No backend
-/// is involved — the controller sequences only UI state; a verification service
-/// will later perform the real code check.
 class OtpVerificationController extends ChangeNotifier {
   OtpVerificationController({
     this.length = 6,
@@ -18,13 +27,10 @@ class OtpVerificationController extends ChangeNotifier {
     this.resendDelay = AuthFlow.verificationTtl,
   });
 
-  /// Number of digits in the code.
   final int length;
 
-  /// How long verify is shown as busy before completing.
   final Duration verifyDelay;
 
-  /// How long the user must wait before requesting a new code.
   final Duration resendDelay;
 
   String _code = '';
@@ -37,35 +43,26 @@ class OtpVerificationController extends ChangeNotifier {
   bool _disposed = false;
   int _errorEpoch = 0;
 
-  /// Current aggregated code.
   String get code => _code;
 
-  /// Whether the Verify action is running.
   bool get isVerifying => _isVerifying;
 
-  /// Whether verification successfully completed.
   bool get isVerified => _isVerified;
 
-  /// Latest inline error (also triggers the shake animation).
   String? get error => _error;
 
-  /// Whether a new code may be requested right now.
   bool get canResend => _canResend;
 
-  /// Seconds left before [resendDelay] elapses.
   int get secondsRemaining => _secondsRemaining;
 
-  /// Bumped whenever [error] changes; the UI uses it to replay the shake.
   int get errorEpoch => _errorEpoch;
 
-  /// Formats the countdown as `mm:ss`.
   String get countdownLabel {
     final minutes = (_secondsRemaining ~/ 60).toString().padLeft(2, '0');
     final seconds = (_secondsRemaining % 60).toString().padLeft(2, '0');
     return '$minutes:$seconds';
   }
 
-  /// Whether [error] is an editable validation issue (not a resend lock).
   bool get hasEditableError => _error != null;
 
   void updateCode(String value) {
@@ -76,7 +73,6 @@ class OtpVerificationController extends ChangeNotifier {
     }
   }
 
-  /// Starts or restarts the resend countdown.
   void startCountdown() {
     _countdownTimer?.cancel();
     _secondsRemaining = resendDelay.inSeconds;
@@ -92,17 +88,11 @@ class OtpVerificationController extends ChangeNotifier {
     });
   }
 
-  /// Requests a new code and restarts the countdown.
   void resend() {
     _error = null;
     startCountdown();
   }
 
-  /// Runs the Verify transition.
-  ///
-  /// An incomplete or invalid code sets [error] and resolves to `false`;
-  /// otherwise the verify action completes and resolves to `true`. No fake
-  /// OTP — the code is not matched against anything.
   Future<bool> verify() async {
     final validationError = AuthValidators.otp(_code, expectedLength: length);
     if (validationError != null) {

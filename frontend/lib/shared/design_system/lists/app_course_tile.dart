@@ -1,14 +1,23 @@
+//**
+// frontend/shared/design_system/lists/app_course_tile.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import 'app_tile.dart';
 
-/// Horizontal course row: thumbnail + title + metadata.
-///
-/// A compact list representation of a course, typically used in search results,
-/// "continue learning" lists, and horizontal scrolling feeds. Accepts a
-/// thumbnail [Widget] (e.g. [Image.network]) and renders title + subtitle
-/// + optional trailing widget.
 class AppCourseTile extends StatelessWidget {
   const AppCourseTile({
     super.key,
@@ -22,23 +31,18 @@ class AppCourseTile extends StatelessWidget {
     this.thumbnailSize = 56,
   });
 
-  /// Thumbnail widget rendered at the leading edge.
   final Widget? thumbnail;
 
-  /// Course title.
   final String title;
 
-  /// Instructor or category subtitle.
   final String? subtitle;
 
-  /// Optional trailing widget (e.g. progress indicator, arrow).
   final Widget? trailing;
 
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final bool enabled;
 
-  /// Thumbnail dimension (square).
   final double thumbnailSize;
 
   @override

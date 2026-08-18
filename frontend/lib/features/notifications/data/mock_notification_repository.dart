@@ -1,13 +1,23 @@
+//**
+// frontend/features/notifications/data/mock_notification_repository.dart
+//
+// frontend:
+// Mock data. Menyediakan sample data untuk development dan testing.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya menyediakan mock data.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi mock data coverage dan edge cases.
+//**
 import 'package:frontend/shared/models/course_identifier.dart';
 
 import '../domain/entities/app_notification.dart';
 import '../domain/repositories/notification_repository.dart';
 
-/// Local feed standing in for the backend notification service.
-///
-/// Timestamps are computed relative to "now" so the time groupings always
-/// look natural. Course ids are derived from real catalog titles so that
-/// actionable notifications resolve to the shared CourseDetailPage.
 class MockNotificationRepository implements NotificationRepository {
   @override
   List<AppNotification> fetch() {

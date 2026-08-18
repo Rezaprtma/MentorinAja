@@ -1,10 +1,18 @@
-/// Authentication feature public API.
-///
-/// Import this barrel for screen, controller, and pure-logic access.
-///
-/// ```dart
-/// import 'package:frontend/features/auth/auth.dart';
-/// ```
+//**
+// frontend/features/auth/auth.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 library;
 
 export 'logic/auth_flow.dart';

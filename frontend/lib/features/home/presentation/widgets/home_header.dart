@@ -1,13 +1,22 @@
+//**
+// frontend/features/home/presentation/widgets/home_header.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Greeting row for the Home screen.
-///
-/// A time-of-day eyebrow pair throws a personalized "ready to continue
-/// learning?" line under the learner's name. The notification action stays
-/// alone on the trailing edge — profile access lives in the bottom navigation —
-/// so the header never grows taller than it needs to be.
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
     super.key,
@@ -15,10 +24,8 @@ class HomeHeader extends StatelessWidget {
     this.onNotificationsPressed,
   });
 
-  /// Learner's name woven into the greeting line.
   final String displayName;
 
-  /// Opens the notifications surface.
   final VoidCallback? onNotificationsPressed;
 
   @override

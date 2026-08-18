@@ -1,13 +1,23 @@
+//**
+// frontend/features/profile/presentation/pages/support/help_center_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
-/// Frequently asked questions screen.
-///
-/// A search field filters the FAQ list as the learner types; answers expand in
-/// place so the page never leaves the current scroll position. Copy is static
-/// product content — no backend endpoint is invented.
 class HelpCenterPage extends StatefulWidget {
   const HelpCenterPage({super.key});
 
@@ -147,7 +157,6 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
   }
 }
 
-/// One expandable question and answer row.
 class _FaqTile extends StatelessWidget {
   const _FaqTile({required this.question, required this.answer});
 

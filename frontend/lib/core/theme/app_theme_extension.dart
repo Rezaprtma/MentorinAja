@@ -1,14 +1,22 @@
+//**
+// frontend/core/theme/app_theme_extension.dart
+//
+// frontend:
+// Theme system. Menyediakan colors, typography, spacing, dan theme configuration.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi theme rendering di light/dark mode.
+//**
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-/// Semantic color set that adapts to the active theme.
-///
-/// Material 3's [ColorScheme] already covers primary/secondary/error and
-/// surfaces. [AppThemeExtension] adds the product-specific roles that are not
-/// part of [ColorScheme] — success, warning, info, card, divider, border, and
-/// the text tones — so the whole app reads a consistent palette from one typed
-/// place and every color still switches correctly between light and dark.
 @immutable
 class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   const AppThemeExtension({
@@ -34,17 +42,13 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     required this.onInfoContainer,
   });
 
-  /// Page background.
   final Color background;
 
-  /// Elevated card surface.
   final Color card;
   final Color onCard;
 
-  /// Hairline dividers.
   final Color divider;
 
-  /// Structural borders.
   final Color border;
 
   final Color textPrimary;
@@ -66,7 +70,6 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
   final Color infoContainer;
   final Color onInfoContainer;
 
-  /// Light-mode semantic palette.
   static const AppThemeExtension light = AppThemeExtension(
     background: AppColors.background,
     card: AppColors.card,
@@ -90,7 +93,6 @@ class AppThemeExtension extends ThemeExtension<AppThemeExtension> {
     onInfoContainer: AppColors.onInfoContainer,
   );
 
-  /// Dark-mode semantic palette.
   static const AppThemeExtension dark = AppThemeExtension(
     background: AppDarkColors.background,
     card: AppDarkColors.card,

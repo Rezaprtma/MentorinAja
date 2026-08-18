@@ -1,3 +1,18 @@
+//**
+// frontend/features/onboarding/presentation/widgets/onboarding_page.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
@@ -8,16 +23,6 @@ import 'onboarding_illustration.dart';
 import 'onboarding_indicator.dart';
 import 'onboarding_page_theme.dart';
 
-/// A single onboarding slide, isolated as its own visual coordinate space.
-///
-/// The root [ClipRect] hard-clips the background, illustration, text,
-/// indicator and CTA to this page's bounds so nothing owned by a neighbor page
-/// can ever bleed across a page boundary during a horizontal swipe.
-///
-/// Each chapter carries its own background, brand logomark, compact "Next"
-/// circle or final wide CTA, and page indicator, all resolved from the
-/// [OnboardingPageTheme] so swiping feels like moving through chapters of one
-/// product.
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({
     super.key,
@@ -84,8 +89,6 @@ class OnboardingPage extends StatelessWidget {
   }
 }
 
-/// Illustration area with the brand mark pinned to the top-left corner and the
-/// Skip action in the top-right corner.
 class _OnboardingHead extends StatelessWidget {
   const _OnboardingHead({
     required this.theme,
@@ -134,9 +137,6 @@ class _OnboardingHead extends StatelessWidget {
   }
 }
 
-/// Bottom block: title, description, page indicator, and the chapter CTA —
-/// a compact circle on navigation pages or a wide primary action on the
-/// final page.
 class _OnboardingBody extends StatelessWidget {
   const _OnboardingBody({
     required this.theme,
@@ -244,7 +244,6 @@ class _OnboardingBody extends StatelessWidget {
   }
 }
 
-/// Compact circular "Next" navigation affordance for pages 1 and 2.
 class _NextNavigationButton extends StatelessWidget {
   const _NextNavigationButton({
     required this.background,
@@ -284,7 +283,6 @@ class _NextNavigationButton extends StatelessWidget {
   }
 }
 
-/// Wide primary action shown on the final page.
 class _OnboardingActionButton extends StatelessWidget {
   const _OnboardingActionButton({
     required this.background,

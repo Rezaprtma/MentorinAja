@@ -1,3 +1,18 @@
+//**
+// frontend/features/home/presentation/widgets/hero_banner_carousel.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -7,23 +22,11 @@ import 'package:frontend/shared/widgets/widgets.dart';
 
 import '../../mock_home_data.dart';
 
-/// Horizontal promotional carousel on the Home screen.
-///
-/// Every page is a flat brand surface with no gradients and carries its own
-/// story based on [MockBanner.kind]: the achievement page highlights today's
-/// streak, the interest page shows personalized progress as a ring, and the
-/// discovery page showcases new material with a full illustration. Icons and
-/// illustrations sit directly on the banner canvas — no mini background
-/// containers — and pages peek past the viewport edge while swiping so the next
-/// banner is always hinted at. Height is derived from the measured text at the
-/// available width so no page clips or overflows on any screen size.
 class HeroBannerCarousel extends StatefulWidget {
   const HeroBannerCarousel({super.key, required this.banners, this.onCta});
 
-  /// Promotional pages shown in the carousel.
   final List<MockBanner> banners;
 
-  /// Invoked when any banner call-to-action is tapped.
   final VoidCallback? onCta;
 
   @override
@@ -33,7 +36,6 @@ class HeroBannerCarousel extends StatefulWidget {
 class _HeroBannerCarouselState extends State<HeroBannerCarousel> {
   static const double _viewportFraction = 0.98;
 
-  /// Horizontal inset per page that produces a visible gap while peeking.
   static const double _pageGap = 4;
 
   late final PageController _controller;
@@ -98,7 +100,6 @@ class _HeroBannerCarouselState extends State<HeroBannerCarousel> {
   }
 }
 
-/// One flat banner page; [probeHeight] mirrors its render for carousel sizing.
 class _BannerCard extends StatelessWidget {
   const _BannerCard({required this.banner, this.onCta});
 
@@ -106,13 +107,11 @@ class _BannerCard extends StatelessWidget {
   static const double _ctaHorizontalPadding = AppSpacing.md;
   static const double _ctaVerticalPadding = AppSpacing.xs;
 
-  /// Smallest inner width that keeps the two-column layout.
   static const double _twoColumnMinWidth = 260;
 
   final MockBanner banner;
   final VoidCallback? onCta;
 
-  /// Side panel width matched to each banner's visual.
   static double _sidePanelWidthFor(MockBannerKind kind) {
     return switch (kind) {
       MockBannerKind.achievement => 116,
@@ -121,7 +120,6 @@ class _BannerCard extends StatelessWidget {
     };
   }
 
-  /// Predicts the rendered height of [banner] at the given [width].
   static double probeHeight(MockBanner banner, TextScaler scale, double width) {
     final innerWidth = width - _padding * 2;
     if (innerWidth <= 0) return 0;
@@ -320,11 +318,6 @@ class _BannerCard extends StatelessWidget {
   }
 }
 
-/// Translucent geometric shapes behind every banner's content.
-///
-/// Each banner kind uses a restrained circle composition from the brand palette
-/// so the three pages read as one carousel without any gradient. The discovery
-/// page stays intentionally minimal so the illustration leads.
 class _BannerDecoration extends StatelessWidget {
   const _BannerDecoration({required this.kind, required this.onSurface});
 
@@ -376,7 +369,6 @@ class _BannerDecoration extends StatelessWidget {
   }
 }
 
-/// One absolutely-positioned decorative circle.
 class _Circle extends StatelessWidget {
   const _Circle({
     this.left,
@@ -410,7 +402,6 @@ class _Circle extends StatelessWidget {
   }
 }
 
-/// Purpose-matched side visual rendered directly on the banner canvas.
 class _SidePanel extends StatelessWidget {
   const _SidePanel({
     required this.banner,
@@ -446,10 +437,6 @@ class _SidePanel extends StatelessWidget {
   }
 }
 
-/// Day-streak composition on the achievement banner.
-///
-/// The flame is the primary element and sits directly on the banner canvas — no
-/// badge circle — with the streak number close below and slightly smaller.
 class _StreakPanel extends StatelessWidget {
   const _StreakPanel({
     required this.days,
@@ -457,10 +444,8 @@ class _StreakPanel extends StatelessWidget {
     this.compact = false,
   });
 
-  /// Natural height of the vertical composition used for carousel sizing.
   static const double naturalHeight = 156;
 
-  /// Natural height of the compact horizontal strip.
   static const double compactNaturalHeight = 56;
 
   final int days;
@@ -532,10 +517,6 @@ class _StreakPanel extends StatelessWidget {
   }
 }
 
-/// Personalized progress visual on the interest banner.
-///
-/// A thick determinate ring with the percentage centered renders directly on
-/// the banner surface (no panel) with the summary label below.
 class _InterestPanel extends StatelessWidget {
   const _InterestPanel({
     required this.progress,
@@ -544,10 +525,8 @@ class _InterestPanel extends StatelessWidget {
     this.compact = false,
   });
 
-  /// Natural height of the vertical composition used for carousel sizing.
   static const double naturalHeight = 124;
 
-  /// Natural height of the compact horizontal strip.
   static const double compactNaturalHeight = 56;
 
   final double? progress;
@@ -627,7 +606,6 @@ class _InterestPanel extends StatelessWidget {
   }
 }
 
-/// Determinate circular progress ring with a centered percentage label.
 class _RingProgress extends StatelessWidget {
   const _RingProgress({
     required this.percent,
@@ -673,12 +651,6 @@ class _RingProgress extends StatelessWidget {
   }
 }
 
-/// Discovery visual on the recommendation banner.
-///
-/// In the single-column layout this renders a compact horizontal strip with a
-/// thumbnail and label. The two-column layout reserves the side panel as empty
-/// space and lets [_DiscoveryIllustration] draw the full illustration anchored
-/// to the banner's right edge.
 class _DiscoveryPanel extends StatelessWidget {
   const _DiscoveryPanel({
     required this.illustrationPath,
@@ -687,10 +659,8 @@ class _DiscoveryPanel extends StatelessWidget {
     this.compact = false,
   });
 
-  /// Natural height of the illustration used for carousel sizing.
   static const double naturalHeight = 120;
 
-  /// Natural height of the compact horizontal strip.
   static const double compactNaturalHeight = 56;
 
   final String? illustrationPath;
@@ -746,16 +716,9 @@ class _DiscoveryPanel extends StatelessWidget {
   }
 }
 
-/// Full discovery illustration anchored to the banner's right edge.
-///
-/// Sized responsively from the reserved side-panel width plus the banner's
-/// padding so it fills the right region edge-to-edge, and capped by the
-/// available height to keep its aspect ratio. Renders directly on the banner
-/// surface without any background container.
 class _DiscoveryIllustration extends StatelessWidget {
   const _DiscoveryIllustration({required this.path, required this.panelWidth});
 
-  /// Aspect ratio of `assets/icons/banner3.svg`.
   static const double _aspect = 1.3163;
 
   final String path;
@@ -781,7 +744,6 @@ class _DiscoveryIllustration extends StatelessWidget {
   }
 }
 
-/// Clean pill call-to-action without any trailing icon.
 class _BannerCta extends StatelessWidget {
   const _BannerCta({
     required this.label,
@@ -824,7 +786,6 @@ class _BannerCta extends StatelessWidget {
   }
 }
 
-/// Small dot row reflecting the currently visible banner.
 class _DotsIndicator extends StatelessWidget {
   const _DotsIndicator({required this.count, required this.current});
 

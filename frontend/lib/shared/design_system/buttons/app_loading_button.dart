@@ -1,17 +1,22 @@
+//**
+// frontend/shared/design_system/buttons/app_loading_button.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'app_button.dart';
 
-/// A button that is already submitting.
-///
-/// Thin, intention-revealing convenience for the most common loading case:
-/// a full-width primary button with a spinner. Every concern (colors, state,
-/// sizes) lives in [AppButton] — this file exists only to read better at call
-/// sites:
-///
-/// ```dart
-/// AppLoadingButton(label: 'Saving...');
-/// ```
 class AppLoadingButton extends StatelessWidget {
   const AppLoadingButton({
     super.key,

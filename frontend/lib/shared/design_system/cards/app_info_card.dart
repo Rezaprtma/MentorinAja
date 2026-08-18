@@ -1,13 +1,23 @@
+//**
+// frontend/shared/design_system/cards/app_info_card.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import 'app_base_card.dart';
 
-/// Semantic info card with tinted background.
-///
-/// Used to display informational messages, tips, warnings or success notices.
-/// The [variant] controls the tint and icon color so every info card is
-/// consistent with the semantic color palette.
 class AppInfoCard extends StatelessWidget {
   const AppInfoCard({
     super.key,
@@ -20,19 +30,14 @@ class AppInfoCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(AppSpacing.md),
   });
 
-  /// Leading icon; defaults to a variant-appropriate icon.
   final IconData? icon;
 
-  /// Primary title text.
   final String title;
 
-  /// Optional supporting message.
   final String? message;
 
-  /// Semantic variant controlling tint and icon color.
   final AppInfoCardVariant variant;
 
-  /// Optional action widget rendered at the end (e.g. a TextButton).
   final Widget? action;
 
   final VoidCallback? onTap;
@@ -82,7 +87,6 @@ class AppInfoCard extends StatelessWidget {
     );
   }
 
-  /// Returns (containerColor, foregroundColor, defaultIcon).
   (Color, Color, IconData) _variantColors(
     ColorScheme scheme,
     AppThemeExtension ext,

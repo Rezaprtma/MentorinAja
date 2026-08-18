@@ -1,14 +1,24 @@
+//**
+// frontend/features/progress/presentation/widgets/progress_empty_state.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
 import 'progress_category_switch.dart';
 
-/// Empty state for a [ProgressCategory] with no courses.
-///
-/// Orients the learner with a clear next step per category: studying courses
-/// fall back to browsing Explore, while completed courses are a quiet note
-/// that finished work surfaces here. Reuses [AppEmptyState].
 class ProgressEmptyState extends StatelessWidget {
   const ProgressEmptyState({
     super.key,
@@ -16,10 +26,8 @@ class ProgressEmptyState extends StatelessWidget {
     this.onExplore,
   });
 
-  /// Which category has no courses.
   final ProgressCategory category;
 
-  /// Switches to the Explore tab to pick a first course.
   final VoidCallback? onExplore;
 
   @override

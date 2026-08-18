@@ -1,14 +1,22 @@
+//**
+// frontend/shared/design_system/layout/app_container.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// A reusable, themable surface used by the rest of the design system.
-///
-/// `AppContainer` centralizes the common decoration concerns — padding,
-/// radius, border, shadow and optional tap feedback — so screens and composite
-/// widgets never hand-build `BoxDecoration` + `InkWell` pairs. When [onTap] is
-/// provided the container renders a Material `InkWell` so the ripple stays
-/// clipped to the border radius.
 class AppContainer extends StatelessWidget {
   const AppContainer({
     super.key,
@@ -28,46 +36,32 @@ class AppContainer extends StatelessWidget {
     this.clipBehavior = Clip.none,
   });
 
-  /// The content of the container.
   final Widget child;
 
-  /// Inner padding; defaults to `AppSpacing.md` on all sides.
   final EdgeInsetsGeometry? padding;
 
-  /// Outer margin.
   final EdgeInsetsGeometry? margin;
 
-  /// Fill color; defaults to `appColors.card`.
   final Color? color;
 
-  /// Corner radius; defaults to [AppRadius.large].
   final double? radius;
 
-  /// Optional hairline border color.
   final Color? borderColor;
 
-  /// Border stroke width when [borderColor] is set.
   final double borderWidth;
 
-  /// Optional box shadow (see [AppShadow]).
   final BoxShadow? shadow;
 
-  /// Tap handler; enables ink feedback and semantics.
   final VoidCallback? onTap;
 
-  /// Long-press handler; requires [onTap] semantics to be meaningful.
   final VoidCallback? onLongPress;
 
-  /// Aligns [child] inside the container.
   final AlignmentGeometry? alignment;
 
-  /// Fixed width.
   final double? width;
 
-  /// Fixed height.
   final double? height;
 
-  /// How content is clipped against the rounded bounds.
   final Clip clipBehavior;
 
   @override

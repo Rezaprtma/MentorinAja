@@ -1,3 +1,18 @@
+//**
+// frontend/features/home/presentation/pages/home_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/routing/route_names.dart';
@@ -12,18 +27,9 @@ import '../widgets/hero_banner_carousel.dart';
 import '../widgets/home_header.dart';
 import '../widgets/recommended_section.dart';
 
-/// Home screen root — a calm, scrollable learning backdrop.
-///
-/// Composes the greeting header, a swipeable flat-brand hero carousel carrying
-/// today's streak, the dominant "Progres Saya" resume card and a horizontally
-/// scrollable programming recommendation rail into one vertical scroll. The
-/// page ends after the rail; nothing decorative is added below it. All values
-/// come from [MockHomeData]; the layout constrains itself with
-/// [ResponsiveContainer] so tablet line lengths stay readable.
 class HomePage extends StatelessWidget {
   const HomePage({super.key, this.onExplore});
 
-  /// Switches the shell to the Explore tab (used by "Lihat Semua" targets).
   final VoidCallback? onExplore;
 
   @override
@@ -87,14 +93,11 @@ class HomePage extends StatelessWidget {
   }
 }
 
-/// "Progres Saya" section header plus the resume card.
 class _ProgressSection extends StatelessWidget {
   const _ProgressSection({this.onSeeAll, this.onOpenCourse});
 
-  /// Opens the full catalog surface.
   final VoidCallback? onSeeAll;
 
-  /// Opens the enrolled course on the shared detail page.
   final ValueChanged<String>? onOpenCourse;
 
   @override

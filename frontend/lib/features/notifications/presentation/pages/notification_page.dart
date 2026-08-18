@@ -1,3 +1,18 @@
+//**
+// frontend/features/notifications/presentation/pages/notification_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/routing/route_names.dart';
@@ -8,17 +23,9 @@ import '../../domain/entities/app_notification.dart';
 import '../../application/notification_controller.dart';
 import '../widgets/notification_list_item.dart';
 
-/// Full-screen notification feed grouped by recency.
-///
-/// A filter bar slices the feed into Belajar, Course and Pengingat buckets,
-/// each with its own empty state. "Tandai Semua" clears the unread state in one
-/// tap; actionable notifications open the shared CourseDetailPage through their
-/// stable course id. The feed stays responsive by centering the list on a
-/// bounded column for tablets.
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key, this.controller});
 
-  /// Injected for tests; defaults to the app-wide singleton.
   final NotificationController? controller;
 
   @override

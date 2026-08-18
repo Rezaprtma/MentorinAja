@@ -1,3 +1,18 @@
+//**
+// frontend/app/main_shell.dart
+//
+// frontend:
+// 4-tab navigation shell dengan IndexedStack. Menyediakan Home, Explore, Progress, dan Profile tabs.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi tab navigation, state preservation, dan responsive layout.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/features/course/course.dart';
@@ -8,13 +23,6 @@ import 'package:frontend/features/progress/progress.dart';
 import 'package:frontend/routing/route_names.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Post-authentication shell hosting the four main tabs.
-///
-/// Holds the active tab index, renders the tab pages in an [IndexedStack] so
-/// each screen keeps its scroll position and state, and floats
-/// [AppFloatingBottomNav] above the bottom edge for navigation. Progress
-/// resumes open the current lesson directly through [LearningProgressController]
-/// instead of detouring through the course detail page.
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
 

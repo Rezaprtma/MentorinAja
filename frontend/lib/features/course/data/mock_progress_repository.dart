@@ -1,3 +1,18 @@
+//**
+// frontend/features/course/data/mock_progress_repository.dart
+//
+// frontend:
+// Mock data. Menyediakan sample data untuk development dan testing.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya menyediakan mock data.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi mock data coverage dan edge cases.
+//**
 import 'package:flutter/foundation.dart';
 
 import '../domain/entities/course_detail.dart';
@@ -7,16 +22,6 @@ import '../domain/repositories/course_repository.dart';
 import '../domain/repositories/progress_repository.dart';
 import 'mock_course_repository.dart';
 
-/// In-memory [ProgressRepository] seeded from [MockCourseCatalog].
-///
-/// Lessons the catalog already marks completed stay completed and the catalog's
-/// "current" lesson becomes the next one to study, so the Progress tab and the
-/// Course Detail page keep reading the same enrollment before any interaction.
-/// Mutations only move forward — a completed lesson is never un-done — and every
-/// change is observable through [addListener] for rebuilds.
-///
-/// Replaced by a backend progress repository in a later phase without touching
-/// screens or controllers.
 class MockProgressRepository extends ChangeNotifier
     implements ProgressRepository {
   MockProgressRepository({CourseRepository? courses})
@@ -24,10 +29,8 @@ class MockProgressRepository extends ChangeNotifier
 
   final CourseRepository _courses;
 
-  /// Completed lesson ids per course, keyed by course id.
   final Map<String, Set<String>> _completed = {};
 
-  /// Next lesson to study per course, keyed by course id.
   final Map<String, String?> _current = {};
 
   @override
@@ -97,9 +100,6 @@ class MockProgressRepository extends ChangeNotifier
     notifyListeners();
   }
 
-  /// The completed/current record for [courseId], seeding courses that the
-  /// catalog already shows as enrolled. Null when the course is unknown or has
-  /// never been started.
   ({Set<String> completed, String? current})? _recordFor(String courseId) {
     final course = _courses.findById(courseId);
     if (course == null) return null;
@@ -108,8 +108,6 @@ class MockProgressRepository extends ChangeNotifier
     return (completed: _completed[courseId]!, current: _current[courseId]);
   }
 
-  /// Seeds a record from the catalog's baked lesson states, but only when the
-  /// course already carries an enrollment snapshot (a non-null progress).
   void _seedFromCatalog(CourseDetail course) {
     if (course.progress == null) return;
 
@@ -129,7 +127,6 @@ class MockProgressRepository extends ChangeNotifier
     _current[course.id] = current;
   }
 
-  /// First lesson not yet finished in [course], or null when all are done.
   String? _firstOpenLesson(CourseDetail course, Set<String> completed) {
     for (final lesson in course.lessons) {
       if (!completed.contains(lesson.id)) return lesson.id;

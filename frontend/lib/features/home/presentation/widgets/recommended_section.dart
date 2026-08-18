@@ -1,3 +1,18 @@
+//**
+// frontend/features/home/presentation/widgets/recommended_section.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -6,21 +21,13 @@ import '../../mock_home_data.dart';
 import 'horizontal_course_rail.dart';
 import 'recommended_course_card.dart';
 
-/// Recommended-courses block on the Home screen.
-///
-/// Sits below the resume card so discovery content stays lower in the visual
-/// hierarchy. Renders a "Untuk Kamu" header with a "Lihat Semua" action above a
-/// horizontally scrolling rail whose cards peek the next item.
 class RecommendedSection extends StatelessWidget {
   const RecommendedSection({super.key, this.onSeeAll, this.onCourseTap});
 
-  /// Opens the full catalog surface.
   final VoidCallback? onSeeAll;
 
-  /// Opens a specific course; receives its mock title.
   final ValueChanged<String>? onCourseTap;
 
-  /// Uniform height kept for every card in the rail.
   static const double _cardHeight = 216;
 
   @override

@@ -1,24 +1,22 @@
+//**
+// frontend/shared/design_system/inputs/app_radio.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// A group of radio options using the modern [RadioGroup] API.
-///
-/// In Flutter 3.44+ the old radio button parameters are deprecated.
-/// This widget wraps [RadioGroup] + a column of labeled [Radio] rows so
-/// callers only need to supply options, the current [groupValue], and an
-/// [onChanged] callback.
-///
-/// ```dart
-/// AppRadioGroup<String>(
-///   groupValue: _selected,
-///   onChanged: (v) => setState(() => _selected = v),
-///   options: [
-///     AppRadioOption(value: 'a', label: 'Option A'),
-///     AppRadioOption(value: 'b', label: 'Option B'),
-///   ],
-/// )
-/// ```
 class AppRadioGroup<T> extends StatelessWidget {
   const AppRadioGroup({
     super.key,
@@ -30,22 +28,16 @@ class AppRadioGroup<T> extends StatelessWidget {
     this.spacing = AppSpacing.xs,
   });
 
-  /// Currently selected value.
   final T? groupValue;
 
-  /// Called when a new option is selected.
   final ValueChanged<T?> onChanged;
 
-  /// The list of radio options.
   final List<AppRadioOption<T>> options;
 
-  /// Whether all options are interactive.
   final bool enabled;
 
-  /// Layout direction; defaults to vertical.
   final Axis direction;
 
-  /// Gap between options.
   final double spacing;
 
   @override
@@ -85,7 +77,6 @@ class AppRadioGroup<T> extends StatelessWidget {
   }
 }
 
-/// A single radio option — must be placed inside an [AppRadioGroup].
 class AppRadioOption<T> extends StatelessWidget {
   const AppRadioOption({
     super.key,
@@ -95,16 +86,12 @@ class AppRadioOption<T> extends StatelessWidget {
     this.enabled = true,
   });
 
-  /// The value this option represents.
   final T value;
 
-  /// Label text shown next to the radio button.
   final String label;
 
-  /// Optional secondary text below the label.
   final String? subtitle;
 
-  /// Whether this specific option is interactive.
   final bool enabled;
 
   @override

@@ -1,14 +1,24 @@
+//**
+// frontend/shared/design_system/layout/app_section.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import '../navigation/app_section_header.dart';
 import 'app_gap.dart';
 
-/// A titled block of content with consistent vertical rhythm.
-///
-/// Composes [AppSectionHeader] (title + optional action) with a column of
-/// [children] separated by [spacing]. Sections give screens a repeatable
-/// "heading + content" unit so page layout stays consistent across the app.
 class AppSection extends StatelessWidget {
   const AppSection({
     super.key,
@@ -20,22 +30,16 @@ class AppSection extends StatelessWidget {
     this.padding = EdgeInsets.zero,
   });
 
-  /// Section title shown in the header.
   final String title;
 
-  /// Optional supporting text under the title.
   final String? subtitle;
 
-  /// Optional trailing widget in the header (e.g. a "See all" button).
   final Widget? trailing;
 
-  /// Content of the section.
   final List<Widget> children;
 
-  /// Vertical gap between header and children and between children.
   final double spacing;
 
-  /// Outer padding around the whole section.
   final EdgeInsetsGeometry padding;
 
   @override

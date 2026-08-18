@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/inputs/app_multiline_field.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'app_text_field.dart';
 
-/// Multi-line text input for longer content (messages, notes, descriptions).
-///
-/// Composes [AppTextField] with multi-line defaults: `maxLines` = 5,
-/// `textInputAction` = newline, top-aligned text. For a single-line field with
-/// character limit, use [AppTextField] with `maxLength` instead.
 class AppMultilineField extends StatelessWidget {
   const AppMultilineField({
     super.key,

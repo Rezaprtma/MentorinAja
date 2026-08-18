@@ -1,13 +1,25 @@
+//**
+// frontend/core/theme/app_theme_context.dart
+//
+// frontend:
+// Theme system. Menyediakan colors, typography, spacing, dan theme configuration.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi theme rendering di light/dark mode.
+//**
 import 'package:flutter/material.dart';
 
 import 'app_theme_extension.dart';
 
-/// Convenient accessors for design-system values from any widget.
 extension AppThemeContext on BuildContext {
-  /// The resolved semantic color palette for the current theme.
   AppThemeExtension get appColors =>
       Theme.of(this).extension<AppThemeExtension>()!;
 
-  /// The full [ThemeData] for the current context.
   ThemeData get appTheme => Theme.of(this);
 }

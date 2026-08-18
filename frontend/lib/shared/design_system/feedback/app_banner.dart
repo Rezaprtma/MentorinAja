@@ -1,3 +1,18 @@
+//**
+// frontend/shared/design_system/feedback/app_banner.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -5,15 +20,9 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/theme.dart';
 import 'app_snack_bar.dart';
 
-/// Themed banner notification displayed at the top of the screen.
-///
-/// Wraps Material [MaterialBanner] with semantic color variants. Useful for
-/// persistent, non-blocking notices that need more space than a snack bar
-/// (e.g. connection lost, update available).
 class AppBanner {
   AppBanner._();
 
-  /// Shows a themed [MaterialBanner] via [ScaffoldMessenger].
   static void show(
     BuildContext context, {
     required String title,

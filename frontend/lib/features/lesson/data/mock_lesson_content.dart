@@ -1,17 +1,24 @@
+//**
+// frontend/features/lesson/data/mock_lesson_content.dart
+//
+// frontend:
+// Mock data. Menyediakan sample data untuk development dan testing.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya menyediakan mock data.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi mock data coverage dan edge cases.
+//**
 import 'package:frontend/features/course/course.dart';
 
 import '../domain/entities/lesson_content.dart';
 import 'mock_lesson_exercises.dart';
 
-/// Deterministic mock lesson body for the Lesson Player.
-///
-/// The catalog stores only titles and durations, so the player generates a
-/// realistic reading experience from that metadata: an intro, learning goals,
-/// a concept paragraph, a real code example for the course's technology and a
-/// practice tip. This is local mock data — a future backend lesson reader
-/// replaces the generator while keeping the same [LessonContentBlock] model.
 abstract final class MockLessonContent {
-  /// Teaching-only blocks for the Materi stage (no exercises).
   static List<LessonContentBlock> materiBlocks(
     CourseDetail course,
     CourseLesson lesson, {
@@ -171,7 +178,6 @@ abstract final class MockLessonContent {
     return 'Kode';
   }
 
-  /// Realistic one-off examples keyed by course id, used verbatim by the player.
   static const Map<String, String> _snippets = {
     'dasar-python': r'''
 def hitung_rata_rata(nilai):

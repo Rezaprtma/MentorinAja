@@ -1,13 +1,24 @@
+//**
+// frontend/shared/design_system/lists/app_profile_tile.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import '../avatar/app_avatar.dart';
 import 'app_tile.dart';
 
-/// Profile display tile: avatar + name + subtitle + optional trailing.
-///
-/// Used in settings menus, team lists, and any context where a user identity
-/// needs to be shown compactly. Composes [AppAvatar] with [AppTile].
 class AppProfileTile extends StatelessWidget {
   const AppProfileTile({
     super.key,

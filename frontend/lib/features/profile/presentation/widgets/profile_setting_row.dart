@@ -1,12 +1,18 @@
-/// Settings row for the Profile tab.
-///
-/// Icon, title and an optional current-value label arranged in one flat row on
-/// the page background. Rows meet the design-system 56 px minimum height for
-/// comfortable touch targets. Leading icons use the brand indigo so settings
-/// stay colorful and consistent with the app's brand-tinted accents; only
-/// destructive rows turn red. The trailing value reports the current state
-/// (e.g. the active theme) and a chevron signals navigation when the row is
-/// tappable.
+//**
+// frontend/features/profile/presentation/widgets/profile_setting_row.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -31,8 +37,6 @@ class ProfileSettingRow extends StatelessWidget {
   final VoidCallback? onTap;
   final bool destructive;
 
-  /// Horizontal space the leading icon occupies so dividers and values align
-  /// with the row title.
   static const double leadingWidth = AppIconSizes.md + AppSpacing.sm;
 
   @override
@@ -88,7 +92,6 @@ class ProfileSettingRow extends StatelessWidget {
   }
 }
 
-/// A short current-state label shown as a settings row trailing value.
 class ProfileSettingValue extends StatelessWidget {
   const ProfileSettingValue(this.value, {super.key});
 

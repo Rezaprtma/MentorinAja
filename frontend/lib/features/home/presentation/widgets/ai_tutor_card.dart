@@ -1,19 +1,27 @@
+//**
+// frontend/features/home/presentation/widgets/ai_tutor_card.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
 import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
-/// Compact AI-tutor entry point on the Home screen.
-///
-/// A soft, tinted assistant strip: a small brand icon, a short title and a
-/// supporting line. Rendered on a very light orange surface with no shadow so
-/// it reads as a helpful nudge rather than a promotional banner, without
-/// competing with the "Lanjut Belajar" call to action.
 class AiTutorCard extends StatelessWidget {
   const AiTutorCard({super.key, this.onPressed});
 
-  /// Opens the tutor conversation surface.
   final VoidCallback? onPressed;
 
   @override

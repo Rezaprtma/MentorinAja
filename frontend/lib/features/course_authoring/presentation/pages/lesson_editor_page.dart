@@ -1,9 +1,18 @@
-/// Mentor lesson editor — one lesson inside a course draft.
-///
-/// Edits the lesson header (title and description) and splits content authoring
-/// across three tabs: Materi, Game and Latihan. Each tab edits its own payload
-/// and persists changes through [CourseAuthoringRepository] on every update, so
-/// the course outline always reflects the latest draft state.
+//**
+// frontend/features/course_authoring/presentation/pages/lesson_editor_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 library;
 
 import 'package:flutter/material.dart';
@@ -14,9 +23,6 @@ import 'package:frontend/shared/widgets/widgets.dart';
 import '../../data/mock_course_authoring_repository.dart';
 import '../../domain/entities/lesson_draft.dart';
 import '../../domain/repositories/course_authoring_repository.dart';
-import '../widgets/exercise_editor.dart';
-import '../widgets/game_editor.dart';
-import '../widgets/material_block_editor.dart';
 
 class LessonEditorPage extends StatefulWidget {
   const LessonEditorPage({
@@ -29,7 +35,6 @@ class LessonEditorPage extends StatefulWidget {
   final String courseId;
   final String lessonId;
 
-  /// Injected for tests; defaults to the shared in-memory mock repository.
   final CourseAuthoringRepository? repository;
 
   @override
@@ -69,7 +74,7 @@ class _LessonEditorPageState extends State<LessonEditorPage> {
     super.dispose();
   }
 
-  void _saveHeader() {
+  void _saveModule() {
     final lesson = _lesson;
     if (lesson == null) return;
     _repository.updateLesson(
@@ -79,151 +84,180 @@ class _LessonEditorPageState extends State<LessonEditorPage> {
         description: _descriptionController.text.trim(),
       ),
     );
+    AppToast.show(
+      context,
+      title: 'Modul disimpan.',
+      message: 'Perubahan pada modul berhasil disimpan.',
+      severity: AppFeedbackSeverity.success,
+    );
     setState(() {});
   }
 
-  void _saveLesson(LessonDraft updated) {
-    _repository.updateLesson(widget.courseId, updated);
+  void _simulatePdfUpload() {
+    final lesson = _lesson;
+    if (lesson == null) return;
+
+    final name = _titleController.text
+        .trim()
+        .replaceAll(' ', '_')
+        .toLowerCase();
+    final sanitizedName = name.isEmpty ? 'modul_baru' : name;
+    final path = 'assets/pdfs/$sanitizedName.pdf';
+
+    _repository.updateLesson(
+      widget.courseId,
+      lesson.copyWith(materialPdfPath: path),
+    );
     setState(() {});
+
+    AppToast.show(
+      context,
+      title: 'File dipilih.',
+      message: 'Dokumen PDF berhasil ditambahkan.',
+      severity: AppFeedbackSeverity.info,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final ext = context.appColors;
+    final scheme = Theme.of(context).colorScheme;
     final lesson = _lesson;
 
     if (lesson == null) {
       return Scaffold(
         backgroundColor: ext.background,
-        appBar: const AppAppBar(title: 'Edit Pelajaran'),
+        appBar: const AppAppBar(title: 'Edit Modul'),
         body: const AppEmptyState(
           icon: Icons.search_off_rounded,
-          title: 'Pelajaran Tidak Ditemukan',
-          message: 'Pelajaran yang kamu cari tidak tersedia.',
+          title: 'Modul Tidak Ditemukan',
+          message: 'Modul yang kamu cari tidak tersedia.',
         ),
       );
     }
 
     return Scaffold(
       backgroundColor: ext.background,
-      appBar: const AppAppBar(title: 'Edit Pelajaran'),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              AppSpacing.md,
-              AppSpacing.sm,
-              AppSpacing.md,
-              0,
-            ),
-            child: ResponsiveContainer(
-              maxWidth: 720,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  AppTextField(
-                    controller: _titleController,
-                    label: 'Judul Pelajaran',
-                    onChanged: (_) => setState(() {}),
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  AppTextField(
-                    controller: _descriptionController,
-                    label: 'Deskripsi',
-                    maxLines: 3,
-                    minLines: 2,
-                    onChanged: (_) => setState(() {}),
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  AppButton(
-                    label: 'Simpan Perubahan',
-                    variant: AppButtonVariant.secondary,
-                    isFullWidth: true,
-                    onPressed: _saveHeader,
-                  ),
-                ],
+      appBar: const AppAppBar(title: 'Edit Modul'),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: ResponsiveContainer(
+          maxWidth: 720,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const AppPageHeader(
+                title: 'Informasi Modul',
+                subtitle: 'Edit metadata dan unggah dokumen materi (PDF).',
               ),
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Expanded(
-            child: DefaultTabController(
-              length: 3,
-              child: Column(
-                children: [
-                  TabBar(
-                    tabs: const [
-                      Tab(text: 'Materi'),
-                      Tab(text: 'Game'),
-                      Tab(text: 'Latihan'),
-                    ],
-                    labelColor: ext.textPrimary,
-                    unselectedLabelColor: ext.textSecondary,
-                    indicatorColor: Theme.of(context).colorScheme.primary,
-                    labelStyle: AppTypeScale.labelLarge.copyWith(
-                      fontWeight: FontWeight.w700,
+              const SizedBox(height: AppSpacing.lg),
+              AppTextField(
+                controller: _titleController,
+                label: 'Judul Modul',
+                onChanged: (_) => setState(() {}),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              AppTextField(
+                controller: _descriptionController,
+                label: 'Deskripsi Modul',
+                maxLines: 3,
+                minLines: 2,
+                onChanged: (_) => setState(() {}),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              AppButton(
+                label: 'Simpan Info Modul',
+                variant: AppButtonVariant.secondary,
+                isFullWidth: true,
+                onPressed: _saveModule,
+              ),
+              const SizedBox(height: AppSpacing.xl),
+              const Divider(),
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                'DOKUMEN MATERI (PDF)',
+                style: AppTypeScale.labelMedium.copyWith(
+                  color: ext.textSecondary,
+                  letterSpacing: 1.25,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                'Unggah dokumen berformat PDF yang akan dibaca oleh siswa. Sistem AI akan menggunakan dokumen ini untuk menghasilkan game dan latihan interaktif.',
+                style: AppTypeScale.bodySmall.copyWith(
+                  color: ext.textSecondary,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              Container(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                decoration: BoxDecoration(
+                  color: scheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(AppRadius.large),
+                  border: Border.all(color: ext.border),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(AppSpacing.sm),
+                      decoration: BoxDecoration(
+                        color: ext.card,
+                        borderRadius: BorderRadius.circular(AppRadius.medium),
+                        border: Border.all(color: ext.border),
+                      ),
+                      child: Icon(
+                        Icons.picture_as_pdf_rounded,
+                        color: lesson.materialPdfPath != null
+                            ? scheme.error
+                            : ext.textDisabled,
+                        size: AppIconSizes.xl,
+                      ),
                     ),
-                    unselectedLabelStyle: AppTypeScale.labelLarge,
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        _TabEditor(
-                          lesson: lesson,
-                          builder: (lesson) => MaterialBlockEditor(
-                            blocks: lesson.materialBlocks,
-                            onChanged: (blocks) => _saveLesson(
-                              lesson.copyWith(materialBlocks: blocks),
+                    const SizedBox(width: AppSpacing.md),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            lesson.materialPdfPath != null
+                                ? lesson.materialPdfPath!.split('/').last
+                                : 'Belum ada file',
+                            style: AppTypeScale.titleSmall.copyWith(
+                              color: lesson.materialPdfPath != null
+                                  ? ext.textPrimary
+                                  : ext.textDisabled,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
-                        ),
-                        _TabEditor(
-                          lesson: lesson,
-                          builder: (lesson) => GameEditor(
-                            games: lesson.games,
-                            onChanged: (games) =>
-                                _saveLesson(lesson.copyWith(games: games)),
-                          ),
-                        ),
-                        _TabEditor(
-                          lesson: lesson,
-                          builder: (lesson) => ExerciseEditor(
-                            exercises: lesson.exercises,
-                            onChanged: (exercises) => _saveLesson(
-                              lesson.copyWith(exercises: exercises),
+                          const SizedBox(height: AppSpacing.xxs),
+                          Text(
+                            lesson.materialPdfPath != null
+                                ? 'Format: PDF • Ukuran: 1.2 MB'
+                                : 'Upload file PDF maksimal 10MB',
+                            style: AppTypeScale.bodySmall.copyWith(
+                              color: ext.textSecondary,
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: AppSpacing.md),
+                    AppButton(
+                      label: lesson.materialPdfPath != null
+                          ? 'Ganti File'
+                          : 'Pilih File',
+                      variant: lesson.materialPdfPath != null
+                          ? AppButtonVariant.outlined
+                          : AppButtonVariant.primary,
+                      onPressed: _simulatePdfUpload,
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
-    );
-  }
-}
-
-/// Scrollable wrapper that keeps tab content aligned and scrollable.
-class _TabEditor extends StatelessWidget {
-  const _TabEditor({required this.lesson, required this.builder});
-
-  final LessonDraft lesson;
-  final Widget Function(LessonDraft lesson) builder;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.md,
-        AppSpacing.md,
-        AppSpacing.md,
-        AppSpacing.xxxl,
-      ),
-      child: ResponsiveContainer(maxWidth: 720, child: builder(lesson)),
     );
   }
 }

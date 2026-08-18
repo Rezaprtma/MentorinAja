@@ -1,11 +1,21 @@
+//**
+// frontend/features/tutor/data/mock_tutor_repository.dart
+//
+// frontend:
+// Mock data. Menyediakan sample data untuk development dan testing.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend karena hanya menyediakan mock data.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung. Integration terjadi melalui repositories.
+//
+// qa:
+// QA perlu memvalidasi mock data coverage dan edge cases.
+//**
 import '../domain/entities/tutor_message.dart';
 import '../domain/repositories/tutor_repository.dart';
 
-/// Local deterministic tutor replies used until the backend AI service exists.
-///
-/// Keyword detection keeps the seam deterministic: "error" explains a likely
-/// mistake, "contoh/kode" returns a short code sample relevant to the course,
-/// "petunjuk" gives a nudge, and everything else gets a conceptual answer.
 class MockTutorRepository implements TutorRepository {
   const MockTutorRepository();
 

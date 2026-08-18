@@ -1,12 +1,22 @@
+//**
+// frontend/shared/design_system/inputs/app_checkbox.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Labeled checkbox.
-///
-/// The entire row is tappable via an [InkWell] so the label acts as a click
-/// target. Color and shape come from the Material 3 theme defaults for visual
-/// consistency.
 class AppCheckbox extends StatelessWidget {
   const AppCheckbox({
     super.key,
@@ -20,26 +30,20 @@ class AppCheckbox extends StatelessWidget {
     this.controlAffinity = ListTileControlAffinity.leading,
   });
 
-  /// Current checked state; null means indeterminate (three-state).
   final bool? value;
 
-  /// Called when the user toggles the checkbox.
   final ValueChanged<bool?>? onChanged;
 
-  /// Primary label text next to the checkbox.
   final String? label;
 
-  /// Secondary text below the label.
   final String? subtitle;
 
-  /// Whether the checkbox is interactive.
   final bool enabled;
 
   final bool autofocus;
 
   final EdgeInsetsGeometry? contentPadding;
 
-  /// Whether the checkbox appears before or after the label.
   final ListTileControlAffinity controlAffinity;
 
   @override

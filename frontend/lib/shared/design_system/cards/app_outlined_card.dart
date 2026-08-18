@@ -1,10 +1,23 @@
+//**
+// frontend/shared/design_system/cards/app_outlined_card.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import 'app_base_card.dart';
 
-/// Card with a visible border and no elevation — a structural container
-/// for content that should feel lightweight (lists, form groups).
 class AppOutlinedCard extends StatelessWidget {
   const AppOutlinedCard({
     super.key,

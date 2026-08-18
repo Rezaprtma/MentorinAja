@@ -1,17 +1,22 @@
+//**
+// frontend/shared/design_system/avatar/app_avatar.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Versatile avatar widget with network, initial and user variants.
-///
-/// Renders a circular image or colored initial(s) based on the provided
-/// parameters. Three named constructors make the intent clear at call sites:
-///
-/// ```dart
-/// AppAvatar.network(imageUrl: url, size: 48)
-/// AppAvatar.initial(name: 'John Doe', size: 40)
-/// AppAvatar.user(imageUrl: url, name: 'John Doe')
-/// ```
 class AppAvatar extends StatelessWidget {
   const AppAvatar({
     super.key,
@@ -25,7 +30,6 @@ class AppAvatar extends StatelessWidget {
     this.child,
   });
 
-  /// Network image avatar.
   const AppAvatar.network({
     super.key,
     String? imageUrl,
@@ -38,7 +42,6 @@ class AppAvatar extends StatelessWidget {
        initials = null,
        child = null;
 
-  /// Initials-only avatar.
   AppAvatar.initial({
     super.key,
     required String name,
@@ -51,7 +54,6 @@ class AppAvatar extends StatelessWidget {
        initials = _deriveInitials(name),
        child = null;
 
-  /// Network image with initials fallback.
   AppAvatar.user({
     super.key,
     String? imageUrl,
@@ -115,7 +117,6 @@ class AppAvatar extends StatelessWidget {
     if (child != null) return child!;
 
     if (image is _NetworkImagePlaceholder) {
-      // Network image with initials fallback.
       return Container(
         color: bg,
         alignment: Alignment.center,
@@ -146,7 +147,6 @@ class AppAvatar extends StatelessWidget {
   }
 }
 
-/// Internal sentinel type — not part of the public API.
 class _NetworkImagePlaceholder {
   const _NetworkImagePlaceholder();
 }

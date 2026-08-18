@@ -1,15 +1,24 @@
+//**
+// frontend/features/notifications/presentation/widgets/notification_list_item.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
 import '../../domain/entities/app_notification.dart';
 
-/// One row of the notification feed.
-///
-/// Unread notifications keep a bold title and a small accent dot so the state
-/// is legible even before the user reads the body. The tinted icon tile
-/// communicates the notification kind at a glance without relying on color
-/// alone — the icon carries the meaning.
 class NotificationListItem extends StatelessWidget {
   const NotificationListItem({
     super.key,

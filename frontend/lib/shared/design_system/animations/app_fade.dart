@@ -1,13 +1,22 @@
+//**
+// frontend/shared/design_system/animations/app_fade.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Animated opacity wrapper with entrance animation support.
-///
-/// When [visible] is true the widget fades in from transparent using
-/// [AppDurations.medium] and [AppEasing.decelerate]. When false it fades out
-/// with [AppEasing.accelerate]. Useful for toggling overlays, tooltips and
-/// help text without abrupt layout changes.
 class AppFade extends StatelessWidget {
   const AppFade({
     super.key,
@@ -33,11 +42,6 @@ class AppFade extends StatelessWidget {
   }
 }
 
-/// One-shot fade-in entrance animation.
-///
-/// The widget fades from transparent to opaque on the first build. Uses
-/// [TweenAnimationBuilder] so no [AnimationController] or [TickerProvider]
-/// is required.
 class AppFadeIn extends StatelessWidget {
   const AppFadeIn({
     super.key,

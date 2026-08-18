@@ -1,3 +1,18 @@
+//**
+// frontend/features/lesson/presentation/widgets/exercises/lesson_exercise_view.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../domain/entities/lesson_exercise.dart';
@@ -6,25 +21,17 @@ import 'code_correction_exercise.dart';
 import 'code_explanation_exercise.dart';
 import 'code_writing_exercise.dart';
 
-/// Dispatches a [LessonExercise] to its reusable interactive widget.
-///
-/// The Course Player only renders [LessonExerciseView]. Adding a new exercise
-/// type means adding its model value and renderer here, not rewriting the
-/// player page. With [selfEvaluate] the exercise checks the answer the moment
-/// the learner completes it, instead of waiting for a submit button.
 class LessonExerciseView extends StatelessWidget {
   const LessonExerciseView({
     super.key,
     required this.exercise,
     this.selfEvaluate = false,
+    this.onSuccess,
   });
 
   final LessonExercise exercise;
-
-  /// Whether the answer is evaluated immediately on completion. The Game stage
-  /// enables this for instant challenge feedback; Latihan keeps the submit
-  /// button for deliberate practice.
   final bool selfEvaluate;
+  final VoidCallback? onSuccess;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +51,7 @@ class LessonExerciseView extends StatelessWidget {
       LessonExerciseType.codeWriting => CodeWritingExercise(
         exercise: exercise,
         selfEvaluate: selfEvaluate,
+        onSuccess: onSuccess,
       ),
     };
   }

@@ -1,3 +1,18 @@
+//**
+// frontend/features/lesson/presentation/pages/course_completed_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/features/course/course.dart';
@@ -5,16 +20,9 @@ import 'package:frontend/shared/design_system/design_system.dart';
 import 'package:frontend/shared/widgets/tech/tech_logo.dart';
 import 'package:frontend/shared/widgets/widgets.dart';
 
-/// Celebratory landing shown when the last lesson of a course is finished.
-///
-/// Reads the live progress record to confirm the course reached 100 percent,
-/// summarizes the finished work and offers two exits: back to the course
-/// outline or all the way home. The success tint is the only semantic accent,
-/// keeping the completion moment warm without extra decoration.
 class CourseCompletedPage extends StatelessWidget {
   const CourseCompletedPage({super.key, required this.courseId});
 
-  /// Stable course identifier (see [CourseIdentifier]).
   final String courseId;
 
   @override
@@ -116,7 +124,6 @@ class CourseCompletedPage extends StatelessWidget {
   }
 }
 
-/// Success seal — a check inside a soft success circle.
 class _CompletionSeal extends StatelessWidget {
   const _CompletionSeal({required this.isCompleted});
 
@@ -149,7 +156,6 @@ class _CompletionSeal extends StatelessWidget {
   }
 }
 
-/// Course summary: identity, full progress bar and lesson count.
 class _SummaryCard extends StatelessWidget {
   const _SummaryCard({
     required this.course,

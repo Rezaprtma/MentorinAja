@@ -1,8 +1,22 @@
+//**
+// frontend/shared/design_system/navigation/app_bottom_navigation.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// Data model for a single [AppBottomNav] destination.
 class AppNavDestination {
   const AppNavDestination({
     required this.icon,
@@ -10,22 +24,13 @@ class AppNavDestination {
     this.selectedIcon,
   });
 
-  /// Icon shown when unselected.
   final IconData icon;
 
-  /// Icon shown when selected; defaults to [icon] with filled style.
   final IconData? selectedIcon;
 
-  /// Short label always visible below the icon.
   final String label;
 }
 
-/// Application-level bottom navigation bar.
-///
-/// Wraps Material 3 [NavigationBar] with the design-system tokens so all
-/// screens share the same surface color, indicator and label behavior. Pass
-/// a list of [AppNavDestination]s and a current index; the widget handles
-/// selection state, indicator animation and semantic labeling.
 class AppBottomNav extends StatelessWidget {
   const AppBottomNav({
     super.key,
@@ -36,19 +41,14 @@ class AppBottomNav extends StatelessWidget {
     this.elevation = AppElevation.xs,
   });
 
-  /// Index of the currently active destination.
   final int currentIndex;
 
-  /// Called when a destination is tapped.
   final ValueChanged<int> onDestinationSelected;
 
-  /// The list of destinations (2-5 recommended by M3 spec).
   final List<AppNavDestination> destinations;
 
-  /// Background surface color; defaults to `surfaceContainer`.
   final Color? backgroundColor;
 
-  /// Bottom bar elevation.
   final double elevation;
 
   @override

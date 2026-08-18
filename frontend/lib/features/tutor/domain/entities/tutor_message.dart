@@ -1,10 +1,22 @@
-/// Domain models for the contextual AI Tutor panel.
+//**
+// frontend/features/tutor/domain/entities/tutor_message.dart
+//
+// frontend:
+// Entity/model. Mendefinisikan data structures untuk feature.
+//
+// backend:
+// Future: akan sesuai dengan backend data models.
+//
+// api:
+// Future: akan menjadi frontend expected contract untuk APIs.
+//
+// qa:
+// QA perlu memvalidasi data validation dan edge cases.
+//**
 library;
 
-/// Speaker role in the tutor conversation.
 enum TutorMessageRole { assistant, learner }
 
-/// Lesson context passed to the future AI backend seam.
 class TutorLessonContext {
   const TutorLessonContext({
     required this.courseId,
@@ -19,11 +31,9 @@ class TutorLessonContext {
   final String lessonId;
   final String lessonTitle;
 
-  /// Friendly name of the active lesson stage, e.g. "tantangan Game".
   final String? stageTitle;
 }
 
-/// One chat message in the local AI Tutor UI.
 class TutorMessage {
   const TutorMessage({
     required this.role,
@@ -37,9 +47,7 @@ class TutorMessage {
   final String text;
   final DateTime createdAt;
 
-  /// Optional code snippet rendered in a code block below the message.
   final String? code;
 
-  /// Optional language label for [code].
   final String? codeLabel;
 }

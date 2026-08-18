@@ -1,15 +1,23 @@
+//**
+// frontend/shared/design_system/inputs/app_otp_input.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/theme/theme.dart';
 
-/// One-time-password input controlled by a custom keypad.
-///
-/// Unlike a classic [TextField], the boxes are display-only and never open the
-/// platform soft keyboard. Digits are appended through [AppOtpInputState]
-/// (driven by a keypad) or via hardware keys / paste, and are reported through
-/// [onChanged] and [onCompleted]. Only numeric characters are accepted and the
-/// code can never exceed [length] digits.
 class AppOtpInput extends StatefulWidget {
   const AppOtpInput({
     super.key,
@@ -22,25 +30,18 @@ class AppOtpInput extends StatefulWidget {
     this.spacing = AppSpacing.xs,
   });
 
-  /// Number of digit boxes.
   final int length;
 
-  /// Horizontal space available for all boxes (used to derive their size).
   final double maxWidth;
 
-  /// Whether interaction is allowed (e.g. while verifying the code).
   final bool enabled;
 
-  /// Highlights the boxes with the error color.
   final bool hasError;
 
-  /// Called on every change with the current aggregated code.
   final ValueChanged<String>? onChanged;
 
-  /// Called when all digits are filled.
   final ValueChanged<String>? onCompleted;
 
-  /// Horizontal gap between boxes.
   final double spacing;
 
   @override
@@ -51,28 +52,23 @@ class AppOtpInputState extends State<AppOtpInput> {
   String _code = '';
   final FocusNode _focusNode = FocusNode();
 
-  /// Current value of the code.
   String get value => _code;
 
-  /// Inserts a single [digit], moving the cursor forward.
   void append(int digit) {
     if (!mounted || !widget.enabled || _code.length >= widget.length) return;
     _setCode(_code + digit.toString());
   }
 
-  /// Removes the last digit.
   void removeLast() {
     if (!mounted || _code.isEmpty) return;
     _setCode(_code.substring(0, _code.length - 1));
   }
 
-  /// Clears every digit.
   void clear() {
     if (!mounted || _code.isEmpty) return;
     _setCode('');
   }
 
-  /// Inserts as many numeric characters from [raw] as fit, up to [length].
   void pasteValue(String raw) {
     if (!mounted || !widget.enabled) return;
     final digits = raw.replaceAll(RegExp(r'[^0-9]'), '');

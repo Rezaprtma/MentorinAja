@@ -1,18 +1,22 @@
+//**
+// frontend/routing/app_router.dart
+//
+// frontend:
+// Routing. Menyediakan route definitions dan navigation logic.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi routing behavior dan deep linking.
+//**
 import 'package:flutter/material.dart';
 
 import '../routing/route_names.dart';
 
-/// Navigator 2.0 based router for MentorinAja.
-///
-/// This router uses Flutter's built-in [Router] API (no third-party package).
-/// It parses URL-like route paths into route stacks and delegates navigation
-/// to a [RouterDelegate]. When GoRouter or another package is added later,
-/// only this file needs to change — screens and services are decoupled via
-/// [NavigationService].
-///
-/// For now, the router maintains a simple path-based stack. Deep-link parsing
-/// is handled by [AppRouteInformationParser] and state management by
-/// [AppRouterDelegate].
 class AppRouter {
   AppRouter({required this.navigatorKey, this.initialRoute = AppRoutes.home});
 
@@ -27,7 +31,6 @@ class AppRouter {
   );
 }
 
-/// Converts between route information (URL strings) and route configuration.
 class AppRouteInformationParser
     extends RouteInformationParser<AppRouteConfiguration> {
   @override
@@ -48,7 +51,6 @@ class AppRouteInformationParser
   }
 }
 
-/// Holds the current navigation state as a stack of paths.
 class AppRouterDelegate extends RouterDelegate<AppRouteConfiguration>
     with
         ChangeNotifier,
@@ -93,11 +95,6 @@ class AppRouterDelegate extends RouterDelegate<AppRouteConfiguration>
   }
 
   Widget _resolvePage(String path) {
-    // Route resolution happens here. Each feature module registers its
-    // route builder in the app startup. For now, return a placeholder
-    // that demonstrates the routing works.
-    //
-    // Future integration: route registry pattern.
     return _PlaceholderScreen(path: path);
   }
 
@@ -125,7 +122,6 @@ class AppRouterDelegate extends RouterDelegate<AppRouteConfiguration>
   }
 }
 
-/// Immutable route configuration (path + optional extra data).
 @immutable
 class AppRouteConfiguration {
   const AppRouteConfiguration({required this.path, this.extra});
@@ -134,8 +130,6 @@ class AppRouteConfiguration {
   final Object? extra;
 }
 
-/// Placeholder screen used during route resolution.
-/// Will be replaced by actual feature screens.
 class _PlaceholderScreen extends StatelessWidget {
   const _PlaceholderScreen({required this.path});
 

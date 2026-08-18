@@ -1,17 +1,24 @@
+//**
+// frontend/features/progress/presentation/widgets/course_distribution_chart.dart
+//
+// frontend:
+// Reusable widget. Menampilkan komponen UI yang dapat digunakan di berbagai places.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
 
-/// Ring chart of the active-vs-completed course distribution.
-///
-/// The ring is split proportionally: the studying slice renders in the brand
-/// purple and the completed slice in success green over a quiet track. The
-/// center shows the total count and, on interacting with a slice (tap on
-/// touch, hover on desktop), swaps to that slice's count and share, acting as
-/// a compact contextual tooltip instead of a static legend. Every value comes
-/// from the constructor — no ratio is hardcoded.
 class CourseDistributionChart extends StatefulWidget {
   const CourseDistributionChart({
     super.key,
@@ -20,13 +27,10 @@ class CourseDistributionChart extends StatefulWidget {
     required this.completedCount,
   });
 
-  /// All enrolled courses.
   final int totalCount;
 
-  /// Courses with progress strictly between 0 and 100 percent.
   final int activeCount;
 
-  /// Courses finished at 100 percent.
   final int completedCount;
 
   @override
@@ -34,7 +38,6 @@ class CourseDistributionChart extends StatefulWidget {
       _CourseDistributionChartState();
 }
 
-/// The two colored slices of the ring.
 enum _ChartSegment { studying, completed }
 
 class _CourseDistributionChartState extends State<CourseDistributionChart> {
@@ -205,10 +208,6 @@ class _CourseDistributionChartState extends State<CourseDistributionChart> {
   }
 }
 
-/// Center block of the donut, rendered inside a scaling box.
-///
-/// A strong value with a supporting label, plus the slice share when a segment
-/// is active.
 class _CenterContent extends StatelessWidget {
   const _CenterContent({
     required this.value,
@@ -259,7 +258,6 @@ class _CenterContent extends StatelessWidget {
   }
 }
 
-/// Paints the donut track and its two proportional slices.
 class _DonutPainter extends CustomPainter {
   const _DonutPainter({
     required this.fractionActive,

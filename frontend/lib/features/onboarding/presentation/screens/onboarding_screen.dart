@@ -1,3 +1,18 @@
+//**
+// frontend/features/onboarding/presentation/screens/onboarding_screen.dart
+//
+// frontend:
+// Source file. Bagian dari MentorinAja frontend.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi file behavior sesuai dengan purpose.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/core/assets/app_assets.dart';
@@ -8,11 +23,6 @@ import '../../logic/onboarding_controller.dart';
 import '../widgets/onboarding_page.dart';
 import '../widgets/onboarding_page_theme.dart';
 
-/// Three-chapter onboarding introducing MentorinAja.
-///
-/// Each chapter gets a distinct visual identity, but the flow stays identical:
-/// swipeable [PageView], Skip, a compact circular Next, and a final
-/// "Mulai Belajar" that routes into authentication.
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -120,7 +130,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   ];
 }
 
-/// Static data describing one onboarding slide.
 class _OnboardingSlide {
   const _OnboardingSlide({
     required this.chapter,

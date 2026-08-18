@@ -1,13 +1,23 @@
+//**
+// frontend/shared/design_system/lists/app_settings_tile.dart
+//
+// frontend:
+// Design system widget. Menyediakan reusable UI components.
+//
+// backend:
+// File ini tidak memiliki dependency langsung terhadap backend.
+//
+// api:
+// File ini tidak mendefinisikan atau memanggil API secara langsung.
+//
+// qa:
+// QA perlu memvalidasi widget rendering, responsiveness, dan accessibility.
+//**
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/theme.dart';
 import 'app_tile.dart';
 
-/// Settings screen tile with a leading icon container and a trailing chevron.
-///
-/// Follows the standard iOS/Android settings pattern: icon on the left, label
-/// + optional subtitle in the center, and a navigation chevron on the right.
-/// The [destructive] flag tints the leading icon and title in the error color.
 class AppSettingsTile extends StatelessWidget {
   const AppSettingsTile({
     super.key,

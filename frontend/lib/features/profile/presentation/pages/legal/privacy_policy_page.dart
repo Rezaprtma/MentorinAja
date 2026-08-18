@@ -1,3 +1,18 @@
+//**
+// frontend/features/profile/presentation/pages/legal/privacy_policy_page.dart
+//
+// frontend:
+// Screen/page. Menampilkan UI dan menerima user interactions.
+//
+// backend:
+// Future: akan membutuhkan backend data dan API calls.
+//
+// api:
+// Future: akan melakukan API calls melalui controllers/repositories.
+//
+// qa:
+// QA perlu memvalidasi UI rendering, user interactions, dan navigation.
+//**
 import 'package:flutter/material.dart';
 
 import 'package:frontend/shared/design_system/design_system.dart';
@@ -5,7 +20,6 @@ import 'package:frontend/shared/widgets/widgets.dart';
 
 import '../../widgets/document_section_list.dart';
 
-/// Privacy policy screen with structured, readable sections.
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
 
