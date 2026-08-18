@@ -14,12 +14,14 @@
 // QA perlu memvalidasi app startup dan initialization.
 //**
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:frontend/app/app.dart';
 import 'package:frontend/app/bootstrap.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await AppBootstrap.initialize();
   runApp(const App());
 }

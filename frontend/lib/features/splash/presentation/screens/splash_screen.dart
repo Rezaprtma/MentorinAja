@@ -2,7 +2,7 @@
 // frontend/features/splash/presentation/screens/splash_screen.dart
 //
 // frontend:
-// Source file. Bagian dari MentorinAja frontend.
+// Renders startup loading sequence while holding the native splash.
 //
 // backend:
 // File ini tidak memiliki dependency langsung terhadap backend.
@@ -15,7 +15,7 @@
 //**
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:frontend/core/theme/theme.dart';
 
@@ -36,7 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = SplashController();
+    // Use minimumDuration = zero so that it completes initialization immediately,
+    // transiting seamlessly into the actual page under the native splash framework.
+    _controller = SplashController(minimumDuration: Duration.zero);
     _controller.addListener(_onControllerStateChanged);
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -56,6 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _maybeNavigate() {
     if (_canNavigate && !_hasNavigated && mounted) {
       _hasNavigated = true;
+      FlutterNativeSplash.remove();
       Navigator.pushReplacementNamed(context, _controller.destination!);
     }
   }
@@ -70,20 +73,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // Return a solid Primary Color scaffold matching the native splash background,
+    // with NO logo image. This prevents the "double logo/double splash animation" experience.
+    return const Scaffold(
       backgroundColor: AppColors.primary,
-      body: Center(
-        child: Semantics(
-          label: 'MentorinAja',
-          child: FractionallySizedBox(
-            widthFactor: 0.30,
-            child: SvgPicture.asset(
-              'assets/icons/logo/icon.svg',
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-      ),
+      body: SizedBox.shrink(),
     );
   }
 }
